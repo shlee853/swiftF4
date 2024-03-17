@@ -31,6 +31,8 @@ Core/Src/Drivers/sensors_mpu9250_lps25h.o: \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h \
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h \
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h \
@@ -55,6 +57,7 @@ Core/Src/Drivers/sensors_mpu9250_lps25h.o: \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h \
+ ../Core/Inc/main.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/mpu6500.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/ak8963.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h \
@@ -63,7 +66,6 @@ Core/Src/Drivers/sensors_mpu9250_lps25h.o: \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/log.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/debug.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Config/config.h \
- ../Core/Inc/main.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Config/autoconf.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/eprintf.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/cfassert.h \
@@ -112,6 +114,8 @@ Core/Src/Drivers/sensors_mpu9250_lps25h.o: \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h:
@@ -136,6 +140,7 @@ Core/Src/Drivers/sensors_mpu9250_lps25h.o: \
 ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h:
+../Core/Inc/main.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/mpu6500.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/ak8963.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h:
@@ -144,7 +149,6 @@ Core/Src/Drivers/sensors_mpu9250_lps25h.o: \
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/log.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/debug.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Config/config.h:
-../Core/Inc/main.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Config/autoconf.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/eprintf.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/cfassert.h:

@@ -21,6 +21,7 @@
 #include "cmsis_os.h"
 #include "adc.h"
 #include "dma.h"
+#include "i2c.h"
 #include "spi.h"
 #include "tim.h"
 #include "usart.h"
@@ -32,6 +33,10 @@
 
 #include "config.h"
 #include "debug.h"
+
+
+#include "mpu6500.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -105,6 +110,7 @@ int main(void)
   MX_USART2_UART_Init();
   MX_SPI2_Init();
   MX_ADC1_Init();
+  MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
 
 
@@ -118,6 +124,20 @@ int main(void)
   	    // The firmware is running on the wrong hardware. Halt
   	    while(1);
   }
+
+
+  i2cdevInit(I2C1_DEV);
+  mpu6500Init(I2C1_DEV);
+  if (mpu6500TestConnection() == true)
+  {
+    DEBUG_PRINT("MPU9250 I2C connection [OK].\n");
+  }
+  else
+  {
+    DEBUG_PRINT("MPU9250 I2C connection [FAIL].\n");
+  }
+
+
 
   systemLaunch();
 

@@ -48,10 +48,11 @@
 #include "i2c_drv.h"
 #include "config.h"
 #include "nvicconf.h"
-#include "sleepus.h"
 
 #include "autoconf.h"
 #include "cfassert.h"
+
+#include "deck_constants.h"
 
 //DEBUG
 #ifdef I2CDRV_DEBUG_LOG_EVENTS
@@ -128,26 +129,26 @@ static void i2cdrvDmaIsrHandler(I2cDrv* i2c);
 // Cost definitions of busses
 static const I2cDef sensorBusDef =
 {
-  .i2cPort            = I2C3,
-//  .i2cPerif           = RCC_APB1Periph_I2C3,
-  .i2cEVIRQn          = I2C3_EV_IRQn,
-  .i2cERIRQn          = I2C3_ER_IRQn,
+  .i2cPort            = I2C1,
+  .i2cPerif           = RCC_APB1Periph_I2C1,
+  .i2cEVIRQn          = I2C1_EV_IRQn,
+  .i2cERIRQn          = I2C1_ER_IRQn,
   .i2cClockSpeed      = I2C_DEFAULT_SENSORS_CLOCK_SPEED,
-//  .gpioSCLPerif       = RCC_AHB1Periph_GPIOA,
-  .gpioSCLPort        = GPIOA,
-  .gpioSCLPin         = GPIO_PIN_8,
+  .gpioSCLPerif       = RCC_AHB1Periph_GPIOB,
+  .gpioSCLPort        = GPIOB,
+  .gpioSCLPin         = IMU_SCL_Pin,
   .gpioSCLPinSource   = 8,
-//  .gpioSDAPerif       = RCC_AHB1Periph_GPIOC,
-  .gpioSDAPort        = GPIOC,
-  .gpioSDAPin         = GPIO_PIN_9,
+  .gpioSDAPerif       = RCC_AHB1Periph_GPIOB,
+  .gpioSDAPort        = GPIOB,
+  .gpioSDAPin         = IMU_SDA_Pin,
   .gpioSDAPinSource   = 9,
-  .gpioAF             = GPIO_AF4_I2C3,
-//  .dmaPerif           = RCC_AHB1Periph_DMA1,
-  .dmaChannel         = DMA_CHANNEL_3,
-  .dmaRxStream        = DMA1_Stream2,
-  .dmaRxIRQ           = DMA1_Stream2_IRQn,
-  .dmaRxTCFlag        = DMA_FLAG_TCIF2_6,
-  .dmaRxTEFlag        = DMA_FLAG_TEIF2_6,
+  .gpioAF             = GPIO_AF4_I2C1,
+  .dmaPerif           = RCC_AHB1Periph_DMA1,
+  .dmaChannel         = DMA_CHANNEL_1,
+  .dmaRxStream        = DMA1_Stream0,
+  .dmaRxIRQ           = DMA1_Stream0_IRQn,
+  .dmaRxTCFlag        = DMA_FLAG_TCIF0_4,
+  .dmaRxTEFlag        = DMA_FLAG_TEIF0_4,
 };
 
 I2cDrv sensorsBus =
@@ -157,34 +158,35 @@ I2cDrv sensorsBus =
 
 static const I2cDef deckBusDef =
 {
-  .i2cPort            = I2C1,
-//  .i2cPerif           = RCC_APB1Periph_I2C1,
-  .i2cEVIRQn          = I2C1_EV_IRQn,
-  .i2cERIRQn          = I2C1_ER_IRQn,
+  .i2cPort            = I2C3,
+  .i2cPerif           = RCC_APB1Periph_I2C3,
+  .i2cEVIRQn          = I2C3_EV_IRQn,
+  .i2cERIRQn          = I2C3_ER_IRQn,
   .i2cClockSpeed      = I2C_DEFAULT_DECK_CLOCK_SPEED,
-//  .gpioSCLPerif       = RCC_AHB1Periph_GPIOB,
-  .gpioSCLPort        = GPIOB,
-  .gpioSCLPin         = GPIO_PIN_6,
-  .gpioSCLPinSource   = 6,
-//  .gpioSDAPerif       = RCC_AHB1Periph_GPIOB,
+  .gpioSCLPerif       = RCC_AHB1Periph_GPIOA,
+  .gpioSCLPort        = GPIOA,
+  .gpioSCLPin         = GPIO_PIN_8,
+  .gpioSCLPinSource   = 8,
+  .gpioSDAPerif       = RCC_AHB1Periph_GPIOB,
   .gpioSDAPort        = GPIOB,
-  .gpioSDAPin         = GPIO_PIN_7,
-  .gpioSDAPinSource   = 7,
-  .gpioAF             = GPIO_AF4_I2C1,
-//  .dmaPerif           = RCC_AHB1Periph_DMA1,
-  .dmaChannel         = DMA_CHANNEL_1,
+  .gpioSDAPin         = GPIO_PIN_4,
+  .gpioSDAPinSource   = 4,
+  .gpioAF             = GPIO_AF4_I2C3,
+  .dmaPerif           = RCC_AHB1Periph_DMA1,
+  .dmaChannel         = DMA_CHANNEL_3,
 #ifdef CONFIG_DECK_USD_USE_ALT_PINS_AND_SPI
   .dmaRxStream        = DMA1_Stream5,
   .dmaRxIRQ           = DMA1_Stream5_IRQn,
-  .dmaRxTCFlag        = DMA_FLAG_TCIF5,
-  .dmaRxTEFlag        = DMA_FLAG_TEIF5,
+  .dmaRxTCFlag        = DMA_FLAG_TCIF1_5,
+  .dmaRxTEFlag        = DMA_FLAG_TEIF1_5,
 #else
-  .dmaRxStream        = DMA1_Stream0,
-  .dmaRxIRQ           = DMA1_Stream0_IRQn,
-  .dmaRxTCFlag        = DMA_FLAG_TCIF0_4,
-  .dmaRxTEFlag        = DMA_FLAG_TEIF0_4,
+  .dmaRxStream        = DMA1_Stream2,
+  .dmaRxIRQ           = DMA1_Stream2_IRQn,
+  .dmaRxTCFlag        = DMA_FLAG_TCIF2_6,
+  .dmaRxTEFlag        = DMA_FLAG_TEIF2_6,
 #endif
 };
+
 
 
 I2cDrv deckBus =
@@ -193,22 +195,25 @@ I2cDrv deckBus =
 };
 
 
+extern I2C_HandleTypeDef hi2c1;
+extern DMA_HandleTypeDef hdma_i2c1_rx;
+
 static void i2cdrvStartTransfer(I2cDrv *i2c)
 {
   ASSERT_DMA_SAFE(i2c->txMessage.buffer);
 
-/*  if (i2c->txMessage.direction == i2cRead)
+  if (i2c->txMessage.direction == i2cRead)
   {
-    i2c->DMAStruct.DMA_BufferSize = i2c->txMessage.messageLength;
-    i2c->DMAStruct.DMA_Memory0BaseAddr = (uint32_t)i2c->txMessage.buffer;
-    DMA_Init(i2c->def->dmaRxStream, &i2c->DMAStruct);
-    DMA_Cmd(i2c->def->dmaRxStream, ENABLE);
+	  	uint32_t src = (uint32_t)i2c->txMessage.buffer;
+	  	uint32_t dst = (uint32_t)&i2c->def->i2cPort->DR;
+
+    HAL_DMA_Start(&hdma_i2c1_rx, src, dst, i2c->txMessage.messageLength);
   }
 
-  I2C_ITConfig(i2c->def->i2cPort, I2C_IT_BUF, DISABLE);
-  I2C_ITConfig(i2c->def->i2cPort, I2C_IT_EVT, ENABLE);
+  __HAL_I2C_DISABLE_IT(&hi2c1, I2C_IT_BUF);
+  __HAL_I2C_ENABLE_IT(&hi2c1, I2C_IT_EVT);
   i2c->def->i2cPort->CR1 = (I2C_CR1_START | I2C_CR1_PE);
-*/
+
 
 }
 
@@ -227,97 +232,73 @@ static void i2cNotifyClient(I2cDrv* i2c)
 
 static void i2cdrvTryToRestartBus(I2cDrv* i2c)
 {
-	/*
-  I2C_InitTypeDef I2C_InitStructure;
-  NVIC_InitTypeDef NVIC_InitStructure;
-  GPIO_InitTypeDef GPIO_InitStructure;
 
-  // Enable GPIOA clock
-  RCC_AHB1PeriphClockCmd(i2c->def->gpioSDAPerif, ENABLE);
-  RCC_AHB1PeriphClockCmd(i2c->def->gpioSCLPerif, ENABLE);
-  // Enable I2C_SENSORS clock
-  RCC_APB1PeriphClockCmd(i2c->def->i2cPerif, ENABLE);
+  GPIO_InitTypeDef GPIO_InitStruct;
 
-  // Configure I2C_SENSORS pins to unlock bus.
-  GPIO_StructInit(&GPIO_InitStructure);
-  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
-  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-  GPIO_InitStructure.GPIO_OType = GPIO_OType_OD;
-  GPIO_InitStructure.GPIO_Pin = i2c->def->gpioSCLPin; // SCL
-  GPIO_Init(i2c->def->gpioSCLPort, &GPIO_InitStructure);
-  GPIO_InitStructure.GPIO_Pin =  i2c->def->gpioSDAPin; // SDA
-  GPIO_Init(i2c->def->gpioSDAPort, &GPIO_InitStructure);
+  __HAL_RCC_GPIOB_CLK_ENABLE();
+
+  /**I2C1 GPIO Configuration
+  PB8     ------> I2C1_SCL
+  PB9     ------> I2C1_SDA
+  */
+  GPIO_InitStruct.Pin = IMU_SCL_Pin|IMU_SDA_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+  GPIO_InitStruct.Alternate = GPIO_AF4_I2C1;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   i2cdrvdevUnlockBus(i2c->def->gpioSCLPort, i2c->def->gpioSDAPort, i2c->def->gpioSCLPin, i2c->def->gpioSDAPin);
 
-  // Configure I2C_SENSORS pins for AF.
-  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
-  GPIO_InitStructure.GPIO_Pin = i2c->def->gpioSCLPin; // SCL
-  GPIO_Init(i2c->def->gpioSCLPort, &GPIO_InitStructure);
-  GPIO_InitStructure.GPIO_Pin =  i2c->def->gpioSDAPin; // SDA
-  GPIO_Init(i2c->def->gpioSDAPort, &GPIO_InitStructure);
 
-  //Map gpios to alternate functions
-  GPIO_PinAFConfig(i2c->def->gpioSCLPort, i2c->def->gpioSCLPinSource, i2c->def->gpioAF);
-  GPIO_PinAFConfig(i2c->def->gpioSDAPort, i2c->def->gpioSDAPinSource, i2c->def->gpioAF);
+  /* I2C1 clock enable */
+  __HAL_RCC_I2C1_CLK_ENABLE();
 
   // I2C_SENSORS configuration
-  I2C_DeInit(i2c->def->i2cPort);
-  I2C_InitStructure.I2C_Mode = I2C_Mode_I2C;
-  I2C_InitStructure.I2C_DutyCycle = I2C_DutyCycle_2;
-  I2C_InitStructure.I2C_OwnAddress1 = I2C_SLAVE_ADDRESS7;
-  I2C_InitStructure.I2C_Ack = I2C_Ack_Enable;
-  I2C_InitStructure.I2C_AcknowledgedAddress = I2C_AcknowledgedAddress_7bit;
-  I2C_InitStructure.I2C_ClockSpeed = i2c->def->i2cClockSpeed;
-  I2C_Init(i2c->def->i2cPort, &I2C_InitStructure);
+  hi2c1.Instance = i2c->def->i2cPort;
+  hi2c1.Init.ClockSpeed =  i2c->def->i2cClockSpeed;
+  hi2c1.Init.DutyCycle = I2C_DUTYCYCLE_2;
+  hi2c1.Init.OwnAddress1 = 0;
+  hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+  hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+  hi2c1.Init.OwnAddress2 = 0;
+  hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+  hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
 
-  // Enable I2C_SENSORS error interrupts
-  I2C_ITConfig(i2c->def->i2cPort, I2C_IT_ERR, ENABLE);
+  if (HAL_I2C_Init(&hi2c1) != HAL_OK)
+  {
+    Error_Handler();
+  }
 
-  NVIC_InitStructure.NVIC_IRQChannel = i2c->def->i2cEVIRQn;
-  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = NVIC_I2C_PRI;
-  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
-  NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-  NVIC_Init(&NVIC_InitStructure);
-  NVIC_InitStructure.NVIC_IRQChannel = i2c->def->i2cERIRQn;
-  NVIC_Init(&NVIC_InitStructure);
 
-  i2cdrvDmaSetupBus(i2c);
-  */
+  hdma_i2c1_rx.Instance = i2c->def->dmaRxStream;
+  hdma_i2c1_rx.Init.Channel = i2c->def->dmaChannel;
+  hdma_i2c1_rx.Init.Direction = DMA_PERIPH_TO_MEMORY;
+  hdma_i2c1_rx.Init.PeriphInc = DMA_PINC_DISABLE;
+  hdma_i2c1_rx.Init.MemInc = DMA_MINC_ENABLE;
+  hdma_i2c1_rx.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
+  hdma_i2c1_rx.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
+  hdma_i2c1_rx.Init.Mode = DMA_NORMAL;
+  hdma_i2c1_rx.Init.Priority = DMA_PRIORITY_LOW;
+  hdma_i2c1_rx.Init.FIFOMode = DMA_FIFOMODE_DISABLE;
+//  hdma_i2c1_rx.Instance->PAR = (uint32_t)&i2c->def->i2cPort->DR;
+
+
+
+
+  if (HAL_DMA_Init(&hdma_i2c1_rx) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  __HAL_LINKDMA(&hi2c1, hdmarx, hdma_i2c1_rx);
+
+  /* I2C1 interrupt Init */
+  HAL_NVIC_SetPriority(I2C1_ER_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(I2C1_ER_IRQn);
+
 }
 
-static void i2cdrvDmaSetupBus(I2cDrv* i2c)
-{
-/*
-  NVIC_InitTypeDef NVIC_InitStructure;
-
-  RCC_AHB1PeriphClockCmd(i2c->def->dmaPerif, ENABLE);
-
-  // RX DMA Channel Config
-  i2c->DMAStruct.DMA_Channel = i2c->def->dmaChannel;
-  i2c->DMAStruct.DMA_PeripheralBaseAddr = (uint32_t)&i2c->def->i2cPort->DR;
-  i2c->DMAStruct.DMA_Memory0BaseAddr = 0;
-  i2c->DMAStruct.DMA_DIR = DMA_DIR_PeripheralToMemory;
-  i2c->DMAStruct.DMA_BufferSize = 0;
-  i2c->DMAStruct.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
-  i2c->DMAStruct.DMA_MemoryInc = DMA_MemoryInc_Enable;
-  i2c->DMAStruct.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;
-  i2c->DMAStruct.DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;
-  i2c->DMAStruct.DMA_Mode = DMA_Mode_Normal;
-  i2c->DMAStruct.DMA_Priority = DMA_Priority_High;
-  i2c->DMAStruct.DMA_FIFOMode = DMA_FIFOMode_Disable;
-  i2c->DMAStruct.DMA_FIFOThreshold = DMA_FIFOThreshold_1QuarterFull;
-  i2c->DMAStruct.DMA_MemoryBurst = DMA_MemoryBurst_Single;
-  i2c->DMAStruct.DMA_PeripheralBurst = DMA_PeripheralBurst_Single;
-
-  NVIC_InitStructure.NVIC_IRQChannel = i2c->def->dmaRxIRQ;
-  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = NVIC_I2C_PRI;
-  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
-  NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-  NVIC_Init(&NVIC_InitStructure);
-
-  */
-}
 
 static void i2cdrvInitBus(I2cDrv* i2c)
 {
@@ -329,34 +310,36 @@ static void i2cdrvInitBus(I2cDrv* i2c)
 
 static void i2cdrvdevUnlockBus(GPIO_TypeDef* portSCL, GPIO_TypeDef* portSDA, uint16_t pinSCL, uint16_t pinSDA)
 {
-  GPIO_SetBits(portSDA, pinSDA);
+
+  HAL_GPIO_WritePin(portSDA, pinSDA, GPIO_PIN_SET);
+
   /* Check SDA line to determine if slave is asserting bus and clock out if so */
-  while(HAL_GPIO_Read(portSDA, pinSDA) == GPIO_PIN_RESET)
+  while(HAL_GPIO_ReadPin(portSDA, pinSDA) == GPIO_PIN_RESET)
   {
     /* Set clock high */
-    GPIO_SetBits(portSCL, pinSCL);
+	  HAL_GPIO_WritePin(portSCL, pinSCL, GPIO_PIN_SET);
     /* Wait for any clock stretching to finish. */
     gpioWaitForHigh(portSCL, pinSCL, 10 * 1000);
-    sleepus(I2CDEV_CLK_TS);
+    usDelay(I2CDEV_CLK_TS);
 
     /* Generate a clock cycle */
-    GPIO_ResetBits(portSCL, pinSCL);
-    sleepus(I2CDEV_CLK_TS);
-    GPIO_SetBits(portSCL, pinSCL);
-    sleepus(I2CDEV_CLK_TS);
+    HAL_GPIO_WritePin(portSCL, pinSCL, GPIO_PIN_RESET);
+    usDelay(I2CDEV_CLK_TS);
+    HAL_GPIO_WritePin(portSCL, pinSCL, GPIO_PIN_SET);
+    usDelay(I2CDEV_CLK_TS);
   }
 
   /* Generate a start then stop condition */
-  GPIO_SetBits(portSCL, pinSCL);
-  sleepus(I2CDEV_CLK_TS);
-  GPIO_ResetBits(portSDA, pinSDA);
-  sleepus(I2CDEV_CLK_TS);
-  GPIO_ResetBits(portSCL, pinSCL);
-  sleepus(I2CDEV_CLK_TS);
+  HAL_GPIO_WritePin(portSCL, pinSCL, GPIO_PIN_SET);
+  usDelay(I2CDEV_CLK_TS);
+  HAL_GPIO_WritePin(portSDA, pinSDA, GPIO_PIN_RESET);
+  usDelay(I2CDEV_CLK_TS);
+  HAL_GPIO_WritePin(portSCL, pinSCL, GPIO_PIN_RESET);
+  usDelay(I2CDEV_CLK_TS);
 
   /* Set data and clock high and wait for any clock stretching to finish. */
-  GPIO_SetBits(portSDA, pinSDA);
-  GPIO_SetBits(portSCL, pinSCL);
+  HAL_GPIO_WritePin(portSDA, pinSDA, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(portSCL, pinSCL, GPIO_PIN_SET);
   gpioWaitForHigh(portSCL, pinSCL, 10 * 1000);
   /* Wait for data to be high */
   gpioWaitForHigh(portSDA, pinSDA, 10 * 1000);
@@ -629,18 +612,19 @@ static void i2cdrvErrorIsrHandler(I2cDrv* i2c)
 
 static void i2cdrvClearDMA(I2cDrv* i2c)
 {
-/*
-  DMA_Cmd(i2c->def->dmaRxStream, DISABLE);
-  DMA_ClearITPendingBit(i2c->def->dmaRxStream, i2c->def->dmaRxTCFlag);
-  I2C_DMACmd(i2c->def->i2cPort, DISABLE);
-  I2C_DMALastTransferCmd(i2c->def->i2cPort, DISABLE);
-  DMA_ITConfig(i2c->def->dmaRxStream, DMA_IT_TC | DMA_IT_TE, DISABLE);
-*/
+/*	  __HAL_DMA_DISABLE(i2c->def->dmaRxStream);
+	  __HAL_DMA_CLEAR_FLAG(i2c->def->dmaRxStream, i2c->def->dmaRxTCFlag);
+	//  I2C_DMACmd(i2c->def->i2cPort, DISABLE);
+	//  I2C_DMALastTransferCmd(i2c->def->i2cPort, DISABLE);
+	  __HAL_DMA_DISABLE_IT(i2c->def->dmaRxStream, DMA_IT_TC | DMA_IT_TE);
+
+	  */
 }
 
 static void i2cdrvDmaIsrHandler(I2cDrv* i2c)
 {
-/*  if (DMA_GetFlagStatus(i2c->def->dmaRxStream, i2c->def->dmaRxTCFlag)) // Transfer complete
+	/*
+ if (DMA_GetFlagStatus(i2c->def->dmaRxStream, i2c->def->dmaRxTCFlag)) // Transfer complete
   {
     i2cdrvClearDMA(i2c);
     i2cNotifyClient(i2c);
@@ -655,11 +639,11 @@ static void i2cdrvDmaIsrHandler(I2cDrv* i2c)
     i2cNotifyClient(i2c);
     i2cTryNextMessage(i2c);
   }
-  */
+*/
 
 }
 
-
+/*
 void __attribute__((used)) I2C1_ER_IRQHandler(void)
 {
   i2cdrvErrorIsrHandler(&deckBus);
@@ -669,7 +653,7 @@ void __attribute__((used)) I2C1_EV_IRQHandler(void)
 {
   i2cdrvEventIsrHandler(&deckBus);
 }
-
+*/
 #ifdef CONFIG_DECK_USD_USE_ALT_PINS_AND_SPI
 void __attribute__((used)) DMA1_Stream5_IRQHandler(void)
 #else

@@ -62,6 +62,14 @@
 #define RCC_APB1Periph_TIM13             ((uint32_t)0x00000080)
 #define RCC_APB1Periph_TIM14             ((uint32_t)0x00000100)
 
+#define RCC_APB1Periph_I2C1              ((uint32_t)0x00200000)
+#define RCC_APB1Periph_I2C2              ((uint32_t)0x00400000)
+#define RCC_APB1Periph_I2C3              ((uint32_t)0x00800000)
+
+#define RCC_AHB1Periph_DMA1              ((uint32_t)0x00200000)
+#define RCC_AHB1Periph_DMA2              ((uint32_t)0x00400000)
+
+
 #define DBGMCU_TIM2_STOP             ((uint32_t)0x00000001)
 #define DBGMCU_TIM3_STOP             ((uint32_t)0x00000002)
 #define DBGMCU_TIM4_STOP             ((uint32_t)0x00000004)

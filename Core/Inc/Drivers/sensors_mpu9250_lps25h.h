@@ -27,6 +27,10 @@
 
 #include "sensors.h"
 
+#define MPU9250_DEVICE_ID0 		0x38
+#define MPU9250_I2C_ADDRESS		0xD2
+
+
 void sensorsMpu9250Lps25hInit(void);
 bool sensorsMpu9250Lps25hTest(void);
 bool sensorsMpu9250Lps25hAreCalibrated(void);

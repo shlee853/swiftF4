@@ -38,6 +38,8 @@ Core/Src/Drivers/i2c_drv.o: ../Core/Src/Drivers/i2c_drv.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h \
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h \
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h \
@@ -51,9 +53,9 @@ Core/Src/Drivers/i2c_drv.o: ../Core/Src/Drivers/i2c_drv.c \
  /home/swift/workspace/project/swiftF4/Core/Inc/Config/config.h \
  ../Core/Inc/main.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Config/nvicconf.h \
- /home/swift/workspace/project/swiftF4/Core/Inc/Utils/sleepus.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Config/autoconf.h \
- /home/swift/workspace/project/swiftF4/Core/Inc/Utils/cfassert.h
+ /home/swift/workspace/project/swiftF4/Core/Inc/Utils/cfassert.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Interface/deck_constants.h
 ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:
 ../Core/Inc/FreeRTOSConfig.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h:
@@ -93,6 +95,8 @@ Core/Src/Drivers/i2c_drv.o: ../Core/Src/Drivers/i2c_drv.c \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h:
@@ -106,6 +110,6 @@ Core/Src/Drivers/i2c_drv.o: ../Core/Src/Drivers/i2c_drv.c \
 /home/swift/workspace/project/swiftF4/Core/Inc/Config/config.h:
 ../Core/Inc/main.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Config/nvicconf.h:
-/home/swift/workspace/project/swiftF4/Core/Inc/Utils/sleepus.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Config/autoconf.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/cfassert.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Interface/deck_constants.h:

@@ -41,6 +41,8 @@ Core/Src/Drivers/lps25h.o: ../Core/Src/Drivers/lps25h.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h \
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h \
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h \
@@ -50,10 +52,10 @@ Core/Src/Drivers/lps25h.o: ../Core/Src/Drivers/lps25h.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h \
+ ../Core/Inc/main.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/i2cdev.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/debug.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Config/config.h \
- ../Core/Inc/main.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Config/autoconf.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/eprintf.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/cfassert.h \
@@ -103,6 +105,8 @@ Core/Src/Drivers/lps25h.o: ../Core/Src/Drivers/lps25h.c \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h:
@@ -112,10 +116,10 @@ Core/Src/Drivers/lps25h.o: ../Core/Src/Drivers/lps25h.c \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h:
+../Core/Inc/main.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/i2cdev.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/debug.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Config/config.h:
-../Core/Inc/main.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Config/autoconf.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/eprintf.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/cfassert.h:

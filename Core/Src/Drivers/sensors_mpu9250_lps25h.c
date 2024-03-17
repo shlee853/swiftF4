@@ -355,7 +355,7 @@ static void sensorsDeviceInit(void)
   TickType_t xStartTime = 0;
   vTaskDelayUntil(&xStartTime, T2M(1000));
 
-  mpu6500Init(I2C3_DEV);
+  mpu6500Init(I2C1_DEV);
   if (mpu6500TestConnection() == true)
   {
     DEBUG_PRINT("MPU9250 I2C connection [OK].\n");
