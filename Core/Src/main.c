@@ -18,12 +18,20 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "cmsis_os.h"
+#include "adc.h"
+#include "dma.h"
+#include "spi.h"
+#include "tim.h"
+#include "usart.h"
+#include "usb_device.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
-#include "SEGGER_RTT.h"
+#include "config.h"
+#include "debug.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -45,10 +53,15 @@
 
 /* USER CODE BEGIN PV */
 
+ADC_HandleTypeDef hadc2;
+
+unsigned long  t1=0;
+unsigned long  t2=0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+void MX_FREERTOS_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -86,11 +99,62 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
+  MX_TIM11_Init();
+  MX_USART1_UART_Init();
+  MX_USART2_UART_Init();
+  MX_SPI2_Init();
+  MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
-  SEGGER_RTT_printf(0, "Hello World!\n");
+
+
+  freertos_IntroTitle();
+
+//  InitTSysTick(96000000, 1000000U);
+  t1 = DWT->CYCCNT;
+//  usDelay(1000);	// 1004 us
+  usDelay(1000);
+//  HAL_Delay(1);		// 1991 us
+  t2 = DWT->CYCCNT;
+  //  DEBUG_PRINT("delay = %.2f(us)\n",(float)(t2-t1)/CLOCK_PER_USEC);
+  DEBUG_PRINT("delay = %d(us)\n",(uint32_t)(t2-t1)/CLOCK_PER_USEC);
+
+
+  check_enter_bootloader();
+
+  int err = platformInit();
+  if (err != 0) {
+  	    // The firmware is running on the wrong hardware. Halt
+  	    while(1);
+  }
+
+//  systemLaunch();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   /* USER CODE END 2 */
 
+  /* Call init function for freertos objects (in freertos.c) */
+  MX_FREERTOS_Init();
+
+  /* Start scheduler */
+  osKernelStart();
+
+  /* We should never get here as control is now taken by the scheduler */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
@@ -126,7 +190,7 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLM = 4;
   RCC_OscInitStruct.PLL.PLLN = 192;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV4;
-  RCC_OscInitStruct.PLL.PLLQ = 4;
+  RCC_OscInitStruct.PLL.PLLQ = 8;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
@@ -148,6 +212,51 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+void InitTSysTick(uint32_t HCLKFrequency, uint32_t Ticks)
+{
+  /* Configure the SysTick to have interrupt in 1ms time base */
+  SysTick->LOAD  = (uint32_t)((HCLKFrequency / Ticks) - 1UL);  /* set reload register */
+  SysTick->VAL   = 0UL;                                       /* Load the SysTick Counter Value */
+  SysTick->CTRL  = SysTick_CTRL_CLKSOURCE_Msk | SysTick_CTRL_ENABLE_Msk;                   /* Enable the Systick Timer */
+
+  CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk; 				// 시간 측정 초기화
+  DWT->CYCCNT = 0;   DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
+}
+
+
+char* OSVersion(void)
+{
+	return tskKERNEL_VERSION_NUMBER;
+}
+
+
+void freertos_IntroTitle(void)
+{
+  DEBUG_PRINT("]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]] \n");
+  DEBUG_PRINT("]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]                     \n");
+  DEBUG_PRINT("]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]                      \n");
+  DEBUG_PRINT("]        ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]      :]]]        ]   .]]]].    :]]]]:  \n");
+  DEBUG_PRINT("]        ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]       ]]]       ]]   ]]]]]]   :]]]]]]  \n");
+  DEBUG_PRINT("]  ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]  ]]]:  ]]]]]        :]]  ]]:  ]]:  :]  \n");
+  DEBUG_PRINT("]  ]]]]]]]]]  .    ]]].    :]]]].    :]]]  ]]]]  ]]]]]  ]     ]]:  :]]  ]]       \n");
+  DEBUG_PRINT("]  ]]]]]]]]]       ]].      :]].      :]]  ]]]:  ]]]]] ]]     ]]    ]]  ]]]:     \n");
+  DEBUG_PRINT("]       ]]]]   .]]]]]  :]]:  ]]  :]]:  ]]       :]]]]  ]]     ]]    ]]  :]]]]]:  \n");
+  DEBUG_PRINT("]       ]]]]  ]]]]]]]        ]]        ]]      ]]]]]   ]]     ]]    ]]   .]]]]]: \n");
+  DEBUG_PRINT("]  ]]]]]]]]]  ]]]]]]]        ]]        ]]  ]]]  .]]    ]]     ]]    ]]      :]]] \n");
+  DEBUG_PRINT("]  ]]]]]]]]]  ]]]]]]]  ]]]]]]]]  ]]]]]]]]  ]]]  ]]     ]]     ]]:  :]]        ]] \n");
+  DEBUG_PRINT("]  ]]]]]]]]]  ]]]]]]]   .]]: ]]   .]]: ]]  ]]]:        ]]     :]]  ]]:  ]:.  :]] \n");
+  DEBUG_PRINT("]  ]]]]]]]]]  ]]]]]]].       ]].       ]]  ]]]]  ]:    ]]      ]]]]]]   ]]]]]]]: \n");
+  DEBUG_PRINT("]  ]]]]]]]]]  ]]]]]]]].     :]]].     :]]  ]]]] ]]]    ]]      .]]]].   .]]]]]:  \n");
+  DEBUG_PRINT("]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]                                   \n");
+  DEBUG_PRINT("]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]                                    \n");
+  DEBUG_PRINT("]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]   The Real Time Kernel \n");
+  DEBUG_PRINT("]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]\n");
+  DEBUG_PRINT("]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]     FreeRTOS version %s\n", OSVersion());
+  DEBUG_PRINT("]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]\n");
+  DEBUG_PRINT("]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]\n\n");
+}
+
 
 /* USER CODE END 4 */
 

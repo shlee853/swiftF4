@@ -1,0 +1,7 @@
+/home/swift/workspace/project/swiftF4/Core/Inc/Algo/math3d.h:111:26:mkvec	1
+/home/swift/workspace/project/swiftF4/Core/Inc/Algo/math3d.h:136:26:vscl	1
+/home/swift/workspace/project/swiftF4/Core/Inc/Algo/math3d.h:573:27:mkquat	1
+/home/swift/workspace/project/swiftF4/Core/Inc/Algo/math3d.h:705:26:quatimagpart	1
+/home/swift/workspace/project/swiftF4/Core/Inc/Algo/math3d.h:745:27:qqmul	1
+/home/swift/workspace/project/swiftF4/Core/Inc/Algo/math3d.h:753:27:qinv	1
+../Core/Src/Interface/mm_pose.c:29:6:kalmanCoreUpdateWithPose	2

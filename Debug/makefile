@@ -9,9 +9,23 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include USB_DEVICE/Target/subdir.mk
+-include USB_DEVICE/App/subdir.mk
+-include Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/subdir.mk
+-include Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/subdir.mk
+-include Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/subdir.mk
+-include Middlewares/Third_Party/FreeRTOS/Source/subdir.mk
+-include Middlewares/ST/STM32_USB_Device_Library/Core/Src/subdir.mk
+-include Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/subdir.mk
 -include Drivers/STM32F4xx_HAL_Driver/Src/subdir.mk
 -include Core/Startup/subdir.mk
 -include Core/Src/Utils/subdir.mk
+-include Core/Src/Platform/subdir.mk
+-include Core/Src/Interface/subdir.mk
+-include Core/Src/Drivers/subdir.mk
+-include Core/Src/Comms/subdir.mk
+-include Core/Src/App/subdir.mk
+-include Core/Src/Algo/subdir.mk
 -include Core/Src/subdir.mk
 -include objects.mk
 
@@ -62,7 +76,7 @@ main-build: swiftF4.elf secondary-outputs
 
 # Tool invocations
 swiftF4.elf swiftF4.map: $(OBJS) $(USER_OBJS) /home/swift/workspace/project/swiftF4/STM32F411CEUX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "swiftF4.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/swift/workspace/project/swiftF4/STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="swiftF4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+	arm-none-eabi-gcc -o "swiftF4.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/swift/workspace/project/swiftF4/STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="swiftF4.map" -Wl,--gc-sections -static -L../Middlewares/ST/ARM/DSP/Lib --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

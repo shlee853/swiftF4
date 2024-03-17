@@ -1,0 +1,5 @@
+../Core/Src/Drivers/ow_common.c:44:6:owCommonInit	2
+../Core/Src/Drivers/ow_common.c:55:6:owCommonTest	1
+../Core/Src/Drivers/ow_common.c:59:13:handleMemGetSerialNr	1
+../Core/Src/Drivers/ow_common.c:63:13:handleMemRead	3
+../Core/Src/Drivers/ow_common.c:75:13:handleMemWrite	3

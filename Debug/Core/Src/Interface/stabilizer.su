@@ -1,0 +1,12 @@
+/home/swift/workspace/project/swiftF4/Core/Inc/Algo/quatcompress.h:34:24:quatcompress	48	static
+../Core/Src/Interface/stabilizer.c:125:13:calcSensorToOutputLatency	32	static
+../Core/Src/Interface/stabilizer.c:131:13:compressState	32	static
+../Core/Src/Interface/stabilizer.c:158:13:compressSetpoint	4	static
+../Core/Src/Interface/stabilizer.c:173:6:stabilizerInit	32	static
+../Core/Src/Interface/stabilizer.c:192:6:stabilizerTest	16	static
+../Core/Src/Interface/stabilizer.c:206:13:batteryCompensation	24	static
+../Core/Src/Interface/stabilizer.c:216:13:setMotorRatios	16	static
+../Core/Src/Interface/stabilizer.c:224:13:updateStateEstimatorAndControllerTypes	8	static
+../Core/Src/Interface/stabilizer.c:236:13:logCapWarning	16	static
+../Core/Src/Interface/stabilizer.c:250:13:controlMotors	24	static
+../Core/Src/Interface/stabilizer.c:262:13:stabilizerTask	40	static

@@ -1,0 +1,6 @@
+../Core/Src/Interface/controller.c:37:6:controllerInit	4
+../Core/Src/Interface/controller.c:71:16:controllerGetType	1
+../Core/Src/Interface/controller.c:75:13:initController	1
+../Core/Src/Interface/controller.c:79:6:controllerTest	1
+../Core/Src/Interface/controller.c:83:6:controller	1
+../Core/Src/Interface/controller.c:87:13:controllerGetName	1

@@ -1,0 +1,17 @@
+../Core/Src/Interface/supervisor.c:94:6:supervisorCanFly	1
+../Core/Src/Interface/supervisor.c:98:6:supervisorIsFlying	1
+../Core/Src/Interface/supervisor.c:102:6:supervisorIsTumbled	1
+../Core/Src/Interface/supervisor.c:106:6:supervisorCanArm	1
+../Core/Src/Interface/supervisor.c:110:6:supervisorIsArmed	3
+../Core/Src/Interface/supervisor.c:114:6:supervisorIsLocked	1
+../Core/Src/Interface/supervisor.c:118:6:supervisorRequestArming	4
+../Core/Src/Interface/supervisor.c:134:13:isFlyingCheck	6
+../Core/Src/Interface/supervisor.c:167:13:isTumbledCheck	10
+../Core/Src/Interface/supervisor.c:207:13:checkEmergencyStopWatchdog	2
+../Core/Src/Interface/supervisor.c:218:13:postTransitionActions	12
+../Core/Src/Interface/supervisor.c:248:34:updateAndPopulateConditions	9
+../Core/Src/Interface/supervisor.c:288:13:updateLogData	9
+../Core/Src/Interface/supervisor.c:317:6:supervisorUpdate	4
+../Core/Src/Interface/supervisor.c:341:6:supervisorOverrideSetpoint	4
+../Core/Src/Interface/supervisor.c:369:6:supervisorAreMotorsAllowedToRun	4
+../Core/Src/Interface/supervisor.c:376:6:infoDump	3

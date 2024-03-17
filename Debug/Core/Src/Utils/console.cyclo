@@ -1,0 +1,9 @@
+../Core/Src/Utils/console.c:59:13:consoleSendMessage	2
+../Core/Src/Utils/console.c:74:6:consoleInit	3
+../Core/Src/Utils/console.c:87:6:consoleTest	1
+../Core/Src/Utils/console.c:92:5:consolePutchar	10
+../Core/Src/Utils/console.c:136:5:consolePutcharFromISR	3
+../Core/Src/Utils/console.c:151:5:consolePuts	2
+../Core/Src/Utils/console.c:161:6:consoleFlush	2
+../Core/Src/Utils/console.c:171:12:findMarkerStart	3
+../Core/Src/Utils/console.c:184:13:addBufferFullMarker	2

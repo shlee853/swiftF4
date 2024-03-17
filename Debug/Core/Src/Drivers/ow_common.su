@@ -1,0 +1,5 @@
+../Core/Src/Drivers/ow_common.c:44:6:owCommonInit	8	static
+../Core/Src/Drivers/ow_common.c:55:6:owCommonTest	4	static
+../Core/Src/Drivers/ow_common.c:59:13:handleMemGetSerialNr	16	static
+../Core/Src/Drivers/ow_common.c:63:13:handleMemRead	32	static
+../Core/Src/Drivers/ow_common.c:75:13:handleMemWrite	32	static

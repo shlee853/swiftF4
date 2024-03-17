@@ -1,0 +1,13 @@
+../Core/Src/Drivers/storage.c:59:15:readEeprom	32	static
+../Core/Src/Drivers/storage.c:86:15:writeEeprom	32	static
+../Core/Src/Drivers/storage.c:113:13:flushEeprom	4	static
+../Core/Src/Drivers/storage.c:131:6:storageInit	8	static
+../Core/Src/Drivers/storage.c:138:6:storageTest	16	static
+../Core/Src/Drivers/storage.c:155:6:storageStore	32	static
+../Core/Src/Drivers/storage.c:173:6:storageForeach	24	static
+../Core/Src/Drivers/storage.c:190:8:storageFetch	32	static
+../Core/Src/Drivers/storage.c:208:6:storageDelete	24	static
+../Core/Src/Drivers/storage.c:225:6:storageReformat	16	static
+../Core/Src/Drivers/storage.c:246:6:storagePrintStats	4	static
+../Core/Src/Drivers/storage.c:268:13:printStats	8	static
+../Core/Src/Drivers/storage.c:279:13:doReformat	8	static

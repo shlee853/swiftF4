@@ -1,0 +1,9 @@
+/home/swift/workspace/project/swiftF4/Core/Inc/Algo/math3d.h:45:21:fsqr	1
+/home/swift/workspace/project/swiftF4/Core/Inc/Algo/math3d.h:46:21:radians	1
+/home/swift/workspace/project/swiftF4/Core/Inc/Algo/math3d.h:47:21:degrees	1
+/home/swift/workspace/project/swiftF4/Core/Inc/Algo/math3d.h:573:27:mkquat	1
+/home/swift/workspace/project/swiftF4/Core/Inc/Algo/math3d.h:681:26:quat2rpy	1
+../Core/Src/Interface/controller_pid.c:27:6:controllerPidInit	1
+../Core/Src/Interface/controller_pid.c:33:6:controllerPidTest	1
+../Core/Src/Interface/controller_pid.c:42:14:capAngle	3
+../Core/Src/Interface/controller_pid.c:56:6:controllerPid	16

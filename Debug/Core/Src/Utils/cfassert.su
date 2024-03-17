@@ -1,0 +1,9 @@
+../Drivers/CMSIS/Include/core_cm4.h:1938:34:__NVIC_SystemReset	4	static,ignoring_inline_asm
+../Core/Src/Utils/cfassert.c:80:6:assertFail	32	static,ignoring_inline_asm
+../Core/Src/Utils/cfassert.c:95:6:storeAssertFileData	16	static
+../Core/Src/Utils/cfassert.c:104:6:storeAssertHardfaultData	24	static
+../Core/Src/Utils/cfassert.c:127:6:storeAssertTextData	16	static
+../Core/Src/Utils/cfassert.c:135:13:clearAssertData	4	static
+../Core/Src/Utils/cfassert.c:139:6:printAssertSnapshotData	56	static
+../Core/Src/Utils/cfassert.c:168:13:isAssertRegistered	4	static
+../Core/Src/Utils/cfassert.c:172:6:cfAssertNormalStartTest	16	static

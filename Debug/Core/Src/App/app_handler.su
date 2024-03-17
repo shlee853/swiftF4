@@ -1,0 +1,2 @@
+../Core/Src/App/app_handler.c:45:28:appInit	24	static
+../Core/Src/App/app_handler.c:55:13:appTask	16	static

@@ -1,0 +1,5 @@
+../Core/Src/Drivers/system.c:115:6:systemLaunch	1
+../Core/Src/Drivers/system.c:126:6:systemTask	2
+../Core/Src/Drivers/system.c:318:6:systemWaitStart	2
+../Core/Src/Drivers/system.c:332:6:systemInit	4
+../Core/Src/Drivers/system.c:405:6:systemSyslinkReceive	3

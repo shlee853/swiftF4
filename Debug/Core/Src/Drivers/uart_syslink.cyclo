@@ -1,0 +1,14 @@
+../Drivers/CMSIS/Include/core_cm4.h:1684:22:__NVIC_EnableIRQ	2
+../Drivers/CMSIS/Include/core_cm4.h:1722:22:__NVIC_DisableIRQ	2
+../Core/Src/Drivers/uart_syslink.c:105:6:uartslkDmaInit	1
+../Core/Src/Drivers/uart_syslink.c:118:6:uartslkInit	2
+../Core/Src/Drivers/uart_syslink.c:181:6:uartslkTest	1
+../Core/Src/Drivers/uart_syslink.c:186:6:uartslkPauseRx	1
+../Core/Src/Drivers/uart_syslink.c:191:6:uartslkResumeRx	1
+../Core/Src/Drivers/uart_syslink.c:197:6:uartslkEnableIncoming	1
+../Core/Src/Drivers/uart_syslink.c:202:6:uartslkGetPacketBlocking	1
+../Core/Src/Drivers/uart_syslink.c:207:6:uartslkSendData	4
+../Core/Src/Drivers/uart_syslink.c:224:6:uartslkSendDataIsrBlocking	1
+../Core/Src/Drivers/uart_syslink.c:237:5:uartslkPutchar	1
+../Core/Src/Drivers/uart_syslink.c:244:6:uartslkSendDataDmaBlocking	5
+../Core/Src/Drivers/uart_syslink.c:575:6:uartSyslinkDumpDebugProbe	1

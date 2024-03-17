@@ -1,0 +1,6 @@
+../Core/Src/Algo/peer_localization.c:8:6:peerLocalizationInit	4	static
+../Core/Src/Algo/peer_localization.c:14:6:peerLocalizationTest	4	static
+../Core/Src/Algo/peer_localization.c:22:6:peerLocalizationTellPosition	32	static
+../Core/Src/Algo/peer_localization.c:37:6:peerLocalizationIsIDActive	24	static
+../Core/Src/Algo/peer_localization.c:47:34:peerLocalizationGetPositionByID	24	static
+../Core/Src/Algo/peer_localization.c:57:34:peerLocalizationGetPositionByIdx	16	static

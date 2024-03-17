@@ -1,0 +1,8 @@
+../Core/Src/Platform/platform.c:33:5:platformInit	2
+../Core/Src/Platform/platform.c:48:5:platformParseDeviceTypeString	7
+../Core/Src/Platform/platform.c:72:5:platformInitConfiguration	3
+../Core/Src/Platform/platform.c:97:13:platformConfigGetDeviceType	1
+../Core/Src/Platform/platform.c:101:13:platformConfigGetDeviceTypeName	1
+../Core/Src/Platform/platform.c:105:24:platformConfigGetSensorImplementation	1
+../Core/Src/Platform/platform.c:109:6:platformConfigPhysicalLayoutAntennasAreClose	1
+../Core/Src/Platform/platform.c:113:23:platformConfigGetMotorMapping	1

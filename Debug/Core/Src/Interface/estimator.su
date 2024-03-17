@@ -1,0 +1,10 @@
+../Core/Src/Interface/estimator.c:103:6:stateEstimatorInit	24	static
+../Core/Src/Interface/estimator.c:108:6:stateEstimatorSwitchTo	24	static
+../Core/Src/Interface/estimator.c:143:20:stateEstimatorGetType	4	static
+../Core/Src/Interface/estimator.c:147:13:initEstimator	16	static
+../Core/Src/Interface/estimator.c:153:13:deinitEstimator	16	static
+../Core/Src/Interface/estimator.c:159:6:stateEstimatorTest	8	static
+../Core/Src/Interface/estimator.c:163:6:stateEstimator	16	static
+../Core/Src/Interface/estimator.c:167:13:stateEstimatorGetName	4	static
+../Core/Src/Interface/estimator.c:172:6:estimatorEnqueue	32	static,ignoring_inline_asm
+../Core/Src/Interface/estimator.c:258:6:estimatorDequeue	16	static

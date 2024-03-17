@@ -1,0 +1,2 @@
+../Core/Src/Platform/platform_stm32f4.c:42:14:getAddressOfOtpMemoryBlock	16	static
+../Core/Src/Platform/platform_stm32f4.c:53:6:platformGetDeviceTypeString	32	static

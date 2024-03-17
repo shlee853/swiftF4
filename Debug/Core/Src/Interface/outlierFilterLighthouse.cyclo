@@ -1,0 +1,2 @@
+../Core/Src/Interface/outlierFilterLighthouse.c:41:6:outlierFilterLighthouseReset	1
+../Core/Src/Interface/outlierFilterLighthouse.c:47:6:outlierFilterLighthouseValidateSweep	5

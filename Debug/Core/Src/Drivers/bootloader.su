@@ -1,0 +1,4 @@
+../Drivers/CMSIS/Include/core_cm4.h:1938:34:__NVIC_SystemReset	4	static,ignoring_inline_asm
+../Core/Src/Drivers/bootloader.c:61:13:branch_to_bootloader	16	static,ignoring_inline_asm
+../Core/Src/Drivers/bootloader.c:72:6:check_enter_bootloader	24	static
+../Core/Src/Drivers/bootloader.c:90:6:enter_bootloader	40	static

@@ -1,0 +1,5 @@
+../Core/Src/Drivers/system.c:115:6:systemLaunch	24	static
+../Core/Src/Drivers/system.c:126:6:systemTask	32	static
+../Core/Src/Drivers/system.c:318:6:systemWaitStart	8	static
+../Core/Src/Drivers/system.c:332:6:systemInit	16	static
+../Core/Src/Drivers/system.c:405:6:systemSyslinkReceive	24	static

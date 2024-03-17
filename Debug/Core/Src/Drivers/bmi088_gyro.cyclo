@@ -1,0 +1,13 @@
+../Core/Src/Drivers/bmi088_gyro.c:156:10:bmi088_gyro_init	3
+../Core/Src/Drivers/bmi088_gyro.c:203:10:bmi088_get_gyro_regs	4
+../Core/Src/Drivers/bmi088_gyro.c:234:10:bmi088_set_gyro_regs	6
+../Core/Src/Drivers/bmi088_gyro.c:263:10:bmi088_gyro_soft_reset	3
+../Core/Src/Drivers/bmi088_gyro.c:291:10:bmi088_set_gyro_meas_conf	10
+../Core/Src/Drivers/bmi088_gyro.c:365:10:bmi088_set_gyro_power_mode	9
+../Core/Src/Drivers/bmi088_gyro.c:418:10:bmi088_get_gyro_data	4
+../Core/Src/Drivers/bmi088_gyro.c:460:10:bmi088_set_gyro_int_config	2
+../Core/Src/Drivers/bmi088_gyro.c:484:10:bmi088_set_gyro_selftest	5
+../Core/Src/Drivers/bmi088_gyro.c:522:10:bmi088_perform_gyro_selftest	9
+../Core/Src/Drivers/bmi088_gyro.c:592:17:null_ptr_check	5
+../Core/Src/Drivers/bmi088_gyro.c:613:17:set_gyro_data_ready_int	7
+../Core/Src/Drivers/bmi088_gyro.c:666:17:set_int_pin_config	7

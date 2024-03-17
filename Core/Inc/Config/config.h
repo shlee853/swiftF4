@@ -44,8 +44,11 @@
 //#include "nrf24l01.h"
 
 #include "main.h" // temp 24.01.21 shlee853
-#include "trace.h"
-#include "usec_time.h"
+//#include "trace.h"
+//#include "usec_time.h"
+
+
+#define CLOCK_PER_USEC 			96
 
 #define ADC_BAT_COEFF			0.008701172f
 

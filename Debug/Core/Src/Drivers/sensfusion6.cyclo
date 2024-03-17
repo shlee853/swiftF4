@@ -1,0 +1,10 @@
+../Core/Src/Drivers/sensfusion6.c:75:6:sensfusion6Init	2
+../Core/Src/Drivers/sensfusion6.c:83:6:sensfusion6Test	1
+../Core/Src/Drivers/sensfusion6.c:88:6:sensfusion6UpdateQ	2
+../Core/Src/Drivers/sensfusion6.c:181:13:sensfusion6UpdateQImpl	5
+../Core/Src/Drivers/sensfusion6.c:255:6:sensfusion6GetQuaternion	1
+../Core/Src/Drivers/sensfusion6.c:263:6:sensfusion6GetEulerRPY	3
+../Core/Src/Drivers/sensfusion6.c:277:7:sensfusion6GetAccZWithoutGravity	1
+../Core/Src/Drivers/sensfusion6.c:285:7:invSqrt	1
+../Core/Src/Drivers/sensfusion6.c:296:14:sensfusion6GetAccZ	1
+../Core/Src/Drivers/sensfusion6.c:303:13:estimatedGravityDirection	1
