@@ -44,6 +44,8 @@
 "./Core/Src/Drivers/storage.o"
 "./Core/Src/Drivers/system.o"
 "./Core/Src/Drivers/uart_syslink.o"
+"./Core/Src/Drivers/usb.o"
+"./Core/Src/Drivers/usblink.o"
 "./Core/Src/Drivers/vcp_esc_passthrough.o"
 "./Core/Src/Interface/attitude_pid_controller.o"
 "./Core/Src/Interface/collision_avoidance.o"

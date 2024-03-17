@@ -25,14 +25,12 @@
  */
 #include <stdbool.h>
 
-//#include "stm32fxxx.h"
-
 /*FreeRtos includes*/
 #include "FreeRTOS.h"
 #include "task.h"
 
 #include "led.h"
-//#include "syslink.h"
+#include "syslink.h"
 #include "param.h"
 #include "cfassert.h"
 
@@ -41,10 +39,10 @@
 static GPIO_TypeDef* led_port[] =
 {
   [LED_BLUE_L] = LED_GPIO_PORT_BLUE,
-  [LED_GREEN_L] = LED_GPIO_PORT,
-  [LED_RED_L] = LED_GPIO_PORT,
-  [LED_GREEN_R] = LED_GPIO_PORT,
-  [LED_RED_R] = LED_GPIO_PORT,
+  [LED_GREEN_L] = LED_L_GPIO_PORT,
+  [LED_RED_L] = LED_L_GPIO_PORT,
+  [LED_GREEN_R] = LED_R_GPIO_PORT,
+  [LED_RED_R] = LED_R_GPIO_PORT,
   [LED_BLUE_NRF] = 0,
 };
 static unsigned int led_pin[] =
@@ -91,7 +89,7 @@ static void ledSetForce(led_t led, bool value)
     value = !value;
   }
 
-/*  if (led == LED_BLUE_NRF && isSyslinkUp())
+  if (led == LED_BLUE_NRF && isSyslinkUp())
   {
     SyslinkPacket slp;
     slp.type = value ? SYSLINK_PM_LED_ON : SYSLINK_PM_LED_OFF;
@@ -100,7 +98,7 @@ static void ledSetForce(led_t led, bool value)
   }
   else
   {
-  */
+
     if (value)
     {
       HAL_GPIO_WritePin(led_port[led], led_pin[led], GPIO_PIN_SET);
@@ -110,7 +108,7 @@ static void ledSetForce(led_t led, bool value)
         HAL_GPIO_WritePin(led_port[led], led_pin[led], GPIO_PIN_RESET);
     }
 
-//  }
+  }
 
 }
 
@@ -180,16 +178,18 @@ void ledInit(void)
 
 bool ledTest(void)
 {
-  ledSet(LED_GREEN_L, 1);
-  ledSet(LED_GREEN_R, 1);
-  ledSet(LED_RED_L, 0);
-  ledSet(LED_RED_R, 0);
-  vTaskDelay((250));
-  ledSet(LED_GREEN_L, 0);
-  ledSet(LED_GREEN_R, 0);
-  ledSet(LED_RED_L, 1);
-  ledSet(LED_RED_R, 1);
-  vTaskDelay((250));
+
+	for(int n=0; n<3; n++) {
+
+		for (int i = 0; i < LED_NUM; i++) {
+
+			  ledSet(i, 1);
+			  vTaskDelay((100));
+			  ledSet(i, 0);
+			  vTaskDelay((100));
+		}
+
+	}
 
   // LED test end
   ledSet(LED_GREEN_L, 0);

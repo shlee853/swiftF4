@@ -5,6 +5,7 @@ Core/Src/Comms/crtp_commander_rpyt.o: \
  /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/imu_types.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/lighthouse_types.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Comms/crtp.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Utils/cfassert.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Interface/commander.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Config/config.h \
  ../Core/Inc/main.h ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
@@ -58,6 +59,7 @@ Core/Src/Comms/crtp_commander_rpyt.o: \
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/imu_types.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/lighthouse_types.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Comms/crtp.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Utils/cfassert.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Interface/commander.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Config/config.h:
 ../Core/Inc/main.h:

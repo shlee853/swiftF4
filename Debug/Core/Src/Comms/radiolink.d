@@ -55,8 +55,6 @@ Core/Src/Comms/radiolink.o: ../Core/Src/Comms/radiolink.c \
  /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/configblock.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/log.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/led.h \
- ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_bus.h \
- ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_gpio.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/ledseq.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/queuemonitor.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Config/autoconf.h \
@@ -120,8 +118,6 @@ Core/Src/Comms/radiolink.o: ../Core/Src/Comms/radiolink.c \
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/configblock.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/log.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/led.h:
-../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_bus.h:
-../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_gpio.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/ledseq.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/queuemonitor.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Config/autoconf.h:

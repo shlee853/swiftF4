@@ -27,7 +27,7 @@
 #include <stdbool.h>
 
 #include "crtp_commander.h"
-
+#include "cfassert.h"
 #include "commander.h"
 #include "crtp.h"
 #include "param.h"

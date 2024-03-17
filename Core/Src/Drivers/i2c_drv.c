@@ -51,7 +51,8 @@
 #include "sleepus.h"
 
 #include "autoconf.h"
-//#include "stm32f4xx_rcc.h"
+#include "cfassert.h"
+
 //DEBUG
 #ifdef I2CDRV_DEBUG_LOG_EVENTS
 #include "usec_time.h"

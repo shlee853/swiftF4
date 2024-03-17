@@ -57,8 +57,6 @@ Core/Src/Drivers/system.o: ../Core/Src/Drivers/system.c \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/SEGGER_RTT_Conf.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/version.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/led.h \
- ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_bus.h \
- ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_gpio.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Platform/system.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Platform/platform.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/motors.h \
@@ -133,8 +131,6 @@ Core/Src/Drivers/system.o: ../Core/Src/Drivers/system.c \
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/SEGGER_RTT_Conf.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/version.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/led.h:
-../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_bus.h:
-../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_gpio.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Platform/system.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Platform/platform.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/motors.h:

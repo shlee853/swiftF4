@@ -199,6 +199,8 @@ void ledseqInit() {
   }
 
   ledInit();
+  ledTest();
+  ledSet(CHG_LED, SET);
 
   /* Led sequence priority */
   ledseqRegisterSequence(&seq_testPassed);

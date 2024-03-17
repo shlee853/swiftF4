@@ -95,8 +95,8 @@ static bool dmaNrfFlowControlBufferFull;
 static uint32_t dmaSendWhileNrfBufferFull;
 
 
-extern UART_HandleTypeDef huart6;
-extern DMA_HandleTypeDef hdma_usart6_tx;
+extern UART_HandleTypeDef huart1;
+extern DMA_HandleTypeDef hdma_usart1_tx;
 
 /**
   * Configures the UART DMA. Mainly used for FreeRTOS trace
@@ -107,7 +107,7 @@ void uartslkDmaInit(void)
 
 #ifdef CONFIG_SYSLINK_DMA
 
-	HAL_UART_MspInit(&huart6);
+	HAL_UART_MspInit(&huart1);
 
 #endif
 
@@ -126,54 +126,42 @@ void uartslkInit(void)
   DEBUG_QUEUE_MONITOR_REGISTER(syslinkPacketDelivery);
 
 
-  GPIO_InitTypeDef GPIO_InitStruct;
-  __HAL_RCC_GPIOC_CLK_ENABLE();
-
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_6, GPIO_PIN_RESET);
-
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_7, GPIO_PIN_RESET);
-
-  GPIO_InitStruct.Pin = GPIO_PIN_7 | GPIO_PIN_6;
-  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-  GPIO_InitStruct.Pull = GPIO_PULLUP;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-
-#if defined(UARTSLK_OUTPUT_TRACE_DATA) || defined(ADC_OUTPUT_RAW_DATA) || defined(IMU_OUTPUT_RAW_DATA_ON_UART)
-
-  huart6.Instance = USART6;
-  huart6.Init.BaudRate = 2000000;
-  huart6.Init.Mode = UART_MODE_TX;
-
-#else
-
-  huart6.Instance = USART6;
-  huart6.Init.BaudRate = 1000000;
-  huart6.Init.Mode = UART_MODE_TX_RX;
-
-#endif
-
-  huart6.Init.WordLength = UART_WORDLENGTH_8B;
-  huart6.Init.StopBits = UART_STOPBITS_1;
-  huart6.Init.Parity = UART_PARITY_NONE;
-  huart6.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-  huart6.Init.OverSampling = UART_OVERSAMPLING_16;
-
-
-  if (HAL_UART_Init(&huart6) != HAL_OK)
-  {
-    Error_Handler();
-  }
-
-
   uartslkDmaInit();
 
   // Setting up TXEN pin (NRF flow control)
   // 향후 외부핀 PA4 연결 필요
 
-  __HAL_UART_ENABLE_IT(&huart6, UART_IT_RXNE);
+
+#if defined(UARTSLK_OUTPUT_TRACE_DATA) || defined(ADC_OUTPUT_RAW_DATA) || defined(IMU_OUTPUT_RAW_DATA_ON_UART)
+
+  huart1.Instance = USART1;
+  huart1.Init.BaudRate = 2000000;
+  huart1.Init.Mode = UART_MODE_TX;
+
+#else
+
+  huart1.Instance = USART1;
+  huart1.Init.BaudRate = 1000000;
+  huart1.Init.Mode = UART_MODE_TX_RX;
+
+#endif
+
+  huart1.Init.WordLength = UART_WORDLENGTH_8B;
+  huart1.Init.StopBits = UART_STOPBITS_1;
+  huart1.Init.Parity = UART_PARITY_NONE;
+  huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart1.Init.OverSampling = UART_OVERSAMPLING_16;
+
+
+  if (HAL_UART_Init(&huart1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+
+
+
+  __HAL_UART_ENABLE_IT(&huart1, UART_IT_RXNE);
 
   isInit = true;
 }
@@ -216,8 +204,8 @@ void uartslkSendData(uint32_t size, uint8_t* data)
 #ifdef UARTSLK_SPINLOOP_FLOWCTRL
     while(GPIO_ReadInputDataBit(UARTSLK_TXEN_PORT, UARTSLK_TXEN_PIN) == Bit_SET);
 #endif
-    while (!(huart6.Instance->SR & UART_FLAG_TXE));
-    huart6.Instance->DR = (data[i] & 0x00FF);
+    while (!(huart1.Instance->SR & UART_FLAG_TXE));
+    huart1.Instance->DR = (data[i] & 0x00FF);
   }
 }
 
@@ -228,7 +216,7 @@ void uartslkSendDataIsrBlocking(uint32_t size, uint8_t* data)
   dataSizeIsr = (uint8_t)size;
   dataIndexIsr = 1;
   uartslkSendData(1, &data[0]);
-  __HAL_UART_ENABLE_IT(&huart6, UART_IT_TXE);
+  __HAL_UART_ENABLE_IT(&huart1, UART_IT_TXE);
   xSemaphoreTake(waitUntilSendDone, portMAX_DELAY);
   outDataIsr = 0;
   xSemaphoreGive(uartBusy);
@@ -251,13 +239,13 @@ void uartslkSendDataDmaBlocking(uint32_t size, uint8_t* data)
   {
     xSemaphoreTake(uartBusy, portMAX_DELAY);
     // Wait for DMA to be free
-    while(HAL_DMA_GetState(&hdma_usart6_tx) != HAL_DMA_STATE_READY);
+    while(HAL_DMA_GetState(&hdma_usart1_tx) != HAL_DMA_STATE_READY);
 
     //Copy data in DMA buffer
     memcpy(dmaTXBuffer, data, size);
     initialDMACount = (uint16_t)size;
 
-    if(HAL_UART_Transmit_DMA(&huart6, dmaTXBuffer, size)!=HAL_OK){
+    if(HAL_UART_Transmit_DMA(&huart1, dmaTXBuffer, size)!=HAL_OK){
     	DEBUG_PRINT("DMA transfer failed\n");
     }
     xSemaphoreTake(waitUntilSendDone, portMAX_DELAY);
@@ -552,7 +540,7 @@ void __attribute__((used)) EXTI4_Callback(void)
   uartslkTxenFlowctrlIsr();
 }
 
-void __attribute__((used)) USART6_IRQHandler(void)
+void __attribute__((used)) USART1_IRQHandler(void)
 {
   uartslkIsr();
 }

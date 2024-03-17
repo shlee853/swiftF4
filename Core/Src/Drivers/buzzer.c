@@ -31,14 +31,14 @@
 #include "buzzer.h"
 
 
-extern TIM_HandleTypeDef htim3;
+extern TIM_HandleTypeDef htim11;
 
 
 
 
 void buzzerInit()
 {
-	 HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
+	 HAL_TIM_Base_Start_IT(&htim11);
 	 TIM3->PSC= 0;
 }
 
@@ -50,7 +50,7 @@ bool buzzerTest()
 void buzzerOff()
 {
   TIM3->PSC= 0;
-  HAL_TIM_PWM_Stop(&htim3, TIM_CHANNEL_1);
+  HAL_TIM_Base_Stop_IT(&htim11);
 }
 
 void buzzerOn(uint32_t freq)

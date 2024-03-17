@@ -27,38 +27,36 @@
 #define __LED_H__
 
 #include <stdbool.h>
-#include "stm32f4xx_ll_bus.h"
-#include "stm32f4xx_ll_gpio.h"
+#include "main.h"
 //Led polarity configuration constant
 #define LED_POL_POS 0
 #define LED_POL_NEG 1
 
 //Hardware configuration
-//#define LED_GPIO_PORT_BLUE  GPIOD
-//#define LED_GPIO_BLUE_L  GPIO_Pin_2
-//#define LED_POL_BLUE_L   LED_POL_POS
 
-#define LED_GPIO_PORT_BLUE  GPIOB
-#define LED_GPIO_BLUE_L  LL_GPIO_PIN_5
-#define LED_POL_BLUE_L   LED_POL_NEG
+#define LED_GPIO_PORT_BLUE  LED_GPIO_BLUE_L_GPIO_Port
+#define LED_GPIO_BLUE_L  LED_GPIO_BLUE_L_Pin
+#define LED_POL_BLUE_L   LED_POL_POS
 
-#define LED_GPIO_PORT    GPIOC
-#define LED_GPIO_GREEN_L LL_GPIO_PIN_1
+#define LED_L_GPIO_PORT  LED_GPIO_GREEN_L_GPIO_Port
+#define LED_GPIO_GREEN_L LED_GPIO_GREEN_L_Pin
 #define LED_POL_GREEN_L  LED_POL_NEG
-#define LED_GPIO_RED_L   LL_GPIO_PIN_0
+#define LED_GPIO_RED_L   LED_GPIO_RED_L_Pin
 #define LED_POL_RED_L    LED_POL_NEG
-#define LED_GPIO_GREEN_R LL_GPIO_PIN_2
+
+#define LED_R_GPIO_PORT  LED_GPIO_GREEN_R_GPIO_Port
+#define LED_GPIO_GREEN_R LED_GPIO_GREEN_R_Pin
 #define LED_POL_GREEN_R  LED_POL_NEG
-#define LED_GPIO_RED_R   LL_GPIO_PIN_3
+#define LED_GPIO_RED_R   LED_GPIO_RED_R_Pin
 #define LED_POL_RED_R    LED_POL_NEG
 
-#define LINK_LED         LED_GREEN_L
-#define CHG_LED          0
-#define LOWBAT_LED       LED_RED_R
-#define LINK_DOWN_LED    LED_RED_L
-#define SYS_LED          LED_RED_R
-#define ERR_LED1         LED_RED_L
-#define ERR_LED2         LED_RED_R
+#define LINK_LED         LED_GPIO_GREEN_L_Pin
+#define CHG_LED          LED_GPIO_BLUE_L_Pin
+#define LOWBAT_LED       LED_GPIO_RED_R_Pin
+#define LINK_DOWN_LED    LED_GPIO_RED_L_Pin
+#define SYS_LED          LED_GPIO_RED_R_Pin
+#define ERR_LED1         LED_GPIO_RED_L_Pin
+#define ERR_LED2         LED_GPIO_RED_R_Pin
 
 #define LED_NUM 6
 

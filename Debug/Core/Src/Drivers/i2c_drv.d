@@ -52,7 +52,8 @@ Core/Src/Drivers/i2c_drv.o: ../Core/Src/Drivers/i2c_drv.c \
  ../Core/Inc/main.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Config/nvicconf.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/sleepus.h \
- /home/swift/workspace/project/swiftF4/Core/Inc/Config/autoconf.h
+ /home/swift/workspace/project/swiftF4/Core/Inc/Config/autoconf.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Utils/cfassert.h
 ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:
 ../Core/Inc/FreeRTOSConfig.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h:
@@ -107,3 +108,4 @@ Core/Src/Drivers/i2c_drv.o: ../Core/Src/Drivers/i2c_drv.c \
 /home/swift/workspace/project/swiftF4/Core/Inc/Config/nvicconf.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/sleepus.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Config/autoconf.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Utils/cfassert.h:

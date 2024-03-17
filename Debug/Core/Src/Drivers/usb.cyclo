@@ -1,0 +1,6 @@
+../Drivers/CMSIS/Include/core_cm4.h:1684:22:__NVIC_EnableIRQ	2
+../Drivers/CMSIS/Include/core_cm4.h:1722:22:__NVIC_DisableIRQ	2
+../Core/Src/Drivers/usb.c:323:6:usbGetDataBlocking	3
+../Core/Src/Drivers/usb.c:342:6:usbSendData	1
+../Core/Src/Drivers/usb.c:351:6:usbInit	1
+../Core/Src/Drivers/usb.c:363:6:usbTest	1

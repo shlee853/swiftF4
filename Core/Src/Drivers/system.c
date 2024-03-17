@@ -127,17 +127,14 @@ void systemTask(void *arg)
 {
   bool pass = true;
 
+  //  InitTSysTick(96000000, 1000000U);
 
   uint32_t ld = SysTick->LOAD;
   time1 = DWT->CYCCNT;
-  delay_us(1000);	// 1ms
+//  usDelay(1000);	// 1002us
+  vTaskDelay(1);	// 1ms
   time2 = DWT->CYCCNT;
   DEBUG_PRINT("delay = %d(us)\n",(uint32_t)(time2-time1)/CLOCK_PER_USEC);
-
-
-  ledInit();
-  ledSet(CHG_LED, SET);
-
 
 #ifdef CONFIG_DEBUG_QUEUE_MONITOR
   queueMonitorInit();
@@ -155,8 +152,6 @@ void systemTask(void *arg)
 
   systemInit();
   DEBUG_PRINT("System drivers are Initialized!\n");
-
-
 
   commInit();
   DEBUG_PRINT("System communications are Initialized!\n");
@@ -370,6 +365,7 @@ void systemInit(void)
 //  configblockInit();			// 현재 디바이스에 EEPROM이 존재하지 않음
 //  storageInit();
   workerInit();
+
   ledseqInit();
   DEBUG_PRINT("[TASK] lesdeqCmdTask is running!\n");
 

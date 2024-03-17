@@ -110,15 +110,6 @@ int main(void)
 
   freertos_IntroTitle();
 
-//  InitTSysTick(96000000, 1000000U);
-  t1 = DWT->CYCCNT;
-//  usDelay(1000);	// 1004 us
-  usDelay(1000);
-//  HAL_Delay(1);		// 1991 us
-  t2 = DWT->CYCCNT;
-  //  DEBUG_PRINT("delay = %.2f(us)\n",(float)(t2-t1)/CLOCK_PER_USEC);
-  DEBUG_PRINT("delay = %d(us)\n",(uint32_t)(t2-t1)/CLOCK_PER_USEC);
-
 
   check_enter_bootloader();
 
@@ -128,7 +119,7 @@ int main(void)
   	    while(1);
   }
 
-//  systemLaunch();
+  systemLaunch();
 
 
 

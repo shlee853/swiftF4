@@ -44,6 +44,8 @@ _Min_Stack_Size = 0x400; /* required amount of stack */
 /* Memories definition */
 MEMORY
 {
+
+  CCMRAM    (xrw)    : ORIGIN = 0x10000000,   LENGTH = 64K
   RAM    (xrw)    : ORIGIN = 0x20000000,   LENGTH = 128K
   FLASH    (rx)    : ORIGIN = 0x8000000,   LENGTH = 512K
 }
@@ -63,6 +65,9 @@ SECTIONS
   .text :
   {
     . = ALIGN(4);
+    
+      _stext = .;
+    
     *(.text)           /* .text sections (code) */
     *(.text*)          /* .text* sections (code) */
     *(.glue_7)         /* glue arm to thumb code */
@@ -73,6 +78,35 @@ SECTIONS
     KEEP (*(.fini))
 
     . = ALIGN(4);
+    
+    	/* CF2를 위해 추된 역 */
+        /* Parameters */
+        . = ALIGN(4);
+        _param_start = .;
+        KEEP(*(.param))
+        KEEP(*(.param.*))
+        _param_stop = .;
+        /* Logging */
+        . = ALIGN(4);
+        _log_start = .;
+        KEEP(*(.log))
+        KEEP(*(.log.*))
+        _log_stop = .;
+        /* Decks */
+	    . = ALIGN(4);
+        _deckDriver_start = .;
+        KEEP(*(.deckDriver));
+        KEEP(*(.deckDriver.*));
+        _deckDriver_stop = .;
+        /* Event Triggers */
+	    . = ALIGN(4);
+        _eventtrigger_start = .;
+        KEEP(*(.eventtrigger));
+        KEEP(*(.eventtrigger.*));
+        _eventtrigger_stop = .;
+
+
+    
     _etext = .;        /* define a global symbols at end of code */
   } >FLASH
 
@@ -145,6 +179,35 @@ SECTIONS
     _edata = .;        /* define a global symbol at data end */
 
   } >RAM AT> FLASH
+
+
+	/*CF2에서 추가 */
+	  _siccmram = LOADADDR(.ccmram);
+	
+	  /* CCM-RAM section
+	  *
+	  * IMPORTANT NOTE!
+	  * If initialized variables will be placed in this section,
+	  * the startup code needs to be modified to copy the init-values.
+	  */
+	  .ccmram :
+	  {
+	    . = ALIGN(4);
+	    _sccmram = .;       /* create a global symbol at ccmram start */
+	    *(.ccmram)
+	    *(.ccmram*)
+	
+	    . = ALIGN(4);
+	    _eccmram = .;       /* create a global symbol at ccmram end */
+	  } >CCMRAM AT> FLASH
+	
+
+
+
+
+
+
+
 
   /* Uninitialized data section into "RAM" Ram type memory */
   . = ALIGN(4);

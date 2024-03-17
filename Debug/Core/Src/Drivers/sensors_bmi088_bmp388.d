@@ -71,8 +71,6 @@ Core/Src/Drivers/sensors_bmi088_bmp388.o: \
  /home/swift/workspace/project/swiftF4/Core/Inc/Config/nvicconf.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/ledseq.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/led.h \
- ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_bus.h \
- ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_gpio.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/sound.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/i2cdev.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/i2c_drv.h \
@@ -158,8 +156,6 @@ Core/Src/Drivers/sensors_bmi088_bmp388.o: \
 /home/swift/workspace/project/swiftF4/Core/Inc/Config/nvicconf.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/ledseq.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/led.h:
-../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_bus.h:
-../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_gpio.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/sound.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/i2cdev.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/i2c_drv.h:

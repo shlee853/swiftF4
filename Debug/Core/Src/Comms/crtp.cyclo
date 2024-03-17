@@ -12,7 +12,7 @@
 ../Core/Src/Comms/crtp.c:218:5:crtpSendPacketBlock	3
 ../Core/Src/Comms/crtp.c:226:5:crtpReset	2
 ../Core/Src/Comms/crtp.c:236:6:crtpIsConnected	2
-../Core/Src/Comms/crtp.c:243:6:crtpSetLink	3
+../Core/Src/Comms/crtp.c:243:6:crtpSetLink	2
 ../Core/Src/Comms/crtp.c:256:12:nopFunc	1
 ../Core/Src/Comms/crtp.c:261:13:clearStats	1
 ../Core/Src/Comms/crtp.c:267:13:updateStats	2

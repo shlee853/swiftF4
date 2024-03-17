@@ -242,8 +242,8 @@ bool crtpIsConnected(void)
 
 void crtpSetLink(struct crtpLinkOperations * lk)
 {
-  if(link)
-    link->setEnable(false);
+//  if(link)
+//    link->setEnable(false);
 
   if (lk)
     link = lk;

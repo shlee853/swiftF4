@@ -49,8 +49,6 @@ Core/Src/Drivers/pm_stm32f4.o: ../Core/Src/Drivers/pm_stm32f4.c \
  /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/pm.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Config/autoconf.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/led.h \
- ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_bus.h \
- ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_gpio.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/log.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/param.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/ledseq.h \
@@ -111,8 +109,6 @@ Core/Src/Drivers/pm_stm32f4.o: ../Core/Src/Drivers/pm_stm32f4.c \
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/pm.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Config/autoconf.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/led.h:
-../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_bus.h:
-../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_gpio.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/log.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/param.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/ledseq.h:

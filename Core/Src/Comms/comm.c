@@ -51,9 +51,9 @@ void commInit(void)
   uartslkInit();
   radiolinkInit();
 
-  //if (usbTest())
-  //  crtpSetLink(usblinkGetLink());
-  //else if(radiolinkTest())
+//  if (usbTest())
+//    crtpSetLink(usblinkGetLink());
+//  else if(radiolinkTest())
     crtpSetLink(radiolinkGetLink());
 
   crtpserviceInit();

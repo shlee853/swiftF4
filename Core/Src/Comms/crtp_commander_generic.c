@@ -28,7 +28,7 @@
 #include <string.h>
 
 #include "crtp_commander.h"
-
+#include "cfassert.h"
 #include "commander.h"
 #include "param.h"
 #include "crtp.h"
