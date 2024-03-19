@@ -13,7 +13,3 @@
 ../Core/Src/Drivers/i2c_drv.c:577:13:i2cdrvErrorIsrHandler	16	static
 ../Core/Src/Drivers/i2c_drv.c:613:13:i2cdrvClearDMA	16	static
 ../Core/Src/Drivers/i2c_drv.c:624:13:i2cdrvDmaIsrHandler	16	static
-../Core/Src/Drivers/i2c_drv.c:660:28:DMA1_Stream0_IRQHandler	8	static
-../Core/Src/Drivers/i2c_drv.c:666:28:I2C3_ER_IRQHandler	8	static
-../Core/Src/Drivers/i2c_drv.c:671:28:I2C3_EV_IRQHandler	8	static
-../Core/Src/Drivers/i2c_drv.c:676:28:DMA1_Stream2_IRQHandler	8	static

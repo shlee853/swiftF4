@@ -36,7 +36,7 @@
 
 
 #include "mpu6500.h"
-
+#include <stdbool.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -62,6 +62,8 @@ ADC_HandleTypeDef hadc2;
 
 unsigned long  t1=0;
 unsigned long  t2=0;
+
+uint8_t rxd[1];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -109,8 +111,8 @@ int main(void)
   MX_USART1_UART_Init();
   MX_USART2_UART_Init();
   MX_SPI2_Init();
-  MX_ADC1_Init();
   MX_I2C1_Init();
+  MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
 
 
@@ -126,8 +128,36 @@ int main(void)
   }
 
 
+  uint8_t buff = 0;
+
+  bool ret = false;
+
+
+  if(HAL_I2C_Mem_Read(&hi2c1, 0x69<<1, 0x75, 1, &buff, 1, 3000) == HAL_OK) {
+	  ret = true;
+  }
+
+
+  buff = 0;
+  ret = false;
+  if(HAL_I2C_Mem_Read_DMA(&hi2c1, 0x69<<1, 0x75, 1, &buff, 1) == HAL_OK) {
+	  ret = true;
+  }
+
+
+
+
+
+
+
+
+
+
+/*
+
   i2cdevInit(I2C1_DEV);
   mpu6500Init(I2C1_DEV);
+
   if (mpu6500TestConnection() == true)
   {
     DEBUG_PRINT("MPU9250 I2C connection [OK].\n");
@@ -136,7 +166,7 @@ int main(void)
   {
     DEBUG_PRINT("MPU9250 I2C connection [FAIL].\n");
   }
-
+*/
 
 
   systemLaunch();
@@ -267,6 +297,9 @@ void freertos_IntroTitle(void)
   DEBUG_PRINT("]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]\n");
   DEBUG_PRINT("]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]\n\n");
 }
+
+
+
 
 
 /* USER CODE END 4 */
