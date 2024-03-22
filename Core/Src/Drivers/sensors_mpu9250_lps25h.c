@@ -355,6 +355,9 @@ static void sensorsDeviceInit(void)
   TickType_t xStartTime = 0;
   vTaskDelayUntil(&xStartTime, T2M(1000));
 
+  i2cdevInit(I2C1_DEV);
+
+
   mpu6500Init(I2C1_DEV);
   if (mpu6500TestConnection() == true)
   {
@@ -366,6 +369,10 @@ static void sensorsDeviceInit(void)
   }
 
   mpu6500Reset();
+
+
+
+
   vTaskDelay(M2T(50));
   // Activate MPU6500
   mpu6500SetSleepEnabled(false);

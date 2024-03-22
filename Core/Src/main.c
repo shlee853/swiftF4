@@ -128,33 +128,8 @@ int main(void)
   }
 
 
-  uint8_t buff = 0;
-
-  bool ret = false;
-
-
-  if(HAL_I2C_Mem_Read(&hi2c1, 0x69<<1, 0x75, 1, &buff, 1, 3000) == HAL_OK) {
-	  ret = true;
-  }
-
-
-  buff = 0;
-  ret = false;
-  if(HAL_I2C_Mem_Read_DMA(&hi2c1, 0x69<<1, 0x75, 1, &buff, 1) == HAL_OK) {
-	  ret = true;
-  }
-
-
-
-
-
-
-
-
-
 
 /*
-
   i2cdevInit(I2C1_DEV);
   mpu6500Init(I2C1_DEV);
 
@@ -167,6 +142,7 @@ int main(void)
     DEBUG_PRINT("MPU9250 I2C connection [FAIL].\n");
   }
 */
+
 
 
   systemLaunch();

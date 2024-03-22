@@ -197,6 +197,7 @@ I2cDrv deckBus =
 
 extern I2C_HandleTypeDef hi2c1;
 extern DMA_HandleTypeDef hdma_i2c1_rx;
+extern DMA_HandleTypeDef hdma_i2c1_tx;
 
 static void i2cdrvStartTransfer(I2cDrv *i2c)
 {
@@ -204,16 +205,12 @@ static void i2cdrvStartTransfer(I2cDrv *i2c)
 
   if (i2c->txMessage.direction == i2cRead)
   {
-	  	uint32_t src = (uint32_t)i2c->txMessage.buffer;
-	  	uint32_t dst = (uint32_t)&i2c->def->i2cPort->DR;
-
-    HAL_DMA_Start(&hdma_i2c1_rx, src, dst, i2c->txMessage.messageLength);
+	HAL_I2C_Mem_Read_DMA(&hi2c1, i2c->txMessage.slaveAddress<<1, i2c->txMessage.internalAddress, 1, i2c->txMessage.buffer, i2c->txMessage.messageLength);
   }
-
-  __HAL_I2C_DISABLE_IT(&hi2c1, I2C_IT_BUF);
-  __HAL_I2C_ENABLE_IT(&hi2c1, I2C_IT_EVT);
-  i2c->def->i2cPort->CR1 = (I2C_CR1_START | I2C_CR1_PE);
-
+  else
+  {
+	HAL_I2C_Mem_Write_DMA(&hi2c1, i2c->txMessage.slaveAddress<<1, i2c->txMessage.internalAddress, 1, i2c->txMessage.buffer, i2c->txMessage.messageLength);
+  }
 
 }
 
@@ -293,9 +290,32 @@ static void i2cdrvTryToRestartBus(I2cDrv* i2c)
 
   __HAL_LINKDMA(&hi2c1, hdmarx, hdma_i2c1_rx);
 
+
+
+  /* I2C1_TX Init */
+  hdma_i2c1_tx.Instance = DMA1_Stream1;
+  hdma_i2c1_tx.Init.Channel = DMA_CHANNEL_0;
+  hdma_i2c1_tx.Init.Direction = DMA_MEMORY_TO_PERIPH;
+  hdma_i2c1_tx.Init.PeriphInc = DMA_PINC_DISABLE;
+  hdma_i2c1_tx.Init.MemInc = DMA_MINC_ENABLE;
+  hdma_i2c1_tx.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
+  hdma_i2c1_tx.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
+  hdma_i2c1_tx.Init.Mode = DMA_NORMAL;
+  hdma_i2c1_tx.Init.Priority = DMA_PRIORITY_LOW;
+  hdma_i2c1_tx.Init.FIFOMode = DMA_FIFOMODE_DISABLE;
+  if (HAL_DMA_Init(&hdma_i2c1_tx) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  __HAL_LINKDMA(&hi2c1,hdmatx,hdma_i2c1_tx);
+
   /* I2C1 interrupt Init */
+  HAL_NVIC_SetPriority(I2C1_EV_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(I2C1_EV_IRQn);
   HAL_NVIC_SetPriority(I2C1_ER_IRQn, 5, 0);
   HAL_NVIC_EnableIRQ(I2C1_ER_IRQn);
+/* USER CODE BEGIN I2C1_MspInit 1 */
 
 }
 
@@ -400,6 +420,14 @@ bool i2cdrvMessageTransfer(I2cDrv* i2c, I2cMessage* message)
   // We can now start the ISR sending this message.
   i2cdrvStartTransfer(i2c);
   // Wait for transaction to be done
+  xSemaphoreTake(i2c->isBusFreeSemaphore, 1);
+  if (i2c->txMessage.status == i2cAck)
+  {
+    status = true;
+  }
+
+//  vTaskDelay(M2T(50));
+/*
   if (xSemaphoreTake(i2c->isBusFreeSemaphore, I2C_MESSAGE_TIMEOUT) == pdTRUE)
   {
     if (i2c->txMessage.status == i2cAck)
@@ -413,6 +441,8 @@ bool i2cdrvMessageTransfer(I2cDrv* i2c, I2cMessage* message)
     i2cdrvTryToRestartBus(i2c);
     //TODO: If bus is really hanged... fail safe
   }
+*/
+
   xSemaphoreGive(i2c->isBusFreeMutex);
 
   return status;
@@ -623,26 +653,24 @@ static void i2cdrvClearDMA(I2cDrv* i2c)
 
 static void i2cdrvDmaIsrHandler(I2cDrv* i2c)
 {
-	/*
- if (DMA_GetFlagStatus(i2c->def->dmaRxStream, i2c->def->dmaRxTCFlag)) // Transfer complete
-  {
-    i2cdrvClearDMA(i2c);
-    i2cNotifyClient(i2c);
-    // Are there any other messages to transact?
-    i2cTryNextMessage(i2c);
-  }
-  if (DMA_GetFlagStatus(i2c->def->dmaRxStream, i2c->def->dmaRxTEFlag)) // Transfer error
-  {
-    DMA_ClearITPendingBit(i2c->def->dmaRxStream, i2c->def->dmaRxTEFlag);
-    //TODO: Best thing we could do?
-    i2c->txMessage.status = i2cNack;
-    i2cNotifyClient(i2c);
-    i2cTryNextMessage(i2c);
-  }
+
+	HAL_DMA_IRQHandler(&hdma_i2c1_rx);
+
+/*
+	if((__HAL_DMA_GET_TC_FLAG_INDEX(&hdma_i2c1_rx) & (DMA_FLAG_TCIF0_4 << hdma_i2c1_rx.StreamIndex)) != RESET)
+	{
+//	    i2cNotifyClient(i2c);
+	    i2cTryNextMessage(i2c);
+	}
+	if((__HAL_DMA_GET_TE_FLAG_INDEX(&hdma_i2c1_rx) & (DMA_FLAG_TEIF0_4 << hdma_i2c1_rx.StreamIndex)) != RESET)
+	{
+	    i2c->txMessage.status = i2cNack;
+//	    i2cNotifyClient(i2c);
+	    i2cTryNextMessage(i2c);
+
+	}
 */
-
 }
-
 /*
 void __attribute__((used)) I2C1_ER_IRQHandler(void)
 {
@@ -654,21 +682,24 @@ void __attribute__((used)) I2C1_EV_IRQHandler(void)
   i2cdrvEventIsrHandler(&deckBus);
 }
 */
-/*#ifdef CONFIG_DECK_USD_USE_ALT_PINS_AND_SPI
+
+
+#ifdef CONFIG_DECK_USD_USE_ALT_PINS_AND_SPI
 void __attribute__((used)) DMA1_Stream5_IRQHandler(void)
 #else
 void __attribute__((used)) DMA1_Stream0_IRQHandler(void)
 #endif
 {
-  i2cdrvDmaIsrHandler(&deckBus);
+  i2cdrvDmaIsrHandler(&sensorsBus);
 }
 
-void __attribute__((used)) I2C3_ER_IRQHandler(void)
+
+void __attribute__((used)) I2C1_ER_IRQHandler(void)
 {
   i2cdrvErrorIsrHandler(&sensorsBus);
 }
 
-void __attribute__((used)) I2C3_EV_IRQHandler(void)
+void __attribute__((used)) I2C1_EV_IRQHandler(void)
 {
   i2cdrvEventIsrHandler(&sensorsBus);
 }
@@ -677,4 +708,4 @@ void __attribute__((used)) DMA1_Stream2_IRQHandler(void)
 {
   i2cdrvDmaIsrHandler(&sensorsBus);
 }
-*/
+

@@ -39,6 +39,8 @@
 #include "nvicconf.h"
 #include "debug.h"
 
+
+
 int i2cdevInit(I2C_Dev *dev)
 {
   i2cdrvInit(dev);
@@ -94,8 +96,7 @@ bool i2cdevReadReg8(I2C_Dev *dev, uint8_t devAddress, uint8_t memAddress,
 {
   I2cMessage message;
 
-  i2cdrvCreateMessageIntAddr(&message, devAddress, false, memAddress,
-                            i2cRead, len, data);
+  i2cdrvCreateMessageIntAddr(&message, devAddress, false, memAddress, i2cRead, len, data);
 
   return i2cdrvMessageTransfer(dev, &message);
 }

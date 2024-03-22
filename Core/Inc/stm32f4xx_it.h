@@ -55,6 +55,7 @@ void DebugMon_Handler(void);
 void SysTick_Handler(void);
 void EXTI4_IRQHandler(void);
 void DMA1_Stream0_IRQHandler(void);
+void DMA1_Stream1_IRQHandler(void);
 void ADC_IRQHandler(void);
 void TIM1_TRG_COM_TIM11_IRQHandler(void);
 void I2C1_EV_IRQHandler(void);

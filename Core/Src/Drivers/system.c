@@ -176,7 +176,6 @@ void systemTask(void *arg)
   deckInit();
 
   estimator = deckGetRequiredEstimator();
-
   stabilizerInit(estimator);
   if (deckGetRequiredLowInterferenceRadioMode() && platformConfigPhysicalLayoutAntennasAreClose())
   {
