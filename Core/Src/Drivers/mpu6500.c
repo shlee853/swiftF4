@@ -143,6 +143,14 @@ bool mpu6500SelfTest()
   i2cdevWriteByte(I2Cx, devAddr, MPU6500_RA_ACCEL_CONFIG_2, 0x02); // Set accelerometer rate to 1 kHz and bandwidth to 92 Hz
   i2cdevWriteByte(I2Cx, devAddr, MPU6500_RA_ACCEL_CONFIG, 1<<FS); // Set full scale range for the accelerometer to 2 g
 
+  i2cdevReadByte(I2Cx, devAddr, MPU6500_RA_SMPLRT_DIV, &saveReg[0]);
+  i2cdevReadByte(I2Cx, devAddr, MPU6500_RA_CONFIG, &saveReg[1]);
+  i2cdevReadByte(I2Cx, devAddr, MPU6500_RA_GYRO_CONFIG, &saveReg[2]);
+  i2cdevReadByte(I2Cx, devAddr, MPU6500_RA_ACCEL_CONFIG_2, &saveReg[3]);
+  i2cdevReadByte(I2Cx, devAddr, MPU6500_RA_ACCEL_CONFIG, &saveReg[4]);
+
+
+
   for(i = 0; i < 200; i++)
   {
     // get average current values of gyro and acclerometer

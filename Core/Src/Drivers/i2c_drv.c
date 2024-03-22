@@ -262,24 +262,23 @@ static void i2cdrvTryToRestartBus(I2cDrv* i2c)
   hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
   hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
 
+
   if (HAL_I2C_Init(&hi2c1) != HAL_OK)
   {
     Error_Handler();
   }
 
 
-  hdma_i2c1_rx.Instance = i2c->def->dmaRxStream;
-  hdma_i2c1_rx.Init.Channel = i2c->def->dmaChannel;
+  hdma_i2c1_rx.Instance = DMA1_Stream0;
+  hdma_i2c1_rx.Init.Channel = DMA_CHANNEL_1;
   hdma_i2c1_rx.Init.Direction = DMA_PERIPH_TO_MEMORY;
   hdma_i2c1_rx.Init.PeriphInc = DMA_PINC_DISABLE;
   hdma_i2c1_rx.Init.MemInc = DMA_MINC_ENABLE;
   hdma_i2c1_rx.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
   hdma_i2c1_rx.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
   hdma_i2c1_rx.Init.Mode = DMA_NORMAL;
-  hdma_i2c1_rx.Init.Priority = DMA_PRIORITY_LOW;
+  hdma_i2c1_rx.Init.Priority = DMA_PRIORITY_HIGH;
   hdma_i2c1_rx.Init.FIFOMode = DMA_FIFOMODE_DISABLE;
-//  hdma_i2c1_rx.Instance->PAR = (uint32_t)&i2c->def->i2cPort->DR;
-
 
 
 
@@ -301,7 +300,7 @@ static void i2cdrvTryToRestartBus(I2cDrv* i2c)
   hdma_i2c1_tx.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
   hdma_i2c1_tx.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
   hdma_i2c1_tx.Init.Mode = DMA_NORMAL;
-  hdma_i2c1_tx.Init.Priority = DMA_PRIORITY_LOW;
+  hdma_i2c1_tx.Init.Priority = DMA_PRIORITY_HIGH;
   hdma_i2c1_tx.Init.FIFOMode = DMA_FIFOMODE_DISABLE;
   if (HAL_DMA_Init(&hdma_i2c1_tx) != HAL_OK)
   {
@@ -420,11 +419,15 @@ bool i2cdrvMessageTransfer(I2cDrv* i2c, I2cMessage* message)
   // We can now start the ISR sending this message.
   i2cdrvStartTransfer(i2c);
   // Wait for transaction to be done
+
   xSemaphoreTake(i2c->isBusFreeSemaphore, 1);
+
   if (i2c->txMessage.status == i2cAck)
   {
     status = true;
   }
+
+
 
 //  vTaskDelay(M2T(50));
 /*
@@ -466,6 +469,11 @@ static void i2cdrvEventIsrHandler(I2cDrv* i2c)
     eventPos = 0;
   }
 #endif
+
+  HAL_I2C_EV_IRQHandler(&hi2c1);
+  i2cNotifyClient(i2c);
+
+
 /*
   // Start bit event
   if (SR1 & I2C_SR1_SB)
@@ -607,6 +615,7 @@ static void i2cdrvEventIsrHandler(I2cDrv* i2c)
 static void i2cdrvErrorIsrHandler(I2cDrv* i2c)
 {
 
+	HAL_I2C_ER_IRQHandler(&hi2c1);
 	/*
   if (I2C_GetFlagStatus(i2c->def->i2cPort, I2C_FLAG_AF))
   {
@@ -651,37 +660,30 @@ static void i2cdrvClearDMA(I2cDrv* i2c)
 	  */
 }
 
-static void i2cdrvDmaIsrHandler(I2cDrv* i2c)
+static void i2cdrvDmaRxIsrHandler(I2cDrv* i2c)
 {
 
-	HAL_DMA_IRQHandler(&hdma_i2c1_rx);
 
-/*
-	if((__HAL_DMA_GET_TC_FLAG_INDEX(&hdma_i2c1_rx) & (DMA_FLAG_TCIF0_4 << hdma_i2c1_rx.StreamIndex)) != RESET)
-	{
-//	    i2cNotifyClient(i2c);
-	    i2cTryNextMessage(i2c);
-	}
-	if((__HAL_DMA_GET_TE_FLAG_INDEX(&hdma_i2c1_rx) & (DMA_FLAG_TEIF0_4 << hdma_i2c1_rx.StreamIndex)) != RESET)
-	{
-	    i2c->txMessage.status = i2cNack;
-//	    i2cNotifyClient(i2c);
-	    i2cTryNextMessage(i2c);
+	if(__HAL_DMA_GET_FLAG(&hdma_i2c1_rx,DMA_FLAG_TCIF0_4)) {
+		HAL_DMA_IRQHandler(&hdma_i2c1_rx);
+		//	    i2cNotifyClient(i2c);
 
 	}
-*/
-}
-/*
-void __attribute__((used)) I2C1_ER_IRQHandler(void)
-{
-  i2cdrvErrorIsrHandler(&deckBus);
+
 }
 
-void __attribute__((used)) I2C1_EV_IRQHandler(void)
+static void i2cdrvDmaTxIsrHandler(I2cDrv* i2c)
 {
-  i2cdrvEventIsrHandler(&deckBus);
+
+	int status = __HAL_DMA_GET_TC_FLAG_INDEX(&hdma_i2c1_tx);
+	if(status) {
+		HAL_DMA_IRQHandler(&hdma_i2c1_tx);
+//	    i2cNotifyClient(i2c);
+	}
+
+
 }
-*/
+
 
 
 #ifdef CONFIG_DECK_USD_USE_ALT_PINS_AND_SPI
@@ -690,7 +692,7 @@ void __attribute__((used)) DMA1_Stream5_IRQHandler(void)
 void __attribute__((used)) DMA1_Stream0_IRQHandler(void)
 #endif
 {
-  i2cdrvDmaIsrHandler(&sensorsBus);
+	i2cdrvDmaRxIsrHandler(&sensorsBus);
 }
 
 
@@ -704,8 +706,8 @@ void __attribute__((used)) I2C1_EV_IRQHandler(void)
   i2cdrvEventIsrHandler(&sensorsBus);
 }
 
-void __attribute__((used)) DMA1_Stream2_IRQHandler(void)
+void __attribute__((used)) DMA1_Stream1_IRQHandler(void)
 {
-  i2cdrvDmaIsrHandler(&sensorsBus);
+	i2cdrvDmaTxIsrHandler(&sensorsBus);
 }
 

@@ -42,7 +42,7 @@
 #endif
 
 #ifdef CONFIG_SENSORS_MPU9250_LPS25H
-  #include "sensors_mpu9250_lps25h.h"
+  #include <sensors_mpu9250_bmp280.h>
 #endif
 
 #ifdef CONFIG_SENSORS_BOSCH

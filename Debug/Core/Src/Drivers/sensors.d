@@ -64,7 +64,7 @@ Core/Src/Drivers/sensors.o: ../Core/Src/Drivers/sensors.c \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/SEGGER_RTT_Conf.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/sensors_bmi088_bmp388.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/sensors.h \
- /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/sensors_mpu9250_lps25h.h
+ /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/sensors_mpu9250_bmp280.h
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/sensors.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Algo/stabilizer_types.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/imu_types.h:
@@ -131,4 +131,4 @@ Core/Src/Drivers/sensors.o: ../Core/Src/Drivers/sensors.c \
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/SEGGER_RTT_Conf.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/sensors_bmi088_bmp388.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/sensors.h:
-/home/swift/workspace/project/swiftF4/Core/Inc/Drivers/sensors_mpu9250_lps25h.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Drivers/sensors_mpu9250_bmp280.h:

@@ -365,7 +365,7 @@ void systemInit(void)
 //  storageInit();
   workerInit();
 
-  ledseqInit();
+//  ledseqInit();
   DEBUG_PRINT("[TASK] lesdeqCmdTask is running!\n");
 
 
