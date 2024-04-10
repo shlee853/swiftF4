@@ -39,7 +39,7 @@ static platformConfig_t configs[] = {
     .deviceTypeName = "Crazyflie 2.1",
     .sensorImplementation = SensorImplementation_icm20602,
     .physicalLayoutAntennasAreClose = true,
- //   .motorMap = motorMapDefaultBrushed,
+/   .motorMap = motorMapDefaultBrushed,
   },
 #endif
 
@@ -49,7 +49,7 @@ static platformConfig_t configs[] = {
     .deviceTypeName = "Crazyflie 2.0",
     .sensorImplementation = SensorImplementation_mpu9250_lps25h,
     .physicalLayoutAntennasAreClose = true,
-//    .motorMap = motorMapDefaultBrushed,
+    .motorMap = motorMapSwiftBrushed,
   },
 #endif
 
@@ -59,7 +59,7 @@ static platformConfig_t configs[] = {
     .deviceTypeName = "Crazyflie 2.1",
     .sensorImplementation = SensorImplementation_bmi088_bmp388,
     .physicalLayoutAntennasAreClose = true,
- //   .motorMap = motorMapDefaultBrushed,
+    .motorMap = motorMapDefaultBrushed,
   },
 
   {
@@ -67,7 +67,7 @@ static platformConfig_t configs[] = {
     .deviceTypeName = "Crazyflie 2.1 Brushless",
     .sensorImplementation = SensorImplementation_bmi088_bmp388,
     .physicalLayoutAntennasAreClose = true,
-  //  .motorMap = motorMapCF21Brushless,
+    .motorMap = motorMapCF21Brushless,
   },
 #endif
 

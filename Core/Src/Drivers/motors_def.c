@@ -50,10 +50,10 @@ static const MotorPerifDef MOTORS_PA1_TIM2_CH2_BRUSHED =
     .timDbgStop    = DBGMCU_TIM2_STOP,
     .timPeriod     = MOTORS_PWM_PERIOD,
     .timPrescaler  = MOTORS_PWM_PRESCALE,
-    .setCompare    = TIM_SetCompare2,
-    .getCompare    = TIM_GetCapture2,
-    .ocInit        = TIM_OC2Init,
-    .preloadConfig = TIM_OC2PreloadConfig,
+//    //    .setCompare    = TIM_SetCompare2,
+//    //    .getCompare    = TIM_GetCapture2,
+//    //    .ocInit        = TIM_OC2Init,
+//    //    .preloadConfig = TIM_OC2PreloadConfig,
 };
 
 // CF2.X connector M2, PB11, TIM2_CH4
@@ -72,10 +72,10 @@ static const MotorPerifDef MOTORS_PB11_TIM2_CH4_BRUSHED =
     .timDbgStop    = DBGMCU_TIM2_STOP,
     .timPeriod     = MOTORS_PWM_PERIOD,
     .timPrescaler  = MOTORS_PWM_PRESCALE,
-    .setCompare    = TIM_SetCompare4,
-    .getCompare    = TIM_GetCapture4,
-    .ocInit        = TIM_OC4Init,
-    .preloadConfig = TIM_OC4PreloadConfig,
+	//   //    .setCompare    = TIM_SetCompare4,
+	//   //    .getCompare    = TIM_GetCapture4,
+	//   //    .ocInit        = TIM_OC4Init,
+	//   //    .preloadConfig = TIM_OC4PreloadConfig,
 };
 
 // CF2.X connector M3, PA15, TIM2_CH1
@@ -94,10 +94,10 @@ static const MotorPerifDef MOTORS_PA15_TIM2_CH1_BRUSHED =
     .timDbgStop    = DBGMCU_TIM2_STOP,
     .timPeriod     = MOTORS_PWM_PERIOD,
     .timPrescaler  = MOTORS_PWM_PRESCALE,
-    .setCompare    = TIM_SetCompare1,
-    .getCompare    = TIM_GetCapture1,
-    .ocInit        = TIM_OC1Init,
-    .preloadConfig = TIM_OC1PreloadConfig,
+    //    .setCompare    = TIM_SetCompare1,
+    //    .getCompare    = TIM_GetCapture1,
+    //    .ocInit        = TIM_OC1Init,
+    //    .preloadConfig = TIM_OC1PreloadConfig,
 };
 
 // CF2.X connector M4, PB9, TIM4_CH4
@@ -116,12 +116,13 @@ static const MotorPerifDef MOTORS_PB9_TIM4_CH4_BRUSHED =
     .timDbgStop    = DBGMCU_TIM4_STOP,
     .timPeriod     = MOTORS_PWM_PERIOD,
     .timPrescaler  = MOTORS_PWM_PRESCALE,
-    .setCompare    = TIM_SetCompare4,
-    .getCompare    = TIM_GetCapture4,
-    .ocInit        = TIM_OC4Init,
-    .preloadConfig = TIM_OC4PreloadConfig,
+    //    .setCompare    = TIM_SetCompare4,
+    //    .getCompare    = TIM_GetCapture4,
+    //    .ocInit        = TIM_OC4Init,
+    //    .preloadConfig = TIM_OC4PreloadConfig,
 };
 // Bolt 1.1 M4, PB10, TIM2_CH3, Brushed config
+/*
 static const MotorPerifDef MOTORS_PB10_TIM2_CH3_BRUSHED =
 {
     .drvType       = BRUSHED,
@@ -137,11 +138,12 @@ static const MotorPerifDef MOTORS_PB10_TIM2_CH3_BRUSHED =
     .timDbgStop    = DBGMCU_TIM2_STOP,
     .timPeriod     = MOTORS_PWM_PERIOD,
     .timPrescaler  = MOTORS_PWM_PRESCALE,
-    .setCompare    = TIM_SetCompare3,
-    .getCompare    = TIM_GetCapture3,
-    .ocInit        = TIM_OC3Init,
-    .preloadConfig = TIM_OC3PreloadConfig,
+    //    .setCompare    = TIM_SetCompare3,
+    //    .getCompare    = TIM_GetCapture3,
+    //    .ocInit        = TIM_OC3Init,
+    //    .preloadConfig = TIM_OC3PreloadConfig,
 };
+*/
 
 // CF2.X connector M1, PA1, TIM2_CH2, Brushless config, inversed
 static const MotorPerifDef MOTORS_PA1_TIM2_CH2_BRUSHLESS_INV_PP =
@@ -159,10 +161,10 @@ static const MotorPerifDef MOTORS_PA1_TIM2_CH2_BRUSHLESS_INV_PP =
     .timDbgStop    = DBGMCU_TIM2_STOP,
     .timPeriod     = MOTORS_BL_PWM_PERIOD,
     .timPrescaler  = MOTORS_BL_PWM_PRESCALE,
-    .setCompare    = TIM_SetCompare2,
-    .getCompare    = TIM_GetCapture2,
-    .ocInit        = TIM_OC2Init,
-    .preloadConfig = TIM_OC2PreloadConfig,
+    //    .setCompare    = TIM_SetCompare2,
+    //    .getCompare    = TIM_GetCapture2,
+    //    .ocInit        = TIM_OC2Init,
+    //    .preloadConfig = TIM_OC2PreloadConfig,
 };
 
 // CF2.X connector M2, PB11, TIM2_CH4, Brushless config, inversed
@@ -181,10 +183,10 @@ static const MotorPerifDef MOTORS_PB11_TIM2_CH4_BRUSHLESS_INV_PP =
     .timDbgStop    = DBGMCU_TIM2_STOP,
     .timPeriod     = MOTORS_BL_PWM_PERIOD,
     .timPrescaler  = MOTORS_BL_PWM_PRESCALE,
-    .setCompare    = TIM_SetCompare4,
-    .getCompare    = TIM_GetCapture4,
-    .ocInit        = TIM_OC4Init,
-    .preloadConfig = TIM_OC4PreloadConfig,
+    //    .setCompare    = TIM_SetCompare4,
+    //    .getCompare    = TIM_GetCapture4,
+    //    .ocInit        = TIM_OC4Init,
+    //    .preloadConfig = TIM_OC4PreloadConfig,
 };
 
 // CF2.X connector M3, PA15, TIM2_CH1, Brushless config, inversed
@@ -203,10 +205,10 @@ static const MotorPerifDef MOTORS_PA15_TIM2_CH1_BRUSHLESS_INV_PP =
     .timDbgStop    = DBGMCU_TIM2_STOP,
     .timPeriod     = MOTORS_BL_PWM_PERIOD,
     .timPrescaler  = MOTORS_BL_PWM_PRESCALE,
-    .setCompare    = TIM_SetCompare1,
-    .getCompare    = TIM_GetCapture1,
-    .ocInit        = TIM_OC1Init,
-    .preloadConfig = TIM_OC1PreloadConfig,
+    //    .setCompare    = TIM_SetCompare1,
+    //    .getCompare    = TIM_GetCapture1,
+    //    .ocInit        = TIM_OC1Init,
+    //    .preloadConfig = TIM_OC1PreloadConfig,
 };
 
 // CF2.X connector M4, PB9, TIM4_CH4, Brushless config, inversed
@@ -225,10 +227,10 @@ static const MotorPerifDef MOTORS_PB9_TIM4_CH4_BRUSHLESS_INV_PP =
     .timDbgStop    = DBGMCU_TIM4_STOP,
     .timPeriod     = MOTORS_BL_PWM_PERIOD,
     .timPrescaler  = MOTORS_BL_PWM_PRESCALE,
-    .setCompare    = TIM_SetCompare4,
-    .getCompare    = TIM_GetCapture4,
-    .ocInit        = TIM_OC4Init,
-    .preloadConfig = TIM_OC4PreloadConfig,
+    //    .setCompare    = TIM_SetCompare4,
+    //    .getCompare    = TIM_GetCapture4,
+    //    .ocInit        = TIM_OC4Init,
+    //    .preloadConfig = TIM_OC4PreloadConfig,
 };
 
 // Bolt M1, PA1, TIM2_CH2, Brushless config
@@ -250,10 +252,10 @@ static const MotorPerifDef MOTORS_PA1_TIM2_CH2_BRUSHLESS_PP =
     .timDbgStop    = DBGMCU_TIM2_STOP,
     .timPeriod     = MOTORS_BL_PWM_PERIOD,
     .timPrescaler  = MOTORS_BL_PWM_PRESCALE,
-    .setCompare    = TIM_SetCompare2,
-    .getCompare    = TIM_GetCapture2,
-    .ocInit        = TIM_OC2Init,
-    .preloadConfig = TIM_OC2PreloadConfig,
+    //    .setCompare    = TIM_SetCompare2,
+    //    .getCompare    = TIM_GetCapture2,
+    //    .ocInit        = TIM_OC2Init,
+    //    .preloadConfig = TIM_OC2PreloadConfig,
     .DMA_stream    = DMA1_Stream6,
     .DMA_Channel   = DMA_CHANNEL_3,
     .DMA_PerifAddr = (uint32_t)&TIM2->CCR2,
@@ -280,10 +282,10 @@ static const MotorPerifDef MOTORS_PB11_TIM2_CH4_BRUSHLESS_PP =
     .timDbgStop    = DBGMCU_TIM2_STOP,
     .timPeriod     = MOTORS_BL_PWM_PERIOD,
     .timPrescaler  = MOTORS_BL_PWM_PRESCALE,
-    .setCompare    = TIM_SetCompare4,
-    .getCompare    = TIM_GetCapture4,
-    .ocInit        = TIM_OC4Init,
-    .preloadConfig = TIM_OC4PreloadConfig,
+    //    .setCompare    = TIM_SetCompare4,
+    //    .getCompare    = TIM_GetCapture4,
+    //    .ocInit        = TIM_OC4Init,
+    //    .preloadConfig = TIM_OC4PreloadConfig,
     .DMA_stream    = DMA1_Stream7,
     .DMA_Channel   = DMA_CHANNEL_3,
     .DMA_PerifAddr = (uint32_t)&TIM2->CCR4,
@@ -311,10 +313,10 @@ static const MotorPerifDef MOTORS_PA15_TIM2_CH1_BRUSHLESS_PP =
     .timDbgStop    = DBGMCU_TIM2_STOP,
     .timPeriod     = MOTORS_BL_PWM_PERIOD,
     .timPrescaler  = MOTORS_BL_PWM_PRESCALE,
-    .setCompare    = TIM_SetCompare1,
-    .getCompare    = TIM_GetCapture1,
-    .ocInit        = TIM_OC1Init,
-    .preloadConfig = TIM_OC1PreloadConfig,
+    //    .setCompare    = TIM_SetCompare1,
+    //    .getCompare    = TIM_GetCapture1,
+    //    .ocInit        = TIM_OC1Init,
+    //    .preloadConfig = TIM_OC1PreloadConfig,
     .DMA_stream    = DMA1_Stream5,
     .DMA_Channel   = DMA_CHANNEL_3,
     .DMA_PerifAddr = (uint32_t)&TIM2->CCR1,
@@ -341,10 +343,10 @@ static const MotorPerifDef MOTORS_PB9_TIM4_CH4_BRUSHLESS_PP =
     .timDbgStop    = DBGMCU_TIM4_STOP,
     .timPeriod     = MOTORS_BL_PWM_PERIOD,
     .timPrescaler  = MOTORS_BL_PWM_PRESCALE,
-    .setCompare    = TIM_SetCompare4,
-    .getCompare    = TIM_GetCapture4,
-    .ocInit        = TIM_OC4Init,
-    .preloadConfig = TIM_OC4PreloadConfig,
+    //    .setCompare    = TIM_SetCompare4,
+    //    .getCompare    = TIM_GetCapture4,
+    //    .ocInit        = TIM_OC4Init,
+    //    .preloadConfig = TIM_OC4PreloadConfig,
 };
 
 // Bolt 1.1 M4, PB10, TIM2_CH3, Brushless config
@@ -366,10 +368,10 @@ static const MotorPerifDef MOTORS_PB10_TIM2_CH3_BRUSHLESS_PP =
     .timDbgStop    = DBGMCU_TIM2_STOP,
     .timPeriod     = MOTORS_BL_PWM_PERIOD,
     .timPrescaler  = MOTORS_BL_PWM_PRESCALE,
-    .setCompare    = TIM_SetCompare3,
-    .getCompare    = TIM_GetCapture3,
-    .ocInit        = TIM_OC3Init,
-    .preloadConfig = TIM_OC3PreloadConfig,
+    //    .setCompare    = TIM_SetCompare3,
+    //    .getCompare    = TIM_GetCapture3,
+    //    .ocInit        = TIM_OC3Init,
+    //    .preloadConfig = TIM_OC3PreloadConfig,
     .DMA_stream    = DMA1_Stream1,
     .DMA_Channel   = DMA_CHANNEL_3,
     .DMA_PerifAddr = (uint32_t)&TIM2->CCR3,
@@ -396,10 +398,10 @@ static const MotorPerifDef MOTORS_PA1_TIM2_CH2_BRUSHLESS_OD =
     .timDbgStop    = DBGMCU_TIM2_STOP,
     .timPeriod     = MOTORS_BL_PWM_PERIOD,
     .timPrescaler  = MOTORS_BL_PWM_PRESCALE,
-    .setCompare    = TIM_SetCompare2,
-    .getCompare    = TIM_GetCapture2,
-    .ocInit        = TIM_OC2Init,
-    .preloadConfig = TIM_OC2PreloadConfig,
+    //    .setCompare    = TIM_SetCompare2,
+    //    .getCompare    = TIM_GetCapture2,
+    //    .ocInit        = TIM_OC2Init,
+    //    .preloadConfig = TIM_OC2PreloadConfig,
     .DMA_stream    = DMA1_Stream6,
     .DMA_Channel   = DMA_CHANNEL_3,
     .DMA_PerifAddr = (uint32_t)&TIM2->CCR2,
@@ -426,10 +428,10 @@ static const MotorPerifDef MOTORS_PB11_TIM2_CH4_BRUSHLESS_OD =
     .timDbgStop    = DBGMCU_TIM2_STOP,
     .timPeriod     = MOTORS_BL_PWM_PERIOD,
     .timPrescaler  = MOTORS_BL_PWM_PRESCALE,
-    .setCompare    = TIM_SetCompare4,
-    .getCompare    = TIM_GetCapture4,
-    .ocInit        = TIM_OC4Init,
-    .preloadConfig = TIM_OC4PreloadConfig,
+    //    .setCompare    = TIM_SetCompare4,
+    //    .getCompare    = TIM_GetCapture4,
+    //    .ocInit        = TIM_OC4Init,
+    //    .preloadConfig = TIM_OC4PreloadConfig,
     .DMA_stream    = DMA1_Stream7,
     .DMA_Channel   = DMA_CHANNEL_3,
     .DMA_PerifAddr = (uint32_t)&TIM2->CCR4,
@@ -456,10 +458,10 @@ static const MotorPerifDef MOTORS_PB11_TIM2_CH4_BRUSHLESS_OD =
     .timDbgStop    = DBGMCU_TIM2_STOP,
     .timPeriod     = MOTORS_BL_PWM_PERIOD,
     .timPrescaler  = MOTORS_BL_PWM_PRESCALE,
-    .setCompare    = TIM_SetCompare1,
-    .getCompare    = TIM_GetCapture1,
-    .ocInit        = TIM_OC1Init,
-    .preloadConfig = TIM_OC1PreloadConfig,
+    //    .setCompare    = TIM_SetCompare1,
+    //    .getCompare    = TIM_GetCapture1,
+    //    .ocInit        = TIM_OC1Init,
+    //    .preloadConfig = TIM_OC1PreloadConfig,
     .DMA_stream    = DMA1_Stream5,
     .DMA_Channel   = DMA_CHANNEL_3,
     .DMA_PerifAddr = (uint32_t)&TIM2->CCR1,
@@ -487,10 +489,10 @@ static const MotorPerifDef MOTORS_PB10_TIM2_CH3_BRUSHLESS_OD =
     .timDbgStop    = DBGMCU_TIM2_STOP,
     .timPeriod     = MOTORS_BL_PWM_PERIOD,
     .timPrescaler  = MOTORS_BL_PWM_PRESCALE,
-    .setCompare    = TIM_SetCompare3,
-    .getCompare    = TIM_GetCapture3,
-    .ocInit        = TIM_OC3Init,
-    .preloadConfig = TIM_OC3PreloadConfig,
+    //    .setCompare    = TIM_SetCompare3,
+    //    .getCompare    = TIM_GetCapture3,
+    //    .ocInit        = TIM_OC3Init,
+    //    .preloadConfig = TIM_OC3PreloadConfig,
     .DMA_stream    = DMA1_Stream1,
     .DMA_Channel   = DMA_CHANNEL_3,
     .DMA_PerifAddr = (uint32_t)&TIM2->CCR3,
@@ -515,10 +517,10 @@ static const MotorPerifDef MOTORS_PA2_TIM2_CH3_BRUSHLESS_OD =
     .timDbgStop    = DBGMCU_TIM2_STOP,
     .timPeriod     = MOTORS_BL_PWM_PERIOD,
     .timPrescaler  = MOTORS_BL_PWM_PRESCALE,
-    .setCompare    = TIM_SetCompare3,
-    .getCompare    = TIM_GetCapture3,
-    .ocInit        = TIM_OC3Init,
-    .preloadConfig = TIM_OC3PreloadConfig,
+    //    .setCompare    = TIM_SetCompare3,
+    //    .getCompare    = TIM_GetCapture3,
+    //    .ocInit        = TIM_OC3Init,
+    //    .preloadConfig = TIM_OC3PreloadConfig,
 };
 
 // Deck TX2, PA2, TIM5_CH3
@@ -537,10 +539,10 @@ static const MotorPerifDef MOTORS_PA2_TIM5_CH3_BRUSHLESS_OD =
     .timDbgStop    = DBGMCU_TIM5_STOP,
     .timPeriod     = MOTORS_BL_PWM_PERIOD,
     .timPrescaler  = MOTORS_BL_PWM_PRESCALE,
-    .setCompare    = TIM_SetCompare3,
-    .getCompare    = TIM_GetCapture3,
-    .ocInit        = TIM_OC3Init,
-    .preloadConfig = TIM_OC3PreloadConfig,
+    //    .setCompare    = TIM_SetCompare3,
+    //    .getCompare    = TIM_GetCapture3,
+    //    .ocInit        = TIM_OC3Init,
+    //    .preloadConfig = TIM_OC3PreloadConfig,
 };
 
 // Deck RX2, PA3, TIM2_CH4
@@ -559,10 +561,10 @@ static const MotorPerifDef MOTORS_PA3_TIM2_CH4_BRUSHLESS_OD =
     .timDbgStop    = DBGMCU_TIM2_STOP,
     .timPeriod     = MOTORS_BL_PWM_PERIOD,
     .timPrescaler  = MOTORS_BL_PWM_PRESCALE,
-    .setCompare    = TIM_SetCompare4,
-    .getCompare    = TIM_GetCapture4,
-    .ocInit        = TIM_OC4Init,
-    .preloadConfig = TIM_OC4PreloadConfig,
+    //    .setCompare    = TIM_SetCompare4,
+    //    .getCompare    = TIM_GetCapture4,
+    //    .ocInit        = TIM_OC4Init,
+    //    .preloadConfig = TIM_OC4PreloadConfig,
 };
 
 // Deck RX2, PA3, TIM5_CH4
@@ -581,10 +583,10 @@ static const MotorPerifDef MOTORS_PA3_TIM5_CH4_BRUSHLESS_OD =
     .timDbgStop    = DBGMCU_TIM5_STOP,
     .timPeriod     = MOTORS_BL_PWM_PERIOD,
     .timPrescaler  = MOTORS_BL_PWM_PRESCALE,
-    .setCompare    = TIM_SetCompare4,
-    .getCompare    = TIM_GetCapture4,
-    .ocInit        = TIM_OC4Init,
-    .preloadConfig = TIM_OC4PreloadConfig,
+    //    .setCompare    = TIM_SetCompare4,
+    //    .getCompare    = TIM_GetCapture4,
+    //    .ocInit        = TIM_OC4Init,
+    //    .preloadConfig = TIM_OC4PreloadConfig,
 };
 
 // Deck IO1, PB8, TIM4_CH3
@@ -603,10 +605,10 @@ static const MotorPerifDef MOTORS_PB8_TIM4_CH3_BRUSHLESS_OD =
     .timDbgStop    = DBGMCU_TIM4_STOP,
     .timPeriod     = MOTORS_BL_PWM_PERIOD,
     .timPrescaler  = MOTORS_BL_PWM_PRESCALE,
-    .setCompare    = TIM_SetCompare3,
-    .getCompare    = TIM_GetCapture3,
-    .ocInit        = TIM_OC3Init,
-    .preloadConfig = TIM_OC3PreloadConfig,
+    //    .setCompare    = TIM_SetCompare3,
+    //    .getCompare    = TIM_GetCapture3,
+    //    .ocInit        = TIM_OC3Init,
+    //    .preloadConfig = TIM_OC3PreloadConfig,
 };
 
 // Deck IO2, PB5, TIM3_CH2
@@ -625,10 +627,10 @@ static const MotorPerifDef MOTORS_PB5_TIM3_CH2_BRUSHLESS_OD =
     .timDbgStop    = DBGMCU_TIM3_STOP,
     .timPeriod     = MOTORS_BL_PWM_PERIOD,
     .timPrescaler  = MOTORS_BL_PWM_PRESCALE,
-    .setCompare    = TIM_SetCompare2,
-    .getCompare    = TIM_GetCapture2,
-    .ocInit        = TIM_OC2Init,
-    .preloadConfig = TIM_OC2PreloadConfig,
+    //    .setCompare    = TIM_SetCompare2,
+    //    .getCompare    = TIM_GetCapture2,
+    //    .ocInit        = TIM_OC2Init,
+    //    .preloadConfig = TIM_OC2PreloadConfig,
 };
 
 // Deck IO3, PB4, TIM3_CH1
@@ -647,10 +649,10 @@ static const MotorPerifDef MOTORS_PB4_TIM2_CH1_BRUSHLESS_OD =
     .timDbgStop    = DBGMCU_TIM3_STOP,
     .timPeriod     = MOTORS_BL_PWM_PERIOD,
     .timPrescaler  = MOTORS_BL_PWM_PRESCALE,
-    .setCompare    = TIM_SetCompare1,
-    .getCompare    = TIM_GetCapture1,
-    .ocInit        = TIM_OC1Init,
-    .preloadConfig = TIM_OC1PreloadConfig,
+    //    .setCompare    = TIM_SetCompare1,
+    //    .getCompare    = TIM_GetCapture1,
+    //    .ocInit        = TIM_OC1Init,
+    //    .preloadConfig = TIM_OC1PreloadConfig,
 };
 
 // Deck SCK, PA5, TIM2_CH1
@@ -669,10 +671,10 @@ static const MotorPerifDef MOTORS_PA5_TIM2_CH1_BRUSHLESS_OD =
     .timDbgStop    = DBGMCU_TIM2_STOP,
     .timPeriod     = MOTORS_BL_PWM_PERIOD,
     .timPrescaler  = MOTORS_BL_PWM_PRESCALE,
-    .setCompare    = TIM_SetCompare1,
-    .getCompare    = TIM_GetCapture1,
-    .ocInit        = TIM_OC1Init,
-    .preloadConfig = TIM_OC1PreloadConfig,
+    //    .setCompare    = TIM_SetCompare1,
+    //    .getCompare    = TIM_GetCapture1,
+    //    .ocInit        = TIM_OC1Init,
+    //    .preloadConfig = TIM_OC1PreloadConfig,
 };
 
 // Deck MISO, PA6, TIM3_CH1
@@ -691,10 +693,10 @@ static const MotorPerifDef MOTORS_PA6_TIM3_CH1_BRUSHLESS_OD =
     .timDbgStop    = DBGMCU_TIM3_STOP,
     .timPeriod     = MOTORS_BL_PWM_PERIOD,
     .timPrescaler  = MOTORS_BL_PWM_PRESCALE,
-    .setCompare    = TIM_SetCompare1,
-    .getCompare    = TIM_GetCapture1,
-    .ocInit        = TIM_OC1Init,
-    .preloadConfig = TIM_OC1PreloadConfig,
+    //    .setCompare    = TIM_SetCompare1,
+    //    .getCompare    = TIM_GetCapture1,
+    //    .ocInit        = TIM_OC1Init,
+    //    .preloadConfig = TIM_OC1PreloadConfig,
 };
 
 // Deck MOSI, PA7, TIM14_CH1
@@ -714,10 +716,108 @@ static const MotorPerifDef MOTORS_PA7_TIM14_CH1_BRUSHLESS_OD =
     .timDbgStop    = DBGMCU_TIM14_STOP,
     .timPeriod     = MOTORS_BL_PWM_PERIOD,
     .timPrescaler  = MOTORS_BL_PWM_PRESCALE,
-    .setCompare    = TIM_SetCompare1,
-    .getCompare    = TIM_GetCapture1,
-    .ocInit        = TIM_OC1Init,
-    .preloadConfig = TIM_OC1PreloadConfig,
+    //    .setCompare    = TIM_SetCompare1,
+    //    .getCompare    = TIM_GetCapture1,
+    //    .ocInit        = TIM_OC1Init,
+    //    .preloadConfig = TIM_OC1PreloadConfig,
+};
+
+
+
+
+
+
+// SwiftF4 connector M1, PB7, TIM4_CH2
+static const MotorPerifDef MOTORS_PB7_TIM4_CH2_BRUSHED =
+{
+    .drvType       = BRUSHED,
+    .gpioPerif     = RCC_AHB1Periph_GPIOB,
+    .gpioPort      = GPIOB,
+    .gpioPin       = GPIO_PIN_7,
+    .gpioPinSource = 7,
+    .gpioOType     = GPIO_MODE_OUTPUT_PP,
+    .gpioAF        = GPIO_AF2_TIM4,
+    .timPerif      = RCC_APB1Periph_TIM4,
+    .tim           = TIM4,
+    .timPolarity   = TIM_OCPOLARITY_HIGH,
+    .timDbgStop    = DBGMCU_TIM4_STOP,
+    .timPeriod     = MOTORS_PWM_PERIOD,
+    .timPrescaler  = MOTORS_PWM_PRESCALE,
+//    //    .setCompare    = TIM_SetCompare2,
+//    //    .getCompare    = TIM_GetCapture2,
+//    //    .ocInit        = TIM_OC2Init,
+//    //    .preloadConfig = TIM_OC2PreloadConfig,
+};
+
+
+
+// SwiftF4 connector M2, PB6, TIM4_CH1
+static const MotorPerifDef MOTORS_PB6_TIM4_CH1_BRUSHED =
+{
+    .drvType       = BRUSHED,
+    .gpioPerif     = RCC_AHB1Periph_GPIOB,
+    .gpioPort      = GPIOB,
+    .gpioPin       = GPIO_PIN_6,
+    .gpioPinSource = 6,
+    .gpioOType     = GPIO_MODE_OUTPUT_PP,
+    .gpioAF        = GPIO_AF2_TIM4,
+    .timPerif      = RCC_APB1Periph_TIM4,
+    .tim           = TIM4,
+    .timPolarity   = TIM_OCPOLARITY_HIGH,
+    .timDbgStop    = DBGMCU_TIM4_STOP,
+    .timPeriod     = MOTORS_PWM_PERIOD,
+    .timPrescaler  = MOTORS_PWM_PRESCALE,
+//    //    .setCompare    = TIM_SetCompare2,
+//    //    .getCompare    = TIM_GetCapture2,
+//    //    .ocInit        = TIM_OC2Init,
+//    //    .preloadConfig = TIM_OC2PreloadConfig,
+};
+
+
+// SwiftF4 connector M3, PB10, TIM2_CH3
+static const MotorPerifDef MOTORS_PB10_TIM2_CH3_BRUSHED =
+{
+    .drvType       = BRUSHED,
+    .gpioPerif     = RCC_AHB1Periph_GPIOB,
+    .gpioPort      = GPIOB,
+    .gpioPin       = GPIO_PIN_10,
+    .gpioPinSource = 10,
+    .gpioOType     = GPIO_MODE_OUTPUT_PP,
+    .gpioAF        = GPIO_AF1_TIM2,
+    .timPerif      = RCC_APB1Periph_TIM2,
+    .tim           = TIM2,
+    .timPolarity   = TIM_OCPOLARITY_HIGH,
+    .timDbgStop    = DBGMCU_TIM2_STOP,
+    .timPeriod     = MOTORS_PWM_PERIOD,
+    .timPrescaler  = MOTORS_PWM_PRESCALE,
+//    //    .setCompare    = TIM_SetCompare2,
+//    //    .getCompare    = TIM_GetCapture2,
+//    //    .ocInit        = TIM_OC2Init,
+//    //    .preloadConfig = TIM_OC2PreloadConfig,
+};
+
+
+
+// SwiftF4 connector M4, PA5, TIM2_CH1
+static const MotorPerifDef MOTORS_PA5_TIM2_CH1_BRUSHED =
+{
+    .drvType       = BRUSHED,
+    .gpioPerif     = RCC_AHB1Periph_GPIOA,
+    .gpioPort      = GPIOA,
+    .gpioPin       = GPIO_PIN_5,
+    .gpioPinSource = 5,
+    .gpioOType     = GPIO_MODE_OUTPUT_PP,
+    .gpioAF        = GPIO_AF1_TIM2,
+    .timPerif      = RCC_APB1Periph_TIM2,
+    .tim           = TIM2,
+    .timPolarity   = TIM_OCPOLARITY_HIGH,
+    .timDbgStop    = DBGMCU_TIM2_STOP,
+    .timPeriod     = MOTORS_PWM_PERIOD,
+    .timPrescaler  = MOTORS_PWM_PRESCALE,
+//    //    .setCompare    = TIM_SetCompare2,
+//    //    .getCompare    = TIM_GetCapture2,
+//    //    .ocInit        = TIM_OC2Init,
+//    //    .preloadConfig = TIM_OC2PreloadConfig,
 };
 
 
@@ -745,6 +845,16 @@ const MotorPerifDef* motorMapDefaultBrushed[NBR_OF_MOTORS] =
   &MOTORS_PA15_TIM2_CH1_BRUSHED,
   &MOTORS_PB9_TIM4_CH4_BRUSHED
 };
+
+
+const MotorPerifDef* motorMapSwiftBrushed[NBR_OF_MOTORS] =
+{
+  &MOTORS_PB7_TIM4_CH2_BRUSHED,
+  &MOTORS_PB6_TIM4_CH1_BRUSHED,
+  &MOTORS_PB10_TIM2_CH3_BRUSHED,
+  &MOTORS_PA5_TIM2_CH1_BRUSHED
+};
+
 
 /**
  * Brushless motors mapped as on the Big-Quad deck

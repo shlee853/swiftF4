@@ -179,7 +179,7 @@ void stabilizerInit(StateEstimatorType estimator)
   stateEstimatorInit(estimator);
   controllerInit(ControllerTypeAutoSelect);
   powerDistributionInit();
-//  motorsInit(platformConfigGetMotorMapping());
+  motorsInit(platformConfigGetMotorMapping());
   collisionAvoidanceInit();
   estimatorType = stateEstimatorGetType();
   controllerType = controllerGetType();

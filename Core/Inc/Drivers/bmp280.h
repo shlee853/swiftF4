@@ -60,6 +60,7 @@
 
 #include "bstdr_comm_support.h"
 #include "bstdr_types.h"
+#include "i2cdev.h"
 
 #define BMP280_ENABLE_FLOAT
 
@@ -447,6 +448,13 @@ struct bmp280_t{
  *
  *
 */
+
+
+
+
+bool bmp280init(I2C_Dev *i2cPort);
+
+
 BMP280_RETURN_FUNCTION_TYPE bmp280_init(struct bmp280_t *bmp280);
 /**************************************************************/
 /**\name	FUNCTION FOR READ UNCOMPENSATED TEMPERATURE     */

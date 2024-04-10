@@ -84,6 +84,8 @@ Core/Src/Drivers/sensors_bosch.o: ../Core/Src/Drivers/sensors_bosch.c \
  /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/bmp280.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/bstdr_comm_support.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/bstdr_types.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/i2cdev.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/i2c_drv.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/bmp3.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/bmp3_defs.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/bstdr_comm_support.h \
@@ -174,6 +176,8 @@ Core/Src/Drivers/sensors_bosch.o: ../Core/Src/Drivers/sensors_bosch.c \
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/bmp280.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/bstdr_comm_support.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/bstdr_types.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Drivers/i2cdev.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Drivers/i2c_drv.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/bmp3.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/bmp3_defs.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/bstdr_comm_support.h:

@@ -441,6 +441,17 @@ static void sensorsDeviceInit(void)
 
 #ifdef SENSORS_ENABLE_MAG_BMP280
 
+
+  if (bmp280init(I2C1_DEV) == true)
+  {
+    isMagnetometerPresent = true;
+    DEBUG_PRINT("BMP280 I2C connection ... [PASS]\n");
+  }
+  else
+  {
+    DEBUG_PRINT("BMP280 I2C connection ... [FAIL]\n");
+  }
+
 #endif
 
 
@@ -451,6 +462,10 @@ static void sensorsDeviceInit(void)
     lps25hSetEnabled(true);
     isBarometerPresent = true;
     DEBUG_PRINT("LPS25H I2C connection [OK].\n");
+
+
+
+
   }
   else
   {

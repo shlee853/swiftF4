@@ -84,6 +84,11 @@
  **************************************************************************/
 #include "bmp280.h"
 
+
+static I2C_Dev *I2Cx;
+static bool isInit;
+static uint8_t devAddr;
+
 static struct bmp280_t *p_bmp280; /**< pointer to BMP280 */
 
 /*!
@@ -111,6 +116,35 @@ static struct bmp280_t *p_bmp280; /**< pointer to BMP280 */
  *
  *
  */
+
+bool bmp280init(I2C_Dev *i2cPort)
+{
+	  if (isInit)
+	    return;
+
+
+	  I2Cx = i2cPort;
+	  devAddr = BMP280_I2C_ADDRESS1;
+
+	  uint8_t buffer = 0;
+
+
+	  if (i2cdevReadByte(I2Cx, devAddr, BMP280_CHIP_ID_REG, &buffer) == true)
+	  {
+		  if(buffer == BMP280_CHIP_ID3){
+
+		    //  i2cdevRead(I2Cx, devAddr, BMP280_TEMPERATURE_CALIB_DIG_T1_LSB_REG, 24, (u8 *)&bmp280Cal);
+		    //	i2cdevWriteByte(I2Cx, devAddr, BMP280_CTRL_MEAS_REG, BMP280_MODE);
+		    //	i2cdevWriteByte(I2Cx, devAddr, BMP280_CONFIG_REG, 5<<2);		/*����IIR�˲�*/
+			  return true;
+
+		  }
+
+	  }
+	  return false;
+
+}
+
 BMP280_RETURN_FUNCTION_TYPE bmp280_init(struct bmp280_t *bmp280)
 {
 	/* variable used to return communication result*/
