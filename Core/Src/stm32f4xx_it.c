@@ -213,6 +213,11 @@ void EXTI4_IRQHandler(void)
   * @brief This function handles DMA1 stream0 global interrupt.
   */
 
+
+/**
+  * @brief This function handles DMA1 stream1 global interrupt.
+  */
+
 /**
   * @brief This function handles ADC1 global interrupt.
   */

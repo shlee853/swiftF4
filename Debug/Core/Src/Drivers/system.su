@@ -1,5 +1,10 @@
 ../Core/Src/Drivers/system.c:115:6:systemLaunch	24	static
 ../Core/Src/Drivers/system.c:126:6:systemTask	32	static
-../Core/Src/Drivers/system.c:312:6:systemWaitStart	8	static
-../Core/Src/Drivers/system.c:326:6:systemInit	16	static
-../Core/Src/Drivers/system.c:400:6:systemSyslinkReceive	24	static
+../Core/Src/Drivers/system.c:314:6:systemTest	16	static
+../Core/Src/Drivers/system.c:326:6:systemWaitStart	8	static
+../Core/Src/Drivers/system.c:340:6:systemInit	16	static
+../Core/Src/Drivers/system.c:419:6:systemRequestShutdown	80	static
+../Core/Src/Drivers/system.c:431:6:systemSyslinkReceive	24	static
+../Core/Src/Drivers/system.c:445:6:systemRequestNRFVersion	80	static
+../Core/Src/Drivers/system.c:456:6:vApplicationIdleHook	16	static
+../Core/Src/Drivers/system.c:480:13:doAssertCallback	8	static

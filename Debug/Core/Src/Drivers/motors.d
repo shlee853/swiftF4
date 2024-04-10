@@ -69,7 +69,8 @@ Core/Src/Drivers/motors.o: ../Core/Src/Drivers/motors.c \
  /home/swift/workspace/project/swiftF4/Core/Inc/Platform/platform_defaults_cf2.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/log.h \
- /home/swift/workspace/project/swiftF4/Core/Inc/Utils/param.h
+ /home/swift/workspace/project/swiftF4/Core/Inc/Utils/param.h \
+ ../Core/Inc/tim.h ../Core/Inc/main.h
 ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h:
 ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f411xe.h:
 ../Drivers/CMSIS/Include/core_cm4.h:
@@ -141,3 +142,5 @@ Core/Src/Drivers/motors.o: ../Core/Src/Drivers/motors.c \
 ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/log.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/param.h:
+../Core/Inc/tim.h:
+../Core/Inc/main.h:

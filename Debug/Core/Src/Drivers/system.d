@@ -65,6 +65,8 @@ Core/Src/Drivers/system.o: ../Core/Src/Drivers/system.c \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/worker.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Comms/syslink.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/console.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Comms/crtp_mem.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/watchdog.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/queuemonitor.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/sysload.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Algo/estimator_kalman.h \
@@ -141,6 +143,8 @@ Core/Src/Drivers/system.o: ../Core/Src/Drivers/system.c \
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/worker.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Comms/syslink.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/console.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Comms/crtp_mem.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Drivers/watchdog.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/queuemonitor.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/sysload.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Algo/estimator_kalman.h:

@@ -332,6 +332,13 @@ void motorsSetRatio(uint32_t id, uint16_t ratio);
  */
 int motorsGetRatio(uint32_t id);
 
+
+void setCompare_CH1(TIM_TypeDef* TIMx, uint32_t Compare);
+void setCompare_CH2(TIM_TypeDef* TIMx, uint32_t Compare);
+void setCompare_CH3(TIM_TypeDef* TIMx, uint32_t Compare);
+void setCompare_CH4(TIM_TypeDef* TIMx, uint32_t Compare);
+
+
 /**
  * FreeRTOS Task to test the Motors driver
  */

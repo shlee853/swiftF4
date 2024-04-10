@@ -12,6 +12,7 @@ C_SRCS += \
 ../Core/Src/Comms/crtp_commander_high_level.c \
 ../Core/Src/Comms/crtp_commander_rpyt.c \
 ../Core/Src/Comms/crtp_localization_service.c \
+../Core/Src/Comms/crtp_mem.c \
 ../Core/Src/Comms/crtpservice.c \
 ../Core/Src/Comms/platformservice.c \
 ../Core/Src/Comms/radiolink.c \
@@ -25,6 +26,7 @@ OBJS += \
 ./Core/Src/Comms/crtp_commander_high_level.o \
 ./Core/Src/Comms/crtp_commander_rpyt.o \
 ./Core/Src/Comms/crtp_localization_service.o \
+./Core/Src/Comms/crtp_mem.o \
 ./Core/Src/Comms/crtpservice.o \
 ./Core/Src/Comms/platformservice.o \
 ./Core/Src/Comms/radiolink.o \
@@ -38,6 +40,7 @@ C_DEPS += \
 ./Core/Src/Comms/crtp_commander_high_level.d \
 ./Core/Src/Comms/crtp_commander_rpyt.d \
 ./Core/Src/Comms/crtp_localization_service.d \
+./Core/Src/Comms/crtp_mem.d \
 ./Core/Src/Comms/crtpservice.d \
 ./Core/Src/Comms/platformservice.d \
 ./Core/Src/Comms/radiolink.d \
@@ -51,7 +54,7 @@ Core/Src/Comms/%.o Core/Src/Comms/%.su Core/Src/Comms/%.cyclo: ../Core/Src/Comms
 clean: clean-Core-2f-Src-2f-Comms
 
 clean-Core-2f-Src-2f-Comms:
-	-$(RM) ./Core/Src/Comms/comm.cyclo ./Core/Src/Comms/comm.d ./Core/Src/Comms/comm.o ./Core/Src/Comms/comm.su ./Core/Src/Comms/crtp.cyclo ./Core/Src/Comms/crtp.d ./Core/Src/Comms/crtp.o ./Core/Src/Comms/crtp.su ./Core/Src/Comms/crtp_commander.cyclo ./Core/Src/Comms/crtp_commander.d ./Core/Src/Comms/crtp_commander.o ./Core/Src/Comms/crtp_commander.su ./Core/Src/Comms/crtp_commander_generic.cyclo ./Core/Src/Comms/crtp_commander_generic.d ./Core/Src/Comms/crtp_commander_generic.o ./Core/Src/Comms/crtp_commander_generic.su ./Core/Src/Comms/crtp_commander_high_level.cyclo ./Core/Src/Comms/crtp_commander_high_level.d ./Core/Src/Comms/crtp_commander_high_level.o ./Core/Src/Comms/crtp_commander_high_level.su ./Core/Src/Comms/crtp_commander_rpyt.cyclo ./Core/Src/Comms/crtp_commander_rpyt.d ./Core/Src/Comms/crtp_commander_rpyt.o ./Core/Src/Comms/crtp_commander_rpyt.su ./Core/Src/Comms/crtp_localization_service.cyclo ./Core/Src/Comms/crtp_localization_service.d ./Core/Src/Comms/crtp_localization_service.o ./Core/Src/Comms/crtp_localization_service.su ./Core/Src/Comms/crtpservice.cyclo ./Core/Src/Comms/crtpservice.d ./Core/Src/Comms/crtpservice.o ./Core/Src/Comms/crtpservice.su ./Core/Src/Comms/platformservice.cyclo ./Core/Src/Comms/platformservice.d ./Core/Src/Comms/platformservice.o ./Core/Src/Comms/platformservice.su ./Core/Src/Comms/radiolink.cyclo ./Core/Src/Comms/radiolink.d ./Core/Src/Comms/radiolink.o ./Core/Src/Comms/radiolink.su ./Core/Src/Comms/syslink.cyclo ./Core/Src/Comms/syslink.d ./Core/Src/Comms/syslink.o ./Core/Src/Comms/syslink.su
+	-$(RM) ./Core/Src/Comms/comm.cyclo ./Core/Src/Comms/comm.d ./Core/Src/Comms/comm.o ./Core/Src/Comms/comm.su ./Core/Src/Comms/crtp.cyclo ./Core/Src/Comms/crtp.d ./Core/Src/Comms/crtp.o ./Core/Src/Comms/crtp.su ./Core/Src/Comms/crtp_commander.cyclo ./Core/Src/Comms/crtp_commander.d ./Core/Src/Comms/crtp_commander.o ./Core/Src/Comms/crtp_commander.su ./Core/Src/Comms/crtp_commander_generic.cyclo ./Core/Src/Comms/crtp_commander_generic.d ./Core/Src/Comms/crtp_commander_generic.o ./Core/Src/Comms/crtp_commander_generic.su ./Core/Src/Comms/crtp_commander_high_level.cyclo ./Core/Src/Comms/crtp_commander_high_level.d ./Core/Src/Comms/crtp_commander_high_level.o ./Core/Src/Comms/crtp_commander_high_level.su ./Core/Src/Comms/crtp_commander_rpyt.cyclo ./Core/Src/Comms/crtp_commander_rpyt.d ./Core/Src/Comms/crtp_commander_rpyt.o ./Core/Src/Comms/crtp_commander_rpyt.su ./Core/Src/Comms/crtp_localization_service.cyclo ./Core/Src/Comms/crtp_localization_service.d ./Core/Src/Comms/crtp_localization_service.o ./Core/Src/Comms/crtp_localization_service.su ./Core/Src/Comms/crtp_mem.cyclo ./Core/Src/Comms/crtp_mem.d ./Core/Src/Comms/crtp_mem.o ./Core/Src/Comms/crtp_mem.su ./Core/Src/Comms/crtpservice.cyclo ./Core/Src/Comms/crtpservice.d ./Core/Src/Comms/crtpservice.o ./Core/Src/Comms/crtpservice.su ./Core/Src/Comms/platformservice.cyclo ./Core/Src/Comms/platformservice.d ./Core/Src/Comms/platformservice.o ./Core/Src/Comms/platformservice.su ./Core/Src/Comms/radiolink.cyclo ./Core/Src/Comms/radiolink.d ./Core/Src/Comms/radiolink.o ./Core/Src/Comms/radiolink.su ./Core/Src/Comms/syslink.cyclo ./Core/Src/Comms/syslink.d ./Core/Src/Comms/syslink.o ./Core/Src/Comms/syslink.su
 
 .PHONY: clean-Core-2f-Src-2f-Comms
 

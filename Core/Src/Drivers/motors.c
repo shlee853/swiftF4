@@ -46,6 +46,7 @@
 //Logging includes
 #include "log.h"
 #include "param.h"
+#include "tim.h"
 
 static bool motorSetEnable = false;
 static uint16_t motorPowerSet[] = {0, 0, 0, 0}; // user-requested PWM signals (overrides)
@@ -102,6 +103,11 @@ const MotorHealthTestDef unknownMotorHealthTestSettings = {
 static bool isInit = false;
 static uint64_t lastCycleTime;
 static uint32_t cycleTime;
+
+
+
+extern TIM_HandleTypeDef htim2;
+extern TIM_HandleTypeDef htim4;
 
 /* Private functions */
 
@@ -211,9 +217,7 @@ void motorsInit(const MotorPerifDef** motorMapSelect)
 {
   int i;
   //Init structures
-  GPIO_InitTypeDef GPIO_InitStructure;
-  TIM_Base_InitTypeDef  TIM_TimeBaseStructure;
-  TIM_OC_InitTypeDef  TIM_OCInitStructure;
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
 
   if (isInit)
   {
@@ -225,77 +229,74 @@ void motorsInit(const MotorPerifDef** motorMapSelect)
 
   DEBUG_PRINT("Using %s motor driver\n", motorMap[0]->drvType == BRUSHED ? "brushed" : "brushless");
 
+
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
+
   for (i = 0; i < NBR_OF_MOTORS; i++)
   {
     //Clock the gpio and the timers
-//    MOTORS_RCC_GPIO_CMD(motorMap[i]->gpioPerif, ENABLE);
-//    MOTORS_RCC_GPIO_CMD(motorMap[i]->gpioPowerswitchPerif, ENABLE);
-//    MOTORS_RCC_TIM_CMD(motorMap[i]->timPerif, ENABLE);
+
 
     // If there is a power switch, as on Bolt, enable power to ESC by
     // switching on mosfet.
     if (motorMap[i]->gpioPowerswitchPin != 0)
     {
-      GPIO_InitStructure.Mode = GPIO_MODE_OUTPUT_PP;
-      GPIO_InitStructure.Pin = motorMap[i]->gpioPowerswitchPin;
-      HAL_GPIO_Init(motorMap[i]->gpioPowerswitchPort, &GPIO_InitStructure);
+      GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+      GPIO_InitStruct.Pin = motorMap[i]->gpioPowerswitchPin;
+      HAL_GPIO_Init(motorMap[i]->gpioPowerswitchPort, &GPIO_InitStruct);
       HAL_GPIO_WritePin(motorMap[i]->gpioPowerswitchPort, motorMap[i]->gpioPowerswitchPin, GPIO_PIN_SET);
     }
 
+
+
     // Configure the GPIO for the timer output
-    GPIO_InitStructure.Mode = GPIO_MODE_AF_PP;
-    GPIO_InitStructure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    GPIO_InitStructure.Pin = motorMap[i]->gpioPin;
-    HAL_GPIO_Init(motorMap[i]->gpioPort, &GPIO_InitStructure);
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+    GPIO_InitStruct.Pull = GPIO_PULLUP;
+    GPIO_InitStruct.Pin = motorMap[i]->gpioPin;
+    GPIO_InitStruct.Alternate = motorMap[i]->gpioAF;
+    HAL_GPIO_Init(motorMap[i]->gpioPort, &GPIO_InitStruct);
 
-    //Map timers to alternate functions
-//    MOTORS_GPIO_AF_CFG(motorMap[i]->gpioPort, motorMap[i]->gpioPinSource, motorMap[i]->gpioAF);
+  }
 
-    //Timer configuration
-    TIM_TimeBaseStructure.Period = motorMap[i]->timPeriod;
-    TIM_TimeBaseStructure.Prescaler = motorMap[i]->timPrescaler;
-    TIM_TimeBaseStructure.ClockDivision = 0;
-    TIM_TimeBaseStructure.CounterMode = TIM_COUNTERMODE_UP;
-    TIM_TimeBaseStructure.RepetitionCounter = 0;
-    HAL_TIM_Base_Init(&TIM_TimeBaseStructure);
+  MX_TIM4_Init();
+  MX_TIM2_Init();
 
-    // PWM channels configuration (All identical!)
-    TIM_OCInitStructure.OCMode = TIM_OCMODE_PWM1;
-//    TIM_OCInitStructure.OutputState = TIM_OUTPUTSTATE_ENABLE;
-    TIM_OCInitStructure.Pulse = 0;
-    TIM_OCInitStructure.OCPolarity = motorMap[i]->timPolarity;
-    TIM_OCInitStructure.OCIdleState = TIM_OCIDLESTATE_SET;
 
     // Configure Output Compare for PWM
-    motorMap[i]->ocInit(motorMap[i]->tim, &TIM_OCInitStructure);
-    motorMap[i]->preloadConfig(motorMap[i]->tim, 8);
-  }
+//    motorMap[i]->ocInit(motorMap[i]->tim, &TIM_OCInitStructure);
+//    motorMap[i]->preloadConfig(motorMap[i]->tim, 8);
+//  }
+
+
 #ifdef CONFIG_MOTORS_ESC_PROTOCOL_DSHOT
   motorsDshotDMASetup();
 #endif
-  // Start the timers
-  for (i = 0; i < NBR_OF_MOTORS; i++)
-  {
-//    TIM_Cmd(motorMap[i]->tim, ENABLE);
-    motorMap[i]->tim->CR1 |= TIM_CR1_CEN;
-  }
+
+
+    HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
+    HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_3);
+    HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_1);
+    HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_2);
+
 
   isInit = true;
 
-  // Output zero power
+//   Output zero power
   motorsStop();
 }
 
 void motorsDeInit(const MotorPerifDef** motorMapSelect)
 {
   int i;
-  GPIO_InitTypeDef GPIO_InitStructure;
+  GPIO_InitTypeDef GPIO_InitStruct;
 
   for (i = 0; i < NBR_OF_MOTORS; i++)
   {
     // Configure default
-    GPIO_InitStructure.Pin = motorMap[i]->gpioPin;
-    HAL_GPIO_Init(motorMap[i]->gpioPort, &GPIO_InitStructure);
+    GPIO_InitStruct.Pin = motorMap[i]->gpioPin;
+    HAL_GPIO_Init(motorMap[i]->gpioPort, &GPIO_InitStruct);
 
     //Map timers to alternate functions
 //    GPIO_PinAFConfig(motorMap[i]->gpioPort, motorMap[i]->gpioPinSource, 0x00);
@@ -642,6 +643,30 @@ const MotorHealthTestDef* motorsGetHealthTestSettings(uint32_t id)
     return &unknownMotorHealthTestSettings;
   }
 }
+
+
+void setCompare_CH1(TIM_TypeDef* TIMx, uint32_t Compare)
+{
+	TIMx->CCR1 = Compare;
+}
+
+
+void setCompare_CH2(TIM_TypeDef* TIMx, uint32_t Compare)
+{
+	TIMx->CCR2 = Compare;
+}
+
+
+void setCompare_CH3(TIM_TypeDef* TIMx, uint32_t Compare)
+{
+	TIMx->CCR3 = Compare;
+}
+
+void setCompare_CH4(TIM_TypeDef* TIMx, uint32_t Compare)
+{
+	TIMx->CCR4 = Compare;
+}
+
 
 #ifdef CONFIG_MOTORS_ESC_PROTOCOL_DSHOT
 void __attribute__((used)) DMA1_Stream1_IRQHandler(void)  // M4

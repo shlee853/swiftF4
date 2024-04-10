@@ -58,9 +58,9 @@
 #include "console.h"
 //#include "usblink.h"
 //#include "mem.h"
-//#include "crtp_mem.h"
+#include "crtp_mem.h"
 //#include "proximity.h"
-//#include "watchdog.h"
+#include "watchdog.h"
 #include "queuemonitor.h"
 //#include "buzzer.h"
 //#include "sound.h"
@@ -177,13 +177,14 @@ void systemTask(void *arg)
 
   estimator = deckGetRequiredEstimator();
   stabilizerInit(estimator);
+
   if (deckGetRequiredLowInterferenceRadioMode() && platformConfigPhysicalLayoutAntennasAreClose())
   {
 //    platformSetLowInterferenceRadioMode();
   }
-  soundInit();
-//  crtpMemInit();
-/*
+//  soundInit();
+  crtpMemInit();
+
 #ifdef PROXIMITY_ENABLED
   proximityInit();
 #endif
@@ -196,7 +197,7 @@ void systemTask(void *arg)
     pass = false;
     DEBUG_PRINT("system [FAIL]\n");
   }
-  if (configblockTest() == false) {
+/*  if (configblockTest() == false) {
     pass = false;
     DEBUG_PRINT("configblock [FAIL]\n");
   }
@@ -309,6 +310,19 @@ void systemTask(void *arg)
 
 
 
+
+bool systemTest()
+{
+  bool pass=isInit;
+
+  pass &= ledseqTest();
+  pass &= pmTest();
+  pass &= workerTest();
+  pass &= buzzerTest();
+  return pass;
+}
+
+
 void systemWaitStart(void)
 {
   //This permits to guarantee that the system task is initialized before other
@@ -397,6 +411,23 @@ void systemInit(void)
   isInit = true;
 }
 
+
+
+
+
+
+void systemRequestShutdown()
+{
+  SyslinkPacket slp;
+
+  slp.type = SYSLINK_PM_ONOFF_SWITCHOFF;
+  slp.length = 0;
+  syslinkSendPacket(&slp);
+}
+
+
+
+
 void systemSyslinkReceive(SyslinkPacket *slp)
 {
   if (slp->type == SYSLINK_SYS_NRF_VERSION)
@@ -408,6 +439,47 @@ void systemSyslinkReceive(SyslinkPacket *slp)
     }
     memcpy(&nrf_version, &slp->data[0], len );
     DEBUG_PRINT("NRF51 version: %s\n", nrf_version);
+  }
+}
+
+void systemRequestNRFVersion()
+{
+  SyslinkPacket slp;
+
+  slp.type = SYSLINK_SYS_NRF_VERSION;
+  slp.length = 0;
+  syslinkSendPacket(&slp);
+}
+
+
+
+void vApplicationIdleHook( void )
+{
+  static uint32_t tickOfLatestWatchdogReset = M2T(0);
+
+  portTickType tickCount = xTaskGetTickCount();
+
+  if (tickCount - tickOfLatestWatchdogReset > M2T(WATCHDOG_RESET_PERIOD_MS))
+  {
+    tickOfLatestWatchdogReset = tickCount;
+    watchdogReset();
+  }
+
+  if (dumpAssertInfo != 0) {
+    printAssertSnapshotData();
+    dumpAssertInfo = 0;
+  }
+
+  // Enter sleep mode. Does not work when debugging chip with SWD.
+  // Currently saves about 20mA STM32F405 current consumption (~30%).
+#ifndef DEBUG
+  { __asm volatile ("wfi"); }
+#endif
+}
+
+static void doAssertCallback(void) {
+  if (doAssert) {
+    ASSERT_FAILED();
   }
 }
 
