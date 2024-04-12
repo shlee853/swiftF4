@@ -1,3 +1,3 @@
-../Core/Src/Drivers/watchdog.c:39:6:watchdogNormalStartTest	16	static
-../Core/Src/Drivers/watchdog.c:53:6:watchdogInit	8	static
-../Core/Src/Drivers/watchdog.c:85:6:IWDG_ReloadCounter	4	static
+../Core/Src/Drivers/watchdog.c:43:6:watchdogNormalStartTest	16	static
+../Core/Src/Drivers/watchdog.c:57:6:watchdogInit	8	static
+../Core/Src/Drivers/watchdog.c:89:6:IWDG_ReloadCounter	4	static

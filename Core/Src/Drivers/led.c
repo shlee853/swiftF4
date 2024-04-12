@@ -184,9 +184,9 @@ bool ledTest(void)
 		for (int i = 0; i < LED_NUM; i++) {
 
 			  ledSet(i, 1);
-			  vTaskDelay((50));
+			  vTaskDelay((100));
 			  ledSet(i, 0);
-			  vTaskDelay((50));
+			  vTaskDelay((100));
 		}
 
 	}

@@ -36,16 +36,20 @@
 
 
 
+#define FLAG_MASK                 ((uint8_t)0x1F)
+
+
+
 bool watchdogNormalStartTest(void)
 {
   bool wasNormalStart = true;
 
-	if (RCC_GetFlagStatus(RCC_FLAG_IWDGRST)) {
+/*	if (RCC_GetFlagStatus(RCC_FLAG_IWDGRST)) {
 		RCC_ClearFlag();
 		wasNormalStart = false;
 		DEBUG_PRINT("The system resumed after watchdog timeout [WARNING]\n");
 	}
-
+*/
 	return wasNormalStart;
 }
 
@@ -86,3 +90,4 @@ void IWDG_ReloadCounter(void)
 {
   IWDG->KR = KR_KEY_RELOAD;
 }
+

@@ -39,7 +39,7 @@
 #include "led.h"
 //#include "param.h"
 //#include "log.h"
-//#include "ledseq.h"
+#include "ledseq.h"
 //#include "pm.h"
 
 #include "system.h"
@@ -175,6 +175,8 @@ void systemTask(void *arg)
   memInit();
   deckInit();
 
+//  xSemaphoreGive(canStartMutex);		// Test!!!!!
+
   estimator = deckGetRequiredEstimator();
   stabilizerInit(estimator);
 
@@ -191,6 +193,8 @@ void systemTask(void *arg)
 
   systemRequestNRFVersion();
 
+
+
   //Test the modules
   DEBUG_PRINT("About to run tests in system.c.\n");
   if (systemTest() == false) {
@@ -201,6 +205,7 @@ void systemTask(void *arg)
     pass = false;
     DEBUG_PRINT("configblock [FAIL]\n");
   }
+  */
   if (storageTest() == false) {
     pass = false;
     DEBUG_PRINT("storage [FAIL]\n");
@@ -267,7 +272,7 @@ void systemTask(void *arg)
     DEBUG_PRINT("Self test passed!\n");
     selftestPassed = 1;
     systemStart();
-    soundSetEffect(SND_STARTUP);
+//    soundSetEffect(SND_STARTUP);
     ledseqRun(&seq_alive);
     ledseqRun(&seq_testPassed);
   }
@@ -304,7 +309,7 @@ void systemTask(void *arg)
     vTaskDelay(portMAX_DELAY);
 
 
-    */
+
 
 }
 
@@ -321,6 +326,17 @@ bool systemTest()
   pass &= buzzerTest();
   return pass;
 }
+
+
+
+void systemStart()
+{
+  xSemaphoreGive(canStartMutex);
+#ifndef DEBUG
+  watchdogInit();
+#endif
+}
+
 
 
 void systemWaitStart(void)

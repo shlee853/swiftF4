@@ -129,23 +129,25 @@ int main(void)
   	    while(1);
   }
 
-  // motor test
 
-/*  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
+
+  // motor test
+/*
+  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
   HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_3);
   HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_1);
   HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_2);
 
-  TIM2->CCR1 = 32;
+  TIM2->CCR1 = 16;
   TIM2->CCR3 = 32;
-  TIM4->CCR1 = 32;
-  TIM4->CCR2 = 32;
+  TIM4->CCR1 = 64;
+  TIM4->CCR2 = 128;
 
   HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_1);
   HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_3);
   HAL_TIM_PWM_Stop(&htim4, TIM_CHANNEL_1);
   HAL_TIM_PWM_Stop(&htim4, TIM_CHANNEL_2);
-  */
+*/
 
 /*
   i2cdevInit(I2C1_DEV);
