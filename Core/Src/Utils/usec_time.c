@@ -10,7 +10,17 @@ static bool isInit = false;
 static uint8_t reset = 0;
 static uint32_t usecTimerHighCount;
 
+extern TIM_HandleTypeDef htim11;
 
+
+
+void usecTimerInit(void)
+{
+	isInit = true;
+  if (isInit) {
+    return;
+  }
+}
 
 void usecTimerReset(void)
 {
@@ -19,7 +29,7 @@ void usecTimerReset(void)
   const uint32_t zero = 0;
   __atomic_store(&usecTimerHighCount, &zero, __ATOMIC_SEQ_CST);
 
-  TIM1->CNT = 0;
+  TIM11->CNT = 0;
 }
 
 uint64_t usecTimestamp(void)
@@ -28,7 +38,7 @@ uint64_t usecTimestamp(void)
 
   uint32_t high0;
   __atomic_load(&usecTimerHighCount, &high0, __ATOMIC_SEQ_CST);
-  uint32_t low = TIM1->CNT;
+  uint32_t low = TIM11->CNT;
   uint32_t high;
   __atomic_load(&usecTimerHighCount, &high, __ATOMIC_SEQ_CST);
 
@@ -38,7 +48,7 @@ uint64_t usecTimestamp(void)
     return (((uint64_t)high) << 16) + low;
   }
   // There was an increment, but we don't expect another one soon
-  return (((uint64_t)high) << 16) + TIM1->CNT;
+  return (((uint64_t)high) << 16) + TIM11->CNT;
 }
 
 
@@ -63,3 +73,14 @@ PARAM_GROUP_START(usec)
 PARAM_ADD_WITH_CALLBACK(PARAM_UINT8, reset, &reset, &resetParamCallback)
 
 PARAM_GROUP_STOP(usec)
+
+
+
+void __attribute__((used)) TIM1_TRG_COM_TIM11_IRQHandler(void)
+{
+
+  HAL_TIM_IRQHandler(&htim11);
+
+  __sync_fetch_and_add(&usecTimerHighCount, 1);
+
+}

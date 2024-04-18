@@ -1,6 +1,6 @@
 ../Core/Src/main.c:85:5:main	2
-../Core/Src/main.c:210:6:SystemClock_Config	3
-../Core/Src/main.c:253:6:InitTSysTick	1
-../Core/Src/main.c:265:7:OSVersion	1
-../Core/Src/main.c:271:6:freertos_IntroTitle	1
-../Core/Src/main.c:307:6:Error_Handler	1
+../Core/Src/main.c:216:6:SystemClock_Config	3
+../Core/Src/main.c:259:6:InitTSysTick	1
+../Core/Src/main.c:271:7:OSVersion	1
+../Core/Src/main.c:277:6:freertos_IntroTitle	1
+../Core/Src/main.c:313:6:Error_Handler	1

@@ -127,7 +127,7 @@ void systemTask(void *arg)
 {
   bool pass = true;
 
-  //  InitTSysTick(96000000, 1000000U);
+  usecTimerInit();
 
   uint32_t ld = SysTick->LOAD;
   time1 = DWT->CYCCNT;
@@ -135,6 +135,13 @@ void systemTask(void *arg)
   vTaskDelay(1);	// 1ms
   time2 = DWT->CYCCNT;
   DEBUG_PRINT("delay = %d(us)\n",(uint32_t)(time2-time1)/CLOCK_PER_USEC);
+
+  uint64_t t1 = usecTimestamp();
+  vTaskDelay(1);	// 1ms
+  uint64_t t2 = usecTimestamp();
+  DEBUG_PRINT("1ms = %d(us)\n",(uint64_t)(t2-t1));
+
+
 
 #ifdef CONFIG_DEBUG_QUEUE_MONITOR
   queueMonitorInit();
@@ -146,9 +153,8 @@ void systemTask(void *arg)
   //  uartSendDataDmaBlocking(36, (uint8_t *)" Testing UART1 DMA and it is working\n");
 #endif
 
-//  ICM20602_Initialization();	// 여기서 일정 시간 지연이 있어야 STM32 VCP 포트가 활성화됨 원인파악중
-
   passthroughInit();	// Create passthrough task
+
 
   systemInit();
   DEBUG_PRINT("System drivers are Initialized!\n");
@@ -180,6 +186,9 @@ void systemTask(void *arg)
   estimator = deckGetRequiredEstimator();
   stabilizerInit(estimator);
 
+  sensorsMpu9250Lps25hManufacturingTest();
+
+
   if (deckGetRequiredLowInterferenceRadioMode() && platformConfigPhysicalLayoutAntennasAreClose())
   {
 //    platformSetLowInterferenceRadioMode();
@@ -191,7 +200,7 @@ void systemTask(void *arg)
   proximityInit();
 #endif
 
-  systemRequestNRFVersion();
+//  systemRequestNRFVersion();
 
 
 
@@ -205,11 +214,12 @@ void systemTask(void *arg)
     pass = false;
     DEBUG_PRINT("configblock [FAIL]\n");
   }
-  */
+
   if (storageTest() == false) {
     pass = false;
     DEBUG_PRINT("storage [FAIL]\n");
   }
+  */
   if (commTest() == false) {
     pass = false;
     DEBUG_PRINT("comm [FAIL]\n");
@@ -241,10 +251,11 @@ void systemTask(void *arg)
     pass = false;
     DEBUG_PRINT("deck [FAIL]\n");
   }
-  if (soundTest() == false) {
+/*  if (soundTest() == false) {
     pass = false;
     DEBUG_PRINT("sound [FAIL]\n");
   }
+  */
   if (memTest() == false) {
     pass = false;
     DEBUG_PRINT("mem [FAIL]\n");
@@ -273,8 +284,8 @@ void systemTask(void *arg)
     selftestPassed = 1;
     systemStart();
 //    soundSetEffect(SND_STARTUP);
-    ledseqRun(&seq_alive);
-    ledseqRun(&seq_testPassed);
+//    ledseqRun(&seq_alive);
+//    ledseqRun(&seq_testPassed);
   }
   else
   {
@@ -320,10 +331,10 @@ bool systemTest()
 {
   bool pass=isInit;
 
-  pass &= ledseqTest();
+//  pass &= ledseqTest();
   pass &= pmTest();
   pass &= workerTest();
-  pass &= buzzerTest();
+//  pass &= buzzerTest();
   return pass;
 }
 

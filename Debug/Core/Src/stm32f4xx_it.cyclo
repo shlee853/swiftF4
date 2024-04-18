@@ -5,9 +5,7 @@
 ../Core/Src/stm32f4xx_it.c:141:6:UsageFault_Handler	1
 ../Core/Src/stm32f4xx_it.c:156:6:DebugMon_Handler	1
 ../Core/Src/stm32f4xx_it.c:169:6:SysTick_Handler	3
-../Core/Src/stm32f4xx_it.c:201:6:EXTI4_IRQHandler	1
 ../Core/Src/stm32f4xx_it.c:224:6:ADC_IRQHandler	1
-../Core/Src/stm32f4xx_it.c:238:6:TIM1_TRG_COM_TIM11_IRQHandler	1
 ../Core/Src/stm32f4xx_it.c:256:6:USART1_IRQHandler	1
 ../Core/Src/stm32f4xx_it.c:270:6:USART2_IRQHandler	1
 ../Core/Src/stm32f4xx_it.c:284:6:DMA2_Stream0_IRQHandler	1

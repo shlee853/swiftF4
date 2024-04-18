@@ -115,8 +115,12 @@ int main(void)
   MX_ADC1_Init();
   MX_TIM2_Init();
   MX_TIM4_Init();
-  /* USER CODE BEGIN 2 */
 
+
+
+
+
+  /* USER CODE BEGIN 2 */
 
   freertos_IntroTitle();
 
@@ -129,6 +133,8 @@ int main(void)
   	    while(1);
   }
 
+
+  HAL_TIM_Base_Start_IT(&htim11);
 
 
   // motor test

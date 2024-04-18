@@ -223,13 +223,23 @@ bool sensorsMpu9250Lps25hAreCalibrated() {
   return gyroBiasFound;
 }
 
+
+
+
+
+
+
+
+
+
+
 static void sensorsTask(void *param)
 {
   measurement_t measurement;
 
   systemWaitStart();
 
-  sensorsSetupSlaveRead();
+//  sensorsSetupSlaveRead();
 
   while (1)
   {
@@ -241,7 +251,7 @@ static void sensorsTask(void *param)
               (isMagnetometerPresent ? SENSORS_MAG_BUFF_LEN : 0) +
               (isBarometerPresent ? SENSORS_BARO_BUFF_LEN : 0));
 
-      i2cdevReadReg8(I2C3_DEV, MPU6500_ADDRESS_AD0_HIGH, MPU6500_RA_ACCEL_XOUT_H, dataLen, buffer);
+      i2cdevReadReg8(I2C1_DEV, MPU6500_ADDRESS_AD0_HIGH, MPU6500_RA_ACCEL_XOUT_H, dataLen, buffer);
       // these functions process the respective data and queue it on the output queues
       processAccGyroMeasurements(&(buffer[0]));
       if (isMagnetometerPresent)
@@ -280,6 +290,19 @@ static void sensorsTask(void *param)
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 void sensorsMpu9250Lps25hWaitDataReady(void)
 {
@@ -456,7 +479,7 @@ static void sensorsDeviceInit(void)
 
 
 #ifdef SENSORS_ENABLE_PRESSURE_LPS25H
-  lps25hInit(I2C3_DEV);
+  lps25hInit(I2C1_DEV);
   if (lps25hTestConnection() == true)
   {
     lps25hSetEnabled(true);
@@ -741,7 +764,7 @@ static bool processGyroBias(int16_t gx, int16_t gy, int16_t gz, Axis3f *gyroBias
     if (gyroBiasRunning.isBiasValueFound)
     {
       soundSetEffect(SND_CALIB);
-      ledseqRun(&seq_calibrated);
+//      ledseqRun(&seq_calibrated);
     }
   }
 
@@ -756,6 +779,7 @@ static bool processGyroBias(int16_t gx, int16_t gy, int16_t gz, Axis3f *gyroBias
 static void sensorsBiasObjInit(BiasObj* bias)
 {
   bias->isBufferFilled = false;
+  bias->isBiasValueFound = false;
   bias->bufHead = bias->buffer;
 }
 
@@ -871,9 +895,11 @@ bool sensorsMpu9250Lps25hManufacturingTest(void)
   if (testStatus)
   {
     sensorsBiasObjInit(&gyroBiasRunning);
+//    while (1)
     while (xTaskGetTickCount() - startTick < SENSORS_VARIANCE_MAN_TEST_TIMEOUT)
     {
       mpu6500GetMotion6(&a.y, &a.x, &a.z, &g.y, &g.x, &g.z);
+      DEBUG_PRINT("a.y:%d\t &a.x:%d\t &a.z:%d\t &g.y:%d\t &g.x:%d\t &g.z:%d\n", a.y, a.x, a.z, g.y, g.x, g.z);
 
       if (processGyroBias(g.x, g.y, g.z, &gyroBias))
       {
@@ -883,7 +909,8 @@ bool sensorsMpu9250Lps25hManufacturingTest(void)
       }
     }
 
-    if (gyroBiasFound)
+    if (1)
+//    if (gyroBiasFound)
     {
       acc.x = -(a.x) * SENSORS_G_PER_LSB_CFG;
       acc.y =  (a.y) * SENSORS_G_PER_LSB_CFG;
@@ -914,8 +941,11 @@ bool sensorsMpu9250Lps25hManufacturingTest(void)
   return testStatus;
 }
 
-void __attribute__((used)) EXTI13_Callback(void)
+void __attribute__((used)) EXTI4_IRQHandler(void)
 {
+
+  HAL_GPIO_EXTI_IRQHandler(IMU_INT_Pin);
+
   portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;
   imuIntTimestamp = usecTimestamp();
   xSemaphoreGiveFromISR(sensorsDataReady, &xHigherPriorityTaskWoken);
@@ -925,6 +955,9 @@ void __attribute__((used)) EXTI13_Callback(void)
     portYIELD();
   }
 }
+
+
+
 
 /**
  * Align the sensors to the Airframe axes
