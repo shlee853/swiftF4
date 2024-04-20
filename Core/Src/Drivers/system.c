@@ -181,14 +181,8 @@ void systemTask(void *arg)
   memInit();
   deckInit();
 
-//  xSemaphoreGive(canStartMutex);		// Test!!!!!
-
   estimator = deckGetRequiredEstimator();
   stabilizerInit(estimator);
-
-
-//  sensorsMpu9250Lps25hManufacturingTest();
-
 
   if (deckGetRequiredLowInterferenceRadioMode() && platformConfigPhysicalLayoutAntennasAreClose())
   {

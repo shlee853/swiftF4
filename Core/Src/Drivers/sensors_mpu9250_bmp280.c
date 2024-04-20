@@ -521,10 +521,18 @@ static void sensorsDeviceInit(void)
   }
 #endif
 
-//  cosPitch = cosf(configblockGetCalibPitch() * (float) M_PI / 180);
-//  sinPitch = sinf(configblockGetCalibPitch() * (float) M_PI / 180);
-//  cosRoll = cosf(configblockGetCalibRoll() * (float) M_PI / 180);
-//  sinRoll = sinf(configblockGetCalibRoll() * (float) M_PI / 180);
+/*
+  cosPitch = cosf(configblockGetCalibPitch() * (float) M_PI / 180);
+  sinPitch = sinf(configblockGetCalibPitch() * (float) M_PI / 180);
+  cosRoll = cosf(configblockGetCalibRoll() * (float) M_PI / 180);
+  sinRoll = sinf(configblockGetCalibRoll() * (float) M_PI / 180);
+*/
+
+  cosPitch = cosf(0.0 * (float) M_PI / 180);
+  sinPitch = sinf(0.0 * (float) M_PI / 180);
+  cosRoll = cosf(0.0 * (float) M_PI / 180);
+  sinRoll = sinf(0.0 * (float) M_PI / 180);
+
 }
 
 

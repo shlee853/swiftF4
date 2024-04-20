@@ -96,8 +96,8 @@ void MX_GPIO_Init(void)
   HAL_GPIO_Init(E_SDA_GPIO_Port, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
-  HAL_NVIC_SetPriority(EXTI4_IRQn, 5, 0);
-  HAL_NVIC_EnableIRQ(EXTI4_IRQn);
+//  HAL_NVIC_SetPriority(EXTI4_IRQn, 5, 0);
+//  HAL_NVIC_EnableIRQ(EXTI4_IRQn);
 
 }
 
