@@ -43,7 +43,6 @@ static GPIO_TypeDef* led_port[] =
   [LED_RED_L] = LED_L_GPIO_PORT,
   [LED_GREEN_R] = LED_R_GPIO_PORT,
   [LED_RED_R] = LED_R_GPIO_PORT,
-  [LED_BLUE_NRF] = 0,
 };
 static unsigned int led_pin[] =
 {
@@ -52,7 +51,6 @@ static unsigned int led_pin[] =
   [LED_RED_L]   = LED_GPIO_RED_L,
   [LED_GREEN_R] = LED_GPIO_GREEN_R,
   [LED_RED_R]   = LED_GPIO_RED_R,
-  [LED_BLUE_NRF] = 0,
 };
 static int led_polarity[] =
 {
@@ -61,7 +59,6 @@ static int led_polarity[] =
   [LED_RED_L]   = LED_POL_RED_L,
   [LED_GREEN_R] = LED_POL_GREEN_R,
   [LED_RED_R]   = LED_POL_RED_R,
-  [LED_BLUE_NRF] = LED_POL_POS,
 };
 
 static bool isInit = 0;
@@ -89,7 +86,8 @@ static void ledSetForce(led_t led, bool value)
     value = !value;
   }
 
-  if (led == LED_BLUE_NRF && isSyslinkUp())
+  //  if (led == LED_BLUE_NRF && isSyslinkUp())
+  if (0)
   {
     SyslinkPacket slp;
     slp.type = value ? SYSLINK_PM_LED_ON : SYSLINK_PM_LED_OFF;
@@ -192,12 +190,11 @@ bool ledTest(void)
 	}
 
   // LED test end
+  ledSet(LED_BLUE_L, 1);
   ledSet(LED_GREEN_L, 0);
   ledSet(LED_GREEN_R, 0);
   ledSet(LED_RED_L, 0);
   ledSet(LED_RED_R, 0);
-  ledSet(LED_BLUE_L, 1);
-//  ledSet(LED_BLUE_NRF, 1);
 
   return isInit;
 }

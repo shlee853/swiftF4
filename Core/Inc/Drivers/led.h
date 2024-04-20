@@ -50,17 +50,18 @@
 #define LED_GPIO_RED_R   LED_GPIO_RED_R_Pin
 #define LED_POL_RED_R    LED_POL_NEG
 
-#define LINK_LED         LED_GPIO_GREEN_L_Pin
-#define CHG_LED          LED_GPIO_BLUE_L_Pin
-#define LOWBAT_LED       LED_GPIO_RED_R_Pin
-#define LINK_DOWN_LED    LED_GPIO_RED_L_Pin
-#define SYS_LED          LED_GPIO_RED_R_Pin
-#define ERR_LED1         LED_GPIO_RED_L_Pin
-#define ERR_LED2         LED_GPIO_RED_R_Pin
+#define TEST_LED         LED_BLUE_L
+#define LINK_LED         LED_GREEN_L
+#define CHG_LED          LED_BLUE_L
+#define LOWBAT_LED       LED_RED_R
+#define LINK_DOWN_LED    LED_RED_L
+#define SYS_LED          LED_GREEN_R
+#define ERR_LED1         LED_RED_L
+#define ERR_LED2         LED_RED_R
 
 #define LED_NUM 5
 
-typedef enum {LED_BLUE_L = 0, LED_GREEN_L, LED_RED_L, LED_GREEN_R, LED_RED_R, LED_BLUE_NRF} led_t;
+typedef enum {LED_BLUE_L = 0, LED_GREEN_L, LED_RED_L, LED_GREEN_R, LED_RED_R} led_t;
 typedef enum { LED_LEDSEQ, LED_PARAM_BITMASK } ledSwitch_t;
 
 void ledInit();

@@ -165,7 +165,6 @@ void systemInit(void)
 //  configblockInit();			// 현재 디바이스에 EEPROM이 존재하지 않음
 //  storageInit();
   workerInit();
-
   ledseqInit();
   DEBUG_PRINT("[TASK] lesdeqCmdTask is running!\n");
 
@@ -368,8 +367,8 @@ void systemTask(void *arg)
     selftestPassed = 1;
     systemStart();
 //    soundSetEffect(SND_STARTUP);
-//    ledseqRun(&seq_alive);
-//    ledseqRun(&seq_testPassed);
+    ledseqRun(&seq_testPassed);
+    ledseqRun(&seq_alive);
   }
   else
   {

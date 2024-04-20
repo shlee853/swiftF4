@@ -144,31 +144,31 @@ ledseqContext_t seq_charging = {
 };
 
 ledseqStep_t seq_testPassed_def[] = {
-  { true, LEDSEQ_WAITMS(50)},
-  {false, LEDSEQ_WAITMS(50)},
-  { true, LEDSEQ_WAITMS(50)},
-  {false, LEDSEQ_WAITMS(50)},
-  { true, LEDSEQ_WAITMS(50)},
-  {false, LEDSEQ_WAITMS(50)},
-  { true, LEDSEQ_WAITMS(50)},
-  {false, LEDSEQ_WAITMS(50)},
-  { true, LEDSEQ_WAITMS(50)},
-  {false, LEDSEQ_WAITMS(50)},
-  { true, LEDSEQ_WAITMS(50)},
-  {false, LEDSEQ_WAITMS(50)},
-  { true, LEDSEQ_WAITMS(50)},
-  {false, LEDSEQ_WAITMS(50)},
+  { true, LEDSEQ_WAITMS(100)},
+  {false, LEDSEQ_WAITMS(100)},
+  { true, LEDSEQ_WAITMS(100)},
+  {false, LEDSEQ_WAITMS(100)},
+  { true, LEDSEQ_WAITMS(100)},
+  {false, LEDSEQ_WAITMS(100)},
+  { true, LEDSEQ_WAITMS(100)},
+  {false, LEDSEQ_WAITMS(100)},
+  { true, LEDSEQ_WAITMS(100)},
+  {false, LEDSEQ_WAITMS(100)},
+  { true, LEDSEQ_WAITMS(100)},
+  {false, LEDSEQ_WAITMS(100)},
+  { true, LEDSEQ_WAITMS(100)},
+  {false, LEDSEQ_WAITMS(100)},
   {false, LEDSEQ_STOP},
 };
 
 ledseqContext_t seq_testPassed = {
   .sequence = seq_testPassed_def,
-  .led = LINK_LED,
+  .led = TEST_LED,
 };
 
 ledseqContext_t seq_testFailed = {
   .sequence = seq_testPassed_def,
-  .led = SYS_LED,
+  .led = ERR_LED1,
 };
 
 struct ledseqCmd_s {
@@ -199,7 +199,6 @@ void ledseqInit() {
   }
 
   ledInit();
-  ledTest();
   ledSet(CHG_LED, SET);
 
   /* Led sequence priority */
@@ -250,7 +249,6 @@ static void lesdeqCmdTask(void* param) {
 bool ledseqTest(void) {
   bool status;
 
-  //  status = isInit & ledTest();
   status = isInit & ledTest();
   #ifdef TURN_OFF_LEDS
   ledseqEnable(false);
