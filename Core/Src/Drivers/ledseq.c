@@ -250,6 +250,7 @@ static void lesdeqCmdTask(void* param) {
 bool ledseqTest(void) {
   bool status;
 
+  //  status = isInit & ledTest();
   status = isInit & ledTest();
   #ifdef TURN_OFF_LEDS
   ledseqEnable(false);

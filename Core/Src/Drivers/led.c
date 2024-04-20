@@ -184,9 +184,9 @@ bool ledTest(void)
 		for (int i = 0; i < LED_NUM; i++) {
 
 			  ledSet(i, 1);
-			  vTaskDelay((100));
+			  vTaskDelay(M2T(100));
 			  ledSet(i, 0);
-			  vTaskDelay((100));
+			  vTaskDelay(M2T(100));
 		}
 
 	}
@@ -197,7 +197,7 @@ bool ledTest(void)
   ledSet(LED_RED_L, 0);
   ledSet(LED_RED_R, 0);
   ledSet(LED_BLUE_L, 1);
-  ledSet(LED_BLUE_NRF, 1);
+//  ledSet(LED_BLUE_NRF, 1);
 
   return isInit;
 }

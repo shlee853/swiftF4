@@ -166,7 +166,7 @@ void systemInit(void)
 //  storageInit();
   workerInit();
 
-//  ledseqInit();
+  ledseqInit();
   DEBUG_PRINT("[TASK] lesdeqCmdTask is running!\n");
 
 
@@ -414,8 +414,7 @@ void systemTask(void *arg)
 bool systemTest()
 {
   bool pass=isInit;
-
-//  pass &= ledseqTest();
+  pass &= ledseqTest();
   pass &= pmTest();
   pass &= workerTest();
 //  pass &= buzzerTest();

@@ -58,7 +58,7 @@
 #define ERR_LED1         LED_GPIO_RED_L_Pin
 #define ERR_LED2         LED_GPIO_RED_R_Pin
 
-#define LED_NUM 6
+#define LED_NUM 5
 
 typedef enum {LED_BLUE_L = 0, LED_GREEN_L, LED_RED_L, LED_GREEN_R, LED_RED_R, LED_BLUE_NRF} led_t;
 typedef enum { LED_LEDSEQ, LED_PARAM_BITMASK } ledSwitch_t;
