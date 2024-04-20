@@ -239,7 +239,7 @@ static void sensorsTask(void *param)
 
   systemWaitStart();
 
-//  sensorsSetupSlaveRead();
+  sensorsSetupSlaveRead();
 
   while (1)
   {
@@ -400,7 +400,7 @@ static void sensorsDeviceInit(void)
   {
     DEBUG_PRINT("MPU9250 I2C connection ... [FAIL].\n");
   }
-
+/*
   if(mpu6500SelfTest()) {
     DEBUG_PRINT("MPU9250 I2C Selftest ... [PASS]\n");
   }
@@ -408,8 +408,10 @@ static void sensorsDeviceInit(void)
   {
     DEBUG_PRINT("MPU9250 I2C Selftest ... [FAIL]\n");
   }
-
+*/
+  uint8_t buf;
   mpu6500Reset();
+  i2cdevReadByte(I2C1_DEV, MPU6500_DEFAULT_ADDRESS, MPU6500_RA_PWR_MGMT_1, &buf);
 
   vTaskDelay(M2T(50));
   // Activate MPU6500
@@ -418,6 +420,7 @@ static void sensorsDeviceInit(void)
   vTaskDelay(M2T(100));
   // Set x-axis gyro as clock source
   mpu6500SetClockSource(MPU6500_CLOCK_PLL_XGYRO);
+  i2cdevReadByte(I2C1_DEV, MPU6500_DEFAULT_ADDRESS, MPU6500_RA_PWR_MGMT_1, &buf);
   // Delay until clock is set and stable
   vTaskDelay(M2T(200));
   // Enable temp sensor
@@ -428,18 +431,39 @@ static void sensorsDeviceInit(void)
   mpu6500SetI2CBypassEnabled(true);
   // Set gyro full scale range
   mpu6500SetFullScaleGyroRange(SENSORS_GYRO_FS_CFG);
+  i2cdevReadByte(I2C1_DEV, MPU6500_DEFAULT_ADDRESS, MPU6500_RA_GYRO_CONFIG, &buf);
   // Set accelerometer full scale range
   mpu6500SetFullScaleAccelRange(SENSORS_ACCEL_FS_CFG);
+  i2cdevReadByte(I2C1_DEV, MPU6500_DEFAULT_ADDRESS, MPU6500_RA_ACCEL_CONFIG, &buf);
   // Set accelerometer digital low-pass bandwidth
   mpu6500SetAccelDLPF(MPU6500_ACCEL_DLPF_BW_41);
+  i2cdevReadByte(I2C1_DEV, MPU6500_DEFAULT_ADDRESS, MPU6500_RA_ACCEL_CONFIG_2, &buf);
 
   // To low DLPF bandwidth might cause instability and decrease agility
   // but it works well for handling vibrations and unbalanced propellers
   // Set output rate (1): 1000 / (1 + 0) = 1000Hz
   mpu6500SetRate(0);
+  i2cdevReadByte(I2C1_DEV, MPU6500_DEFAULT_ADDRESS, MPU6500_RA_SMPLRT_DIV, &buf);
   // Set digital low-pass bandwidth for gyro
+  //  mpu6500SetDLPFMode(MPU6500_DLPF_BW_98);
   mpu6500SetDLPFMode(MPU6500_DLPF_BW_98);
+  i2cdevReadByte(I2C1_DEV, MPU6500_DEFAULT_ADDRESS, MPU6500_RA_CONFIG, &buf);
   // Init second order filer for accelerometer
+
+
+/*
+  Axis3i16 g;
+  Axis3i16 a;
+
+
+  while(1){
+	  mpu6500GetMotion6(&a.y, &a.x, &a.z, &g.y, &g.x, &g.z);
+	  DEBUG_PRINT("a.y:%04d\t a.x:%04d\t a.z:%04d\t g.y:%04d\t g.x:%04d\t g.z:%04d\n", a.y, a.x, a.z,  g.y, g.x, g.z);
+  }
+
+
+*/
+
   for (uint8_t i = 0; i < 3; i++)
   {
     lpf2pInit(&gyroLpf[i], 1000, GYRO_LPF_CUTOFF_FREQ);
@@ -890,16 +914,19 @@ bool sensorsMpu9250Lps25hManufacturingTest(void)
   float pitch, roll;
   uint32_t startTick = xTaskGetTickCount();
 
+  uint8_t buffer[14];
+  int16_t temp;
+
   testStatus = mpu6500SelfTest();
 
   if (testStatus)
   {
     sensorsBiasObjInit(&gyroBiasRunning);
-//    while (1)
     while (xTaskGetTickCount() - startTick < SENSORS_VARIANCE_MAN_TEST_TIMEOUT)
     {
       mpu6500GetMotion6(&a.y, &a.x, &a.z, &g.y, &g.x, &g.z);
-      DEBUG_PRINT("a.y:%d\t &a.x:%d\t &a.z:%d\t &g.y:%d\t &g.x:%d\t &g.z:%d\n", a.y, a.x, a.z, g.y, g.x, g.z);
+
+	  DEBUG_PRINT("a.y:%04d\t a.x:%04d\t a.z:%04d\t g.y:%04d\t g.x:%04d\t g.z:%04d\n", a.y, a.x, a.z,  g.y, g.x, g.z);
 
       if (processGyroBias(g.x, g.y, g.z, &gyroBias))
       {
@@ -909,8 +936,7 @@ bool sensorsMpu9250Lps25hManufacturingTest(void)
       }
     }
 
-    if (1)
-//    if (gyroBiasFound)
+    if (gyroBiasFound)
     {
       acc.x = -(a.x) * SENSORS_G_PER_LSB_CFG;
       acc.y =  (a.y) * SENSORS_G_PER_LSB_CFG;

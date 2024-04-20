@@ -143,13 +143,6 @@ bool mpu6500SelfTest()
   i2cdevWriteByte(I2Cx, devAddr, MPU6500_RA_ACCEL_CONFIG_2, 0x02); // Set accelerometer rate to 1 kHz and bandwidth to 92 Hz
   i2cdevWriteByte(I2Cx, devAddr, MPU6500_RA_ACCEL_CONFIG, 1<<FS); // Set full scale range for the accelerometer to 2 g
 
-  i2cdevReadByte(I2Cx, devAddr, MPU6500_RA_SMPLRT_DIV, &saveReg[0]);
-  i2cdevReadByte(I2Cx, devAddr, MPU6500_RA_CONFIG, &saveReg[1]);
-  i2cdevReadByte(I2Cx, devAddr, MPU6500_RA_GYRO_CONFIG, &saveReg[2]);
-  i2cdevReadByte(I2Cx, devAddr, MPU6500_RA_ACCEL_CONFIG_2, &saveReg[3]);
-  i2cdevReadByte(I2Cx, devAddr, MPU6500_RA_ACCEL_CONFIG, &saveReg[4]);
-
-
 
   for(i = 0; i < 200; i++)
   {
@@ -171,9 +164,11 @@ bool mpu6500SelfTest()
     gAvg[i] /= 200;
   }
 
+
+
   // Configure the accelerometer for self-test
   i2cdevWriteByte(I2Cx, devAddr, MPU6500_RA_ACCEL_CONFIG, 0xE0); // Enable self test on all three axes and set accelerometer range to +/- 2 g
-  i2cdevWriteByte(I2Cx, devAddr, MPU6500_RA_GYRO_CONFIG, 0xE0); // Enable self test on all three axes and set gyro range to +/- 250 degrees/s
+  i2cdevWriteByte(I2Cx, devAddr, MPU6500_RA_GYRO_CONFIG, 0xE0); // Enable self test on all three axes and set gyro range to +/- 250 degrees/s    i2cdevWriteByte(I2Cx, devAddr, MPU6500_RA_GYRO_CONFIG, 0x00); // Enable self test on all three axes and set gyro range to +/- 250 degrees/s
   vTaskDelay(M2T(25)); // Delay a while to let the device stabilize
 
   for(i = 0; i < 200; i++)
@@ -198,7 +193,7 @@ bool mpu6500SelfTest()
 
    // Configure the gyro and accelerometer for normal operation
    i2cdevWriteByte(I2Cx, devAddr, MPU6500_RA_ACCEL_CONFIG, 0x00);
-   i2cdevWriteByte(I2Cx, devAddr, MPU6500_RA_GYRO_CONFIG, 0x00);
+   i2cdevWriteByte(I2Cx, devAddr, MPU6500_RA_GYRO_CONFIG, 0X00);
    vTaskDelay(M2T(25)); // Delay a while to let the device stabilize
 
    // Retrieve accelerometer and gyro factory Self-Test Code from USR_Reg
@@ -227,8 +222,8 @@ bool mpu6500SelfTest()
   {
    aDiff[i] = 100.0f*((float)((aSTAvg[i] - aAvg[i]) - factoryTrim[i]))/factoryTrim[i]; // Report percent differences
    gDiff[i] = 100.0f*((float)((gSTAvg[i] - gAvg[i]) - factoryTrim[i+3]))/factoryTrim[i+3]; // Report percent differences
-//   DEBUG_PRINT("a[%d] Avg:%d, StAvg:%d, Shift:%d, FT:%d, Diff:%0.2f\n", i, aAvg[i], aSTAvg[i], aSTAvg[i] - aAvg[i], factoryTrim[i], aDiff[i]);
-//   DEBUG_PRINT("g[%d] Avg:%d, StAvg:%d, Shift:%d, FT:%d, Diff:%0.2f\n", i, gAvg[i], gSTAvg[i], gSTAvg[i] - gAvg[i], factoryTrim[i+3], gDiff[i]);
+   DEBUG_PRINT("a[%d] Avg:%d, StAvg:%d, Shift:%d, FT:%d, Diff:%0.2f\n", i, aAvg[i], aSTAvg[i], aSTAvg[i] - aAvg[i], factoryTrim[i], aDiff[i]);
+   DEBUG_PRINT("g[%d] Avg:%d, StAvg:%d, Shift:%d, FT:%d, Diff:%0.2f\n", i, gAvg[i], gSTAvg[i], gSTAvg[i] - gAvg[i], factoryTrim[i+3], gDiff[i]);
   }
 
   // Restore old configuration

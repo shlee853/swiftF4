@@ -186,7 +186,8 @@ void systemTask(void *arg)
   estimator = deckGetRequiredEstimator();
   stabilizerInit(estimator);
 
-  sensorsMpu9250Lps25hManufacturingTest();
+
+//  sensorsMpu9250Lps25hManufacturingTest();
 
 
   if (deckGetRequiredLowInterferenceRadioMode() && platformConfigPhysicalLayoutAntennasAreClose())
