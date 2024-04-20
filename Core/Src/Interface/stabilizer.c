@@ -280,7 +280,8 @@ static void stabilizerTask(void* param)
 
   systemWaitStart();
   DEBUG_PRINT("Starting stabilizer loop\n");
-  rateSupervisorInit(&rateSupervisorContext, xTaskGetTickCount(), M2T(1000), 997, 1003, 1);
+  //  rateSupervisorInit(&rateSupervisorContext, xTaskGetTickCount(), M2T(1000), 997, 1003, 1);
+    rateSupervisorInit(&rateSupervisorContext, xTaskGetTickCount(), M2T(1000), 980, 1003, 1);
 
   while(1) {
     // The sensor should unlock at 1kHz

@@ -121,6 +121,91 @@ void systemLaunch(void)
 
 
 
+
+
+// This must be the first module to be initialized!
+void systemInit(void)
+{
+  if(isInit)
+    return;
+
+  canStartMutex = xSemaphoreCreateMutexStatic(&canStartMutexBuffer);
+  xSemaphoreTake(canStartMutex, portMAX_DELAY);
+
+  usblinkInit();
+  DEBUG_PRINT("[TASK] usblinkTask is running!\n");
+
+  sysLoadInit();
+  DEBUG_PRINT("sysLoadMonitorTimer is Initialized\n");
+
+#if CONFIG_ENABLE_CPX
+//  cpxlinkInit();
+#endif
+
+  /* Initialized here so that DEBUG_PRINT (buffered) can be used early */
+//  debugInit();
+  crtpInit();
+  DEBUG_PRINT("[TASK] crtpTxTask is running!\n");
+  DEBUG_PRINT("[TASK] crtpRxTask is running!\n");
+
+  consoleInit();
+
+  DEBUG_PRINT("%s is up and running!\n", platformConfigGetDeviceTypeName());
+
+  if (V_PRODUCTION_RELEASE) {
+    DEBUG_PRINT("Production release %s\n", V_STAG);
+  } else {
+    DEBUG_PRINT("Build %s:%s (%s) %s\n", V_SLOCAL_REVISION,
+                V_SREVISION, V_STAG, (V_MODIFIED)?"MODIFIED":"CLEAN");
+  }
+  DEBUG_PRINT("I am 0x%08X%08X%08X and I have %dKB of flash!\n",
+              *((int*)(MCU_ID_ADDRESS+8)), *((int*)(MCU_ID_ADDRESS+4)),
+              *((int*)(MCU_ID_ADDRESS+0)), *((short*)(MCU_FLASH_SIZE_ADDRESS)));
+
+//  configblockInit();			// 현재 디바이스에 EEPROM이 존재하지 않음
+//  storageInit();
+  workerInit();
+
+//  ledseqInit();
+  DEBUG_PRINT("[TASK] lesdeqCmdTask is running!\n");
+
+
+  pmInit();
+  DEBUG_PRINT("[TASK] pmTask is running!\n");
+
+  buzzerInit();
+/*  buzzerOn(1000);
+  HAL_Delay(2);
+  buzzerOn(2000);
+  HAL_Delay(2);
+  buzzerOn(3000);
+  HAL_Delay(2);
+  buzzerOn(2000);
+  HAL_Delay(2);
+  */
+  buzzerOff();
+
+  peerLocalizationInit();
+  DEBUG_PRINT("peerLocalization is Initialized!\n");
+
+
+#ifdef CONFIG_APP_ENABLE
+  DEBUG_PRINT("-------------- Start User application -----------------\n");
+  appInit();
+  DEBUG_PRINT("[TASK] appTask is running!\n");
+#endif
+
+  isInit = true;
+}
+
+
+
+
+
+
+
+
+
 /* Private functions implementation */
 
 void systemTask(void *arg)
@@ -136,11 +221,15 @@ void systemTask(void *arg)
   time2 = DWT->CYCCNT;
   DEBUG_PRINT("delay = %d(us)\n",(uint32_t)(time2-time1)/CLOCK_PER_USEC);
 
-  uint64_t t1 = usecTimestamp();
+  time1 = usecTimestamp();
   vTaskDelay(1);	// 1ms
-  uint64_t t2 = usecTimestamp();
-  DEBUG_PRINT("1ms = %d(us)\n",(uint64_t)(t2-t1));
+  time2 = usecTimestamp();
+  DEBUG_PRINT("1ms = %d(us)\n",(uint64_t)(time2-time1));
 
+  time1  = T2M(xTaskGetTickCount());
+  vTaskDelay(100);	// 1ms
+  time2  = T2M(xTaskGetTickCount());
+  DEBUG_PRINT("tick to 100ms = %d(ms)\n",(uint64_t)(time2-time1));
 
 
 #ifdef CONFIG_DEBUG_QUEUE_MONITOR
@@ -356,82 +445,6 @@ void systemWaitStart(void)
   xSemaphoreGive(canStartMutex);
 }
 
-
-
-// This must be the first module to be initialized!
-void systemInit(void)
-{
-  if(isInit)
-    return;
-
-  canStartMutex = xSemaphoreCreateMutexStatic(&canStartMutexBuffer);
-  xSemaphoreTake(canStartMutex, portMAX_DELAY);
-
-  usblinkInit();
-  DEBUG_PRINT("[TASK] usblinkTask is running!\n");
-
-  sysLoadInit();
-  DEBUG_PRINT("sysLoadMonitorTimer is Initialized\n");
-
-#if CONFIG_ENABLE_CPX
-//  cpxlinkInit();
-#endif
-
-  /* Initialized here so that DEBUG_PRINT (buffered) can be used early */
-//  debugInit();
-  crtpInit();
-  DEBUG_PRINT("[TASK] crtpTxTask is running!\n");
-  DEBUG_PRINT("[TASK] crtpRxTask is running!\n");
-
-  consoleInit();
-
-  DEBUG_PRINT("%s is up and running!\n", platformConfigGetDeviceTypeName());
-
-  if (V_PRODUCTION_RELEASE) {
-    DEBUG_PRINT("Production release %s\n", V_STAG);
-  } else {
-    DEBUG_PRINT("Build %s:%s (%s) %s\n", V_SLOCAL_REVISION,
-                V_SREVISION, V_STAG, (V_MODIFIED)?"MODIFIED":"CLEAN");
-  }
-  DEBUG_PRINT("I am 0x%08X%08X%08X and I have %dKB of flash!\n",
-              *((int*)(MCU_ID_ADDRESS+8)), *((int*)(MCU_ID_ADDRESS+4)),
-              *((int*)(MCU_ID_ADDRESS+0)), *((short*)(MCU_FLASH_SIZE_ADDRESS)));
-
-//  configblockInit();			// 현재 디바이스에 EEPROM이 존재하지 않음
-//  storageInit();
-  workerInit();
-
-//  ledseqInit();
-  DEBUG_PRINT("[TASK] lesdeqCmdTask is running!\n");
-
-
-  pmInit();
-  DEBUG_PRINT("[TASK] pmTask is running!\n");
-
-  buzzerInit();
-/*  buzzerOn(1000);
-  HAL_Delay(2);
-  buzzerOn(2000);
-  HAL_Delay(2);
-  buzzerOn(3000);
-  HAL_Delay(2);
-  buzzerOn(2000);
-  HAL_Delay(2);
-  */
-  buzzerOff();
-
-  peerLocalizationInit();
-  DEBUG_PRINT("peerLocalization is Initialized!\n");
-
-
-#ifdef CONFIG_APP_ENABLE
-  DEBUG_PRINT("-------------- Start User application -----------------\n");
-  appInit();
-  DEBUG_PRINT("[TASK] appTask is running!\n");
-#endif
-
-  isInit = true;
-}
 
 
 

@@ -64,6 +64,8 @@ static EstimatorFcns estimatorFunctions[] = {
         .update = NOT_IMPLEMENTED,
         .name = "None",
     }, // Any estimator
+
+
     {
         .init = estimatorComplementaryInit,
         .deinit = NOT_IMPLEMENTED,
@@ -116,7 +118,8 @@ void stateEstimatorSwitchTo(StateEstimatorType estimator) {
     newEstimator = DEFAULT_ESTIMATOR;
   }
 
-  #if defined(CONFIG_ESTIMATOR_KALMAN_ENABLE)
+  //  #if defined(CONFIG_ESTIMATOR_KALMAN_ENABLE)
+  #if defined(CONFIG_ESTIMATOR_KALMAN)
     #define ESTIMATOR StateEstimatorTypeKalman
   #elif defined(CONFIG_UKF_KALMAN)
     #define ESTIMATOR StateEstimatorTypeUkf
