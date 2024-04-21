@@ -240,7 +240,7 @@ static void i2cdrvTryToRestartBus(I2cDrv* i2c)
   */
   GPIO_InitStruct.Pin = IMU_SCL_Pin|IMU_SDA_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   GPIO_InitStruct.Alternate = GPIO_AF4_I2C1;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
@@ -470,7 +470,7 @@ static void i2cdrvEventIsrHandler(I2cDrv* i2c)
   }
 #endif
 
-  HAL_I2C_EV_IRQHandler(&hi2c1);
+//  HAL_I2C_EV_IRQHandler(&hi2c1);
   i2cNotifyClient(i2c);
 
 
@@ -615,7 +615,7 @@ static void i2cdrvEventIsrHandler(I2cDrv* i2c)
 static void i2cdrvErrorIsrHandler(I2cDrv* i2c)
 {
 
-	HAL_I2C_ER_IRQHandler(&hi2c1);
+//	HAL_I2C_ER_IRQHandler(&hi2c1);
 	/*
   if (I2C_GetFlagStatus(i2c->def->i2cPort, I2C_FLAG_AF))
   {
@@ -665,7 +665,7 @@ static void i2cdrvDmaRxIsrHandler(I2cDrv* i2c)
 
 
 	if(__HAL_DMA_GET_FLAG(&hdma_i2c1_rx,DMA_FLAG_TCIF0_4)) {
-		HAL_DMA_IRQHandler(&hdma_i2c1_rx);
+//		HAL_DMA_IRQHandler(&hdma_i2c1_rx);
 		//	    i2cNotifyClient(i2c);
 
 	}
@@ -677,7 +677,7 @@ static void i2cdrvDmaTxIsrHandler(I2cDrv* i2c)
 
 	int status = __HAL_DMA_GET_TC_FLAG_INDEX(&hdma_i2c1_tx);
 	if(status) {
-		HAL_DMA_IRQHandler(&hdma_i2c1_tx);
+//		HAL_DMA_IRQHandler(&hdma_i2c1_tx);
 //	    i2cNotifyClient(i2c);
 	}
 
@@ -687,26 +687,26 @@ static void i2cdrvDmaTxIsrHandler(I2cDrv* i2c)
 
 
 #ifdef CONFIG_DECK_USD_USE_ALT_PINS_AND_SPI
-void __attribute__((used)) DMA1_Stream5_IRQHandler(void)
+void __attribute__((used)) DMA1_Stream5_IRQ_Callback(void)
 #else
-void __attribute__((used)) DMA1_Stream0_IRQHandler(void)
+void __attribute__((used)) DMA1_Stream0_IRQ_Callback(void)
 #endif
 {
 	i2cdrvDmaRxIsrHandler(&sensorsBus);
 }
 
 
-void __attribute__((used)) I2C1_ER_IRQHandler(void)
+void __attribute__((used)) I2C1_ER_IRQ_Callback(void)
 {
   i2cdrvErrorIsrHandler(&sensorsBus);
 }
 
-void __attribute__((used)) I2C1_EV_IRQHandler(void)
+void __attribute__((used)) I2C1_EV_IRQ_Callback(void)
 {
   i2cdrvEventIsrHandler(&sensorsBus);
 }
 
-void __attribute__((used)) DMA1_Stream1_IRQHandler(void)
+void __attribute__((used)) DMA1_Stream1_IRQ_Callback(void)
 {
 	i2cdrvDmaTxIsrHandler(&sensorsBus);
 }

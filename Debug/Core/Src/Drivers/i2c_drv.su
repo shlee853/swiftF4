@@ -14,7 +14,7 @@
 ../Core/Src/Drivers/i2c_drv.c:652:13:i2cdrvClearDMA	16	static
 ../Core/Src/Drivers/i2c_drv.c:663:13:i2cdrvDmaRxIsrHandler	16	static
 ../Core/Src/Drivers/i2c_drv.c:675:13:i2cdrvDmaTxIsrHandler	24	static
-../Core/Src/Drivers/i2c_drv.c:692:28:DMA1_Stream0_IRQHandler	8	static
-../Core/Src/Drivers/i2c_drv.c:699:28:I2C1_ER_IRQHandler	8	static
-../Core/Src/Drivers/i2c_drv.c:704:28:I2C1_EV_IRQHandler	8	static
-../Core/Src/Drivers/i2c_drv.c:709:28:DMA1_Stream1_IRQHandler	8	static
+../Core/Src/Drivers/i2c_drv.c:692:28:DMA1_Stream0_IRQ_Callback	8	static
+../Core/Src/Drivers/i2c_drv.c:699:28:I2C1_ER_IRQ_Callback	8	static
+../Core/Src/Drivers/i2c_drv.c:704:28:I2C1_EV_IRQ_Callback	8	static
+../Core/Src/Drivers/i2c_drv.c:709:28:DMA1_Stream1_IRQ_Callback	8	static

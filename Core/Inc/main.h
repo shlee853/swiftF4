@@ -63,6 +63,9 @@ void Error_Handler(void);
 #define LED_GPIO_RED_R_GPIO_Port GPIOC
 #define E_CS0_Pin GPIO_PIN_15
 #define E_CS0_GPIO_Port GPIOC
+#define NRF_EXINT_Pin GPIO_PIN_0
+#define NRF_EXINT_GPIO_Port GPIOA
+#define NRF_EXINT_EXTI_IRQn EXTI0_IRQn
 #define USART2_TX_NRF_RX_Pin GPIO_PIN_2
 #define USART2_TX_NRF_RX_GPIO_Port GPIOA
 #define USART2_RX_NRF_TX_Pin GPIO_PIN_3

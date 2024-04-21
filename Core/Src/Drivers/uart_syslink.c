@@ -96,9 +96,9 @@ static bool dmaNrfFlowControlBufferFull;
 static uint32_t dmaSendWhileNrfBufferFull;
 
 
-extern UART_HandleTypeDef huart1;
-extern DMA_HandleTypeDef hdma_usart1_tx;
-extern DMA_HandleTypeDef hdma_usart1_rx;
+extern UART_HandleTypeDef huart2;
+extern DMA_HandleTypeDef hdma_usart2_tx;
+extern DMA_HandleTypeDef hdma_usart2_rx;
 
 /**
   * Configures the UART DMA. Mainly used for FreeRTOS trace
@@ -109,7 +109,7 @@ void uartslkDmaInit(void)
 
 #ifdef CONFIG_SYSLINK_DMA
 
-	HAL_UART_MspInit(&huart1);
+	HAL_UART_MspInit(&huart2);
 
 #endif
 
@@ -136,31 +136,35 @@ void uartslkInit(void)
 
 #if defined(UARTSLK_OUTPUT_TRACE_DATA) || defined(ADC_OUTPUT_RAW_DATA) || defined(IMU_OUTPUT_RAW_DATA_ON_UART)
 
-  huart1.Instance = USART1;
-  huart1.Init.BaudRate = 2000000;
-  huart1.Init.Mode = UART_MODE_TX;
+  huart2.Instance = USART2;
+  huart2.Init.BaudRate = 2000000;
+  huart2.Init.Mode = UART_MODE_TX;
 
 #else
 
-  huart1.Instance = USART1;
-  huart1.Init.BaudRate = 1000000;
-  huart1.Init.Mode = UART_MODE_TX_RX;
+  huart2.Instance = USART2;
+  huart2.Init.BaudRate = 1000000;
+  huart2.Init.Mode = UART_MODE_TX_RX;
 
 #endif
 
-  huart1.Init.WordLength = UART_WORDLENGTH_8B;
-  huart1.Init.StopBits = UART_STOPBITS_1;
-  huart1.Init.Parity = UART_PARITY_NONE;
-  huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-  huart1.Init.OverSampling = UART_OVERSAMPLING_16;
+  huart2.Init.WordLength = UART_WORDLENGTH_8B;
+  huart2.Init.StopBits = UART_STOPBITS_1;
+  huart2.Init.Parity = UART_PARITY_NONE;
+  huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart2.Init.OverSampling = UART_OVERSAMPLING_16;
 
 
-  if (HAL_UART_Init(&huart1) != HAL_OK)
+  if (HAL_UART_Init(&huart2) != HAL_OK)
   {
     Error_Handler();
   }
 
-  __HAL_UART_ENABLE_IT(&huart1, UART_IT_RXNE);
+  __HAL_UART_ENABLE_IT(&huart2, UART_IT_RXNE);
+
+  HAL_NVIC_SetPriority(EXTI0_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(EXTI0_IRQn);
+
 
   isInit = true;
 }
@@ -203,8 +207,8 @@ void uartslkSendData(uint32_t size, uint8_t* data)
 #ifdef UARTSLK_SPINLOOP_FLOWCTRL
     while(GPIO_ReadInputDataBit(UARTSLK_TXEN_PORT, UARTSLK_TXEN_PIN) == Bit_SET);
 #endif
-    while (!(huart1.Instance->SR & UART_FLAG_TXE));
-    huart1.Instance->DR = (data[i] & 0x00FF);
+    while (!(huart2.Instance->SR & UART_FLAG_TXE));
+    huart2.Instance->DR = (data[i] & 0x00FF);
   }
 }
 
@@ -215,7 +219,7 @@ void uartslkSendDataIsrBlocking(uint32_t size, uint8_t* data)
   dataSizeIsr = (uint8_t)size;
   dataIndexIsr = 1;
   uartslkSendData(1, &data[0]);
-  __HAL_UART_ENABLE_IT(&huart1, UART_IT_TXE);
+  __HAL_UART_ENABLE_IT(&huart2, UART_IT_TXE);
   xSemaphoreTake(waitUntilSendDone, portMAX_DELAY);
   outDataIsr = 0;
   xSemaphoreGive(uartBusy);
@@ -238,13 +242,13 @@ void uartslkSendDataDmaBlocking(uint32_t size, uint8_t* data)
   {
     xSemaphoreTake(uartBusy, portMAX_DELAY);
     // Wait for DMA to be free
-    while(HAL_DMA_GetState(&hdma_usart1_tx) != HAL_DMA_STATE_READY);
+    while(HAL_DMA_GetState(&hdma_usart2_tx) != HAL_DMA_STATE_READY);
 
     //Copy data in DMA buffer
     memcpy(dmaTXBuffer, data, size);
     initialDMACount = (uint16_t)size;
 
-    if(HAL_UART_Transmit_DMA(&huart1, dmaTXBuffer, size)!=HAL_OK){
+    if(HAL_UART_Transmit_DMA(&huart2, dmaTXBuffer, size)!=HAL_OK){
     	DEBUG_PRINT("DMA transfer failed\n");
     }
     xSemaphoreTake(waitUntilSendDone, portMAX_DELAY);
@@ -260,9 +264,9 @@ static void uartslkReceiveDMA(uint32_t size)
   if (isUartDmaInitialized)
   {
     // Wait for DMA to be free
-    while(HAL_DMA_GetState(&hdma_usart1_rx) != HAL_DMA_STATE_READY);
+    while(HAL_DMA_GetState(&hdma_usart2_rx) != HAL_DMA_STATE_READY);
 
-    if(HAL_UART_Receive_DMA(&huart1, dmaRXBuffer, size)!=HAL_OK){
+    if(HAL_UART_Receive_DMA(&huart2, dmaRXBuffer, size)!=HAL_OK){
     	DEBUG_PRINT("DMA receive failed\n");
     }
 
@@ -510,17 +514,17 @@ void uartslkIsr(void)
     uint8_t rxDataInterrupt = (uint8_t)(UARTSLK_TYPE->DR & 0xFF);
     uartslkHandleDataFromISR(rxDataInterrupt, &xHigherPriorityTaskWoken);
   }
-  else if (__HAL_UART_GET_IT_SOURCE(&huart1, UART_IT_TXE) == SET)
+  else if (__HAL_UART_GET_IT_SOURCE(&huart2, UART_IT_TXE) == SET)
   {
     if (outDataIsr && (dataIndexIsr < dataSizeIsr))
     {
-//      USART_SendData(&huart1, outDataIsr[dataIndexIsr] & 0x00FF);
+//      USART_SendData(&huart2, outDataIsr[dataIndexIsr] & 0x00FF);
       UARTSLK_TYPE->DR = (outDataIsr[dataIndexIsr] & 0x00FF & (uint16_t)0x01FF);
       dataIndexIsr++;
     }
     else
     {
-    	__HAL_UART_DISABLE_IT(&huart1, UART_IT_TXE);
+    	__HAL_UART_DISABLE_IT(&huart2, UART_IT_TXE);
 //      USART_ITConfig(UARTSLK_TYPE, USART_IT_TXE, DISABLE);
       xSemaphoreGiveFromISR(waitUntilSendDone, &xHigherPriorityTaskWoken);
     }
@@ -559,22 +563,23 @@ void __attribute__((used)) EXTI4_Callback(void)
   uartslkTxenFlowctrlIsr();
 }
 */
-void __attribute__((used)) USART1_IRQHandler(void)
+void __attribute__((used)) USART2_IRQ_Callback(void)
 {
-  HAL_UART_IRQHandler(&huart1);
+//  HAL_UART_IRQHandler(&huart2);
 //  uartslkIsr();
 }
 
-void __attribute__((used)) DMA2_Stream7_IRQHandler(void)
+void __attribute__((used)) DMA1_Stream6_Callback(void)
 {
-  HAL_DMA_IRQHandler(&hdma_usart1_tx);
+//  HAL_DMA_IRQHandler(&hdma_usart2_tx);
   uartslkDmaTXIsr();
 }
 
+
 #ifdef CONFIG_SYSLINK_DMA
-void __attribute__((used)) DMA2_Stream2_IRQHandler(void)
+void __attribute__((used)) DMA1_Stream5_Callback(void)
 {
-  HAL_DMA_IRQHandler(&hdma_usart1_rx);
+//  HAL_DMA_IRQHandler(&hdma_usart2_rx);
 //  uartslkDmaRXIsr();
 }
 #endif

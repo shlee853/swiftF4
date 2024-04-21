@@ -2,4 +2,4 @@
 ../Core/Src/Utils/usec_time.c:25:6:usecTimerReset	2
 ../Core/Src/Utils/usec_time.c:35:10:usecTimestamp	3
 ../Core/Src/Utils/usec_time.c:58:13:resetParamCallback	2
-../Core/Src/Utils/usec_time.c:79:28:TIM1_TRG_COM_TIM11_IRQHandler	1
+../Core/Src/Utils/usec_time.c:79:28:TIM1_TRG_COM_TIM11_IRQ_Callback	1

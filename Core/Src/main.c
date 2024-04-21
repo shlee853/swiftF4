@@ -115,11 +115,6 @@ int main(void)
   MX_ADC1_Init();
   MX_TIM2_Init();
   MX_TIM4_Init();
-
-
-
-
-
   /* USER CODE BEGIN 2 */
 
   freertos_IntroTitle();

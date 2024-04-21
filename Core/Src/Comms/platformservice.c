@@ -40,7 +40,7 @@
 #include "platform.h"
 #include "app_channel.h"
 #include "static_mem.h"
-//#include "supervisor.h"
+#include "supervisor.h"
 
 static bool isInit=false;
 STATIC_MEM_TASK_ALLOC_STACK_NO_DMA_CCM_SAFE(platformSrvTask, PLATFORM_SRV_TASK_STACKSIZE);
@@ -129,9 +129,9 @@ static void platformCommandProcess(CRTPPacket *p)
     case armSystem:
     {
       const bool doArm = data[0];
-//      const bool success = supervisorRequestArming(doArm);
-//      data[0] = success;
-//      data[1] = supervisorIsArmed();
+      const bool success = supervisorRequestArming(doArm);
+      data[0] = success;
+      data[1] = supervisorIsArmed();
       p->size = 2;
       break;
     }

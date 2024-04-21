@@ -59,7 +59,11 @@ Core/Src/Comms/platformservice.o: ../Core/Src/Comms/platformservice.c \
  /home/swift/workspace/project/swiftF4/Core/Inc/Config/autoconf.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/App/app_channel.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/static_mem.h \
- /home/swift/workspace/project/swiftF4/Core/Inc/Utils/cfassert.h
+ /home/swift/workspace/project/swiftF4/Core/Inc/Utils/cfassert.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Interface/supervisor.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Algo/stabilizer_types.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/imu_types.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/lighthouse_types.h
 ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:
 ../Core/Inc/FreeRTOSConfig.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h:
@@ -122,3 +126,7 @@ Core/Src/Comms/platformservice.o: ../Core/Src/Comms/platformservice.c \
 /home/swift/workspace/project/swiftF4/Core/Inc/App/app_channel.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/static_mem.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/cfassert.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Interface/supervisor.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Algo/stabilizer_types.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Drivers/imu_types.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Drivers/lighthouse_types.h:

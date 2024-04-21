@@ -975,7 +975,7 @@ bool sensorsMpu9250Lps25hManufacturingTest(void)
   return testStatus;
 }
 
-void __attribute__((used)) EXTI4_IRQHandler(void)
+void __attribute__((used)) EXTI4_IRQ_Callback(void)
 {
 
   HAL_GPIO_EXTI_IRQHandler(IMU_INT_Pin);

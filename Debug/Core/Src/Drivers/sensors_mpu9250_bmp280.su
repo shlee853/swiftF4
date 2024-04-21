@@ -23,7 +23,7 @@
 ../Core/Src/Drivers/sensors_mpu9250_bmp280.c:871:13:sensorsAddBiasValue	24	static
 ../Core/Src/Drivers/sensors_mpu9250_bmp280.c:890:13:sensorsFindBiasValue	32	static
 ../Core/Src/Drivers/sensors_mpu9250_bmp280.c:916:6:sensorsMpu9250Lps25hManufacturingTest	104	static
-../Core/Src/Drivers/sensors_mpu9250_bmp280.c:978:28:EXTI4_IRQHandler	16	static,ignoring_inline_asm
+../Core/Src/Drivers/sensors_mpu9250_bmp280.c:978:28:EXTI4_IRQ_Callback	16	static,ignoring_inline_asm
 ../Core/Src/Drivers/sensors_mpu9250_bmp280.c:999:13:sensorsAlignToAirframe	16	static
 ../Core/Src/Drivers/sensors_mpu9250_bmp280.c:1034:13:sensorsAccAlignToGravity	40	static
 ../Core/Src/Drivers/sensors_mpu9250_bmp280.c:1054:6:sensorsMpu9250Lps25hSetAccMode	24	static

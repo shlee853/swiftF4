@@ -10,7 +10,7 @@ static bool isInit = false;
 static uint8_t reset = 0;
 static uint32_t usecTimerHighCount;
 
-extern TIM_HandleTypeDef htim11;
+//extern TIM_HandleTypeDef htim11;
 
 
 
@@ -76,10 +76,10 @@ PARAM_GROUP_STOP(usec)
 
 
 
-void __attribute__((used)) TIM1_TRG_COM_TIM11_IRQHandler(void)
+void __attribute__((used)) TIM1_TRG_COM_TIM11_IRQ_Callback(void)
 {
 
-  HAL_TIM_IRQHandler(&htim11);
+//  HAL_TIM_IRQHandler(&htim11);
 
   __sync_fetch_and_add(&usecTimerHighCount, 1);
 
