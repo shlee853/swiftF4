@@ -100,6 +100,11 @@ void radiolinkInit(void)
 //  radiolinkSetDatarate(configblockGetRadioSpeed());
 //  radiolinkSetAddress(configblockGetRadioAddress());
 
+    radiolinkSetChannel(RADIO_CHANNEL);
+    radiolinkSetDatarate(RADIO_DATARATE);
+    radiolinkSetAddress(RADIO_ADDRESS);
+
+
   isInit = true;
 }
 

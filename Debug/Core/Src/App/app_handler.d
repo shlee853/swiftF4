@@ -8,6 +8,8 @@ Core/Src/App/app_handler.o: ../Core/Src/App/app_handler.c \
  ../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Config/config.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nrf24l01.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nRF24L01reg.h \
  ../Core/Inc/main.h ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -45,6 +47,7 @@ Core/Src/App/app_handler.o: ../Core/Src/App/app_handler.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Utils/usec_time.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Platform/system.h \
@@ -60,6 +63,8 @@ Core/Src/App/app_handler.o: ../Core/Src/App/app_handler.c \
 ../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Config/config.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nrf24l01.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nRF24L01reg.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -98,6 +103,7 @@ Core/Src/App/app_handler.o: ../Core/Src/App/app_handler.c \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Utils/usec_time.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Platform/system.h:

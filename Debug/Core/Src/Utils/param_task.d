@@ -9,6 +9,8 @@ Core/Src/Utils/param_task.o: ../Core/Src/Utils/param_task.c \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Config/config.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nrf24l01.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nRF24L01reg.h \
  ../Core/Inc/main.h ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -46,6 +48,7 @@ Core/Src/Utils/param_task.o: ../Core/Src/Utils/param_task.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Utils/usec_time.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/param_task.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/param_logic.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/param.h \
@@ -71,6 +74,8 @@ Core/Src/Utils/param_task.o: ../Core/Src/Utils/param_task.c \
 ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Config/config.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nrf24l01.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nRF24L01reg.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -109,6 +114,7 @@ Core/Src/Utils/param_task.o: ../Core/Src/Utils/param_task.c \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Utils/usec_time.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/param_task.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/param_logic.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/param.h:

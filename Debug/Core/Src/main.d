@@ -59,6 +59,9 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h \
  ../USB_DEVICE/Target/usbd_conf.h ../Core/Inc/gpio.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Config/config.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nrf24l01.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nRF24L01reg.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Utils/usec_time.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/debug.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Config/autoconf.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/eprintf.h \
@@ -136,6 +139,9 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../USB_DEVICE/Target/usbd_conf.h:
 ../Core/Inc/gpio.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Config/config.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nrf24l01.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nRF24L01reg.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Utils/usec_time.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/debug.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Config/autoconf.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/eprintf.h:

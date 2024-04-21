@@ -2,6 +2,8 @@ Core/Src/Platform/platform_cf2.o: ../Core/Src/Platform/platform_cf2.c \
  /home/swift/workspace/project/swiftF4/Core/Inc/Platform/platform.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/motors.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Config/config.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nrf24l01.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nRF24L01reg.h \
  ../Core/Inc/main.h ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -39,10 +41,13 @@ Core/Src/Platform/platform_cf2.o: ../Core/Src/Platform/platform_cf2.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Utils/usec_time.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Config/autoconf.h
 /home/swift/workspace/project/swiftF4/Core/Inc/Platform/platform.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/motors.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Config/config.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nrf24l01.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nRF24L01reg.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -81,4 +86,5 @@ Core/Src/Platform/platform_cf2.o: ../Core/Src/Platform/platform_cf2.c \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Utils/usec_time.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Config/autoconf.h:

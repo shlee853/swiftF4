@@ -41,11 +41,11 @@
 
 #ifndef CONFIG_H_
 #define CONFIG_H_
-//#include "nrf24l01.h"
+#include "nrf24l01.h"
 
 #include "main.h" // temp 24.01.21 shlee853
 //#include "trace.h"
-//#include "usec_time.h"
+#include "usec_time.h"
 
 
 #define CLOCK_PER_USEC 			96

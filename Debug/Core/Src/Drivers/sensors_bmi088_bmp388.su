@@ -32,4 +32,4 @@
 ../Core/Src/Drivers/sensors_bmi088_bmp388.c:914:13:sensorsAccAlignToGravity	40	static
 ../Core/Src/Drivers/sensors_bmi088_bmp388.c:934:6:sensorsBmi088Bmp388SetAccMode	24	static
 ../Core/Src/Drivers/sensors_bmi088_bmp388.c:971:13:applyAxis3fLpf	32	static
-../Core/Src/Drivers/sensors_bmi088_bmp388.c:978:6:sensorsBmi088Bmp388DataAvailableCallback	24	static,ignoring_inline_asm
+../Core/Src/Drivers/sensors_bmi088_bmp388.c:978:6:sensorsBmi088Bmp388DataAvailableCallback	16	static,ignoring_inline_asm

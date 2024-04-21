@@ -3,6 +3,8 @@ Core/Src/Utils/statsCnt.o: ../Core/Src/Utils/statsCnt.c \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/log.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/debug.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Config/config.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nrf24l01.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nRF24L01reg.h \
  ../Core/Inc/main.h ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -40,6 +42,7 @@ Core/Src/Utils/statsCnt.o: ../Core/Src/Utils/statsCnt.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Utils/usec_time.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Config/autoconf.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/eprintf.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h \
@@ -62,6 +65,8 @@ Core/Src/Utils/statsCnt.o: ../Core/Src/Utils/statsCnt.c \
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/log.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/debug.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Config/config.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nrf24l01.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nRF24L01reg.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -100,6 +105,7 @@ Core/Src/Utils/statsCnt.o: ../Core/Src/Utils/statsCnt.c \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Utils/usec_time.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Config/autoconf.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/eprintf.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:

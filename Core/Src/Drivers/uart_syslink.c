@@ -43,6 +43,7 @@
 #include "config.h"
 #include "queuemonitor.h"
 #include "static_mem.h"
+#include "led.h"
 
 #define DEBUG_MODULE "U-SLK"
 #include "debug.h"
@@ -97,6 +98,7 @@ static uint32_t dmaSendWhileNrfBufferFull;
 
 extern UART_HandleTypeDef huart1;
 extern DMA_HandleTypeDef hdma_usart1_tx;
+extern DMA_HandleTypeDef hdma_usart1_rx;
 
 /**
   * Configures the UART DMA. Mainly used for FreeRTOS trace
@@ -157,9 +159,6 @@ void uartslkInit(void)
   {
     Error_Handler();
   }
-
-
-
 
   __HAL_UART_ENABLE_IT(&huart1, UART_IT_RXNE);
 
@@ -255,6 +254,37 @@ void uartslkSendDataDmaBlocking(uint32_t size, uint8_t* data)
 }
 
 
+#ifdef CONFIG_SYSLINK_DMA
+static void uartslkReceiveDMA(uint32_t size)
+{
+  if (isUartDmaInitialized)
+  {
+    // Wait for DMA to be free
+    while(HAL_DMA_GetState(&hdma_usart1_rx) != HAL_DMA_STATE_READY);
+
+    if(HAL_UART_Receive_DMA(&huart1, dmaRXBuffer, size)!=HAL_OK){
+    	DEBUG_PRINT("DMA receive failed\n");
+    }
+
+
+//    while(DMA_GetCmdStatus(UARTSLK_DMA_RX_STREAM) != DISABLE);
+    // Reload new DMA stream by loading number of bytes to be transferred
+//    UARTSLK_DMA_RX_STREAM->NDTR = size;
+    // Enable the Transfer Complete interrupt
+//    DMA_ITConfig(UARTSLK_DMA_RX_STREAM, DMA_IT_TC, ENABLE);
+    // Enable USART DMA RX Requests
+//    USART_DMACmd(UARTSLK_TYPE, USART_DMAReq_Rx, ENABLE);
+    // Clear transfer complete
+//    USART_ClearFlag(UARTSLK_TYPE, USART_FLAG_TC);
+    // Disable USART RX interrupt
+//    USART_ITConfig(UARTSLK_TYPE, USART_IT_RXNE, DISABLE);
+    // Enable DMA USART RX Stream
+//    DMA_Cmd(UARTSLK_DMA_RX_STREAM, ENABLE);
+  }
+}
+
+
+
 /*
 static void uartslkPauseDma()
 {
@@ -297,54 +327,38 @@ static void uartslkResumeDma()
     dmaTxStreamResumedCounter++;
   }
 }
+*/
 
 static void uartslkDmaTXIsr(void)
 {
   portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;
 
   // Stop and cleanup DMA stream
-  DMA_ITConfig(UARTSLK_DMA_TX_STREAM, DMA_IT_TC, DISABLE);
-  DMA_ClearITPendingBit(UARTSLK_DMA_TX_STREAM, UARTSLK_DMA_TX_FLAG_TCIF);
-  USART_DMACmd(UARTSLK_TYPE, USART_DMAReq_Tx, DISABLE);
-  DMA_Cmd(UARTSLK_DMA_TX_STREAM, DISABLE);
+//  DMA_ITConfig(UARTSLK_DMA_TX_STREAM, DMA_IT_TC, DISABLE);
+//  DMA_ClearITPendingBit(UARTSLK_DMA_TX_STREAM, UARTSLK_DMA_TX_FLAG_TCIF);
+//  USART_DMACmd(UARTSLK_TYPE, USART_DMAReq_Tx, DISABLE);
+//  DMA_Cmd(UARTSLK_DMA_TX_STREAM, DISABLE);
 
   remainingDMACount = 0;
   xSemaphoreGiveFromISR(waitUntilSendDone, &xHigherPriorityTaskWoken);
 }
 
-#ifdef CONFIG_SYSLINK_DMA
-static void uartslkReceiveDMA(uint32_t size)
-{
-  if (isUartDmaInitialized)
-  {
-    // Wait for DMA to be free
-    while(DMA_GetCmdStatus(UARTSLK_DMA_RX_STREAM) != DISABLE);
-    // Reload new DMA stream by loading number of bytes to be transferred
-    UARTSLK_DMA_RX_STREAM->NDTR = size;
-    // Enable the Transfer Complete interrupt
-    DMA_ITConfig(UARTSLK_DMA_RX_STREAM, DMA_IT_TC, ENABLE);
-    // Enable USART DMA RX Requests
-    USART_DMACmd(UARTSLK_TYPE, USART_DMAReq_Rx, ENABLE);
-    // Clear transfer complete
-    USART_ClearFlag(UARTSLK_TYPE, USART_FLAG_TC);
-    // Disable USART RX interrupt
-    USART_ITConfig(UARTSLK_TYPE, USART_IT_RXNE, DISABLE);
-    // Enable DMA USART RX Stream
-    DMA_Cmd(UARTSLK_DMA_RX_STREAM, ENABLE);
-  }
-}
+
+
+
+
 
 static void uartslkDmaRXIsr(void)
 {
   portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;
 
   // Stop and cleanup DMA stream
-  DMA_ITConfig(UARTSLK_DMA_RX_STREAM, DMA_IT_TC, DISABLE);
-  DMA_ClearITPendingBit(UARTSLK_DMA_RX_STREAM, UARTSLK_DMA_RX_FLAG_TCIF);
-  USART_DMACmd(UARTSLK_TYPE, USART_DMAReq_Rx, DISABLE);
-  DMA_Cmd(UARTSLK_DMA_RX_STREAM, DISABLE);
+//  DMA_ITConfig(UARTSLK_DMA_RX_STREAM, DMA_IT_TC, DISABLE);
+//  DMA_ClearITPendingBit(UARTSLK_DMA_RX_STREAM, UARTSLK_DMA_RX_FLAG_TCIF);
+//  USART_DMACmd(UARTSLK_TYPE, USART_DMAReq_Rx, DISABLE);
+//  DMA_Cmd(UARTSLK_DMA_RX_STREAM, DISABLE);
   // Enable USART RX interrupt
-  USART_ITConfig(UARTSLK_TYPE, USART_IT_RXNE, ENABLE);
+//  USART_ITConfig(UARTSLK_TYPE, USART_IT_RXNE, ENABLE);
 
   for (int i = 0; i < slp.length; i++)
   {
@@ -481,6 +495,8 @@ void uartslkHandleDataFromISR(uint8_t c, BaseType_t * const pxHigherPriorityTask
   }
 }
 
+
+
 void uartslkIsr(void)
 {
   portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;
@@ -494,16 +510,18 @@ void uartslkIsr(void)
     uint8_t rxDataInterrupt = (uint8_t)(UARTSLK_TYPE->DR & 0xFF);
     uartslkHandleDataFromISR(rxDataInterrupt, &xHigherPriorityTaskWoken);
   }
-  else if (USART_GetITStatus(UARTSLK_TYPE, USART_IT_TXE) == SET)
+  else if (__HAL_UART_GET_IT_SOURCE(&huart1, UART_IT_TXE) == SET)
   {
     if (outDataIsr && (dataIndexIsr < dataSizeIsr))
     {
-      USART_SendData(UARTSLK_TYPE, outDataIsr[dataIndexIsr] & 0x00FF);
+//      USART_SendData(&huart1, outDataIsr[dataIndexIsr] & 0x00FF);
+      UARTSLK_TYPE->DR = (outDataIsr[dataIndexIsr] & 0x00FF & (uint16_t)0x01FF);
       dataIndexIsr++;
     }
     else
     {
-      USART_ITConfig(UARTSLK_TYPE, USART_IT_TXE, DISABLE);
+    	__HAL_UART_DISABLE_IT(&huart1, UART_IT_TXE);
+//      USART_ITConfig(UARTSLK_TYPE, USART_IT_TXE, DISABLE);
       xSemaphoreGiveFromISR(waitUntilSendDone, &xHigherPriorityTaskWoken);
     }
   }
@@ -520,44 +538,48 @@ void uartslkIsr(void)
 
 void uartslkTxenFlowctrlIsr()
 {
-  EXTI_ClearFlag(UARTSLK_TXEN_EXTI);
-  if (GPIO_ReadInputDataBit(UARTSLK_TXEN_PORT, UARTSLK_TXEN_PIN) == Bit_SET)
+//  EXTI_ClearFlag(UARTSLK_TXEN_EXTI);
+  __HAL_GPIO_EXTI_CLEAR_FLAG(UARTSLK_TXEN_EXTI);
+  if (HAL_GPIO_ReadPin(UARTSLK_TXEN_PORT, UARTSLK_TXEN_PIN) == GPIO_PIN_SET)
   {
-    uartslkPauseDma();
-    //ledSet(LED_GREEN_R, 1);
+//    uartslkPauseDma();
+    ledSet(LED_GREEN_R, 1);
   }
   else
   {
-    uartslkResumeDma();
-    //ledSet(LED_GREEN_R, 0);
+//    uartslkResumeDma();
+    ledSet(LED_GREEN_R, 0);
   }
 }
 
 
-
+/*
 void __attribute__((used)) EXTI4_Callback(void)
 {
   uartslkTxenFlowctrlIsr();
 }
-
+*/
 void __attribute__((used)) USART1_IRQHandler(void)
 {
-  uartslkIsr();
+  HAL_UART_IRQHandler(&huart1);
+//  uartslkIsr();
 }
 
 void __attribute__((used)) DMA2_Stream7_IRQHandler(void)
 {
+  HAL_DMA_IRQHandler(&hdma_usart1_tx);
   uartslkDmaTXIsr();
 }
 
 #ifdef CONFIG_SYSLINK_DMA
-void __attribute__((used)) DMA2_Stream1_IRQHandler(void)
+void __attribute__((used)) DMA2_Stream2_IRQHandler(void)
 {
-  uartslkDmaRXIsr();
+  HAL_DMA_IRQHandler(&hdma_usart1_rx);
+//  uartslkDmaRXIsr();
 }
 #endif
 
-*/
+
 
 
 void uartSyslinkDumpDebugProbe() {

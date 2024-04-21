@@ -50,7 +50,7 @@
 #define LED_GPIO_RED_R   LED_GPIO_RED_R_Pin
 #define LED_POL_RED_R    LED_POL_NEG
 
-#define TEST_LED         LED_BLUE_L
+#define TEST_LED         LED_GREEN_L
 #define LINK_LED         LED_GREEN_L
 #define CHG_LED          LED_BLUE_L
 #define LOWBAT_LED       LED_RED_R

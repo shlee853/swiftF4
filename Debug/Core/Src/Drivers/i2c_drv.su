@@ -1,4 +1,4 @@
-../Core/Src/Drivers/i2c_drv.c:76:13:gpioWaitForHigh	56	static
+../Core/Src/Drivers/i2c_drv.c:76:13:gpioWaitForHigh	40	static
 ../Core/Src/Drivers/i2c_drv.c:202:13:i2cdrvStartTransfer	24	static
 ../Core/Src/Drivers/i2c_drv.c:217:13:i2cTryNextMessage	16	static
 ../Core/Src/Drivers/i2c_drv.c:223:13:i2cNotifyClient	24	static,ignoring_inline_asm

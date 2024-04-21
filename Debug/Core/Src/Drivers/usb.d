@@ -52,7 +52,10 @@ Core/Src/Drivers/usb.o: ../Core/Src/Drivers/usb.c \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/queuemonitor.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Config/autoconf.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Config/config.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nrf24l01.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nRF24L01reg.h \
  ../Core/Inc/main.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Utils/usec_time.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/usblink.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Comms/crtp.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/usb.h \
@@ -124,7 +127,10 @@ Core/Src/Drivers/usb.o: ../Core/Src/Drivers/usb.c \
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/queuemonitor.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Config/autoconf.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Config/config.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nrf24l01.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nRF24L01reg.h:
 ../Core/Inc/main.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Utils/usec_time.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/usblink.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Comms/crtp.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/usb.h:

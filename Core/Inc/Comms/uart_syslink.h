@@ -32,7 +32,7 @@
 #include "eprintf.h"
 #include "syslink.h"
 
-#define UARTSLK_TYPE             USART6
+#define UARTSLK_TYPE             USART1
 #define UARTSLK_PERIF            RCC_APB2Periph_USART6
 #define ENABLE_UARTSLK_RCC       RCC_APB2PeriphClockCmd
 #define UARTSLK_IRQ              USART6_IRQn
@@ -43,9 +43,9 @@
 #define UARTSLK_DMA_TX_CH        DMA_Channel_5
 #define UARTSLK_DMA_TX_FLAG_TCIF DMA_FLAG_TCIF7
 
-#define UARTSLK_DMA_RX_IRQ       DMA2_Stream1_IRQn
+#define UARTSLK_DMA_RX_IRQ       DMA2_Stream2_IRQn
 #define UARTSLK_DMA_RX_IT_TC     DMA_IT_TC
-#define UARTSLK_DMA_RX_STREAM    DMA2_Stream1
+#define UARTSLK_DMA_RX_STREAM    DMA2_Stream2
 #define UARTSLK_DMA_RX_CH        DMA_Channel_5
 #define UARTSLK_DMA_RX_FLAG_TCIF DMA_FLAG_TCIF1
 
@@ -55,13 +55,13 @@
 #define UARTSLK_GPIO_RX_PIN      GPIO_Pin_7
 #define UARTSLK_GPIO_AF_TX_PIN   GPIO_PinSource6
 #define UARTSLK_GPIO_AF_RX_PIN   GPIO_PinSource7
-#define UARTSLK_GPIO_AF_TX       GPIO_AF_USART6
-#define UARTSLK_GPIO_AF_RX       GPIO_AF_USART6
+#define UARTSLK_GPIO_AF_TX       GPIO_AF_USART1
+#define UARTSLK_GPIO_AF_RX       GPIO_AF_USART1
 
 #define UARTSLK_TXEN_PERIF       RCC_AHB1Periph_GPIOA
 #define UARTSLK_TXEN_PORT        GPIOA
-#define UARTSLK_TXEN_PIN         GPIO_Pin_4
-#define UARTSLK_TXEN_EXTI        EXTI_Line4
+#define UARTSLK_TXEN_PIN         GPIO_PIN_4
+#define UARTSLK_TXEN_EXTI        EXTI_LINE_4
 
 /**
  * Initialize the UART.

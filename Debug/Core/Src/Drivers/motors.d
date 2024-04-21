@@ -38,7 +38,10 @@ Core/Src/Drivers/motors.o: ../Core/Src/Drivers/motors.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/motors.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Config/config.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nrf24l01.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nRF24L01reg.h \
  ../Core/Inc/main.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Utils/usec_time.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Config/autoconf.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/pm.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/debug.h \
@@ -64,7 +67,6 @@ Core/Src/Drivers/motors.o: ../Core/Src/Drivers/motors.c \
  /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/imu_types.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/lighthouse_types.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Config/nvicconf.h \
- /home/swift/workspace/project/swiftF4/Core/Inc/Utils/usec_time.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Platform/platform_defaults.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Platform/platform_defaults_cf2.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h \
@@ -110,7 +112,10 @@ Core/Src/Drivers/motors.o: ../Core/Src/Drivers/motors.c \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/motors.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Config/config.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nrf24l01.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nRF24L01reg.h:
 ../Core/Inc/main.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Utils/usec_time.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Config/autoconf.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/pm.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/debug.h:
@@ -136,7 +141,6 @@ Core/Src/Drivers/motors.o: ../Core/Src/Drivers/motors.c \
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/imu_types.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/lighthouse_types.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Config/nvicconf.h:
-/home/swift/workspace/project/swiftF4/Core/Inc/Utils/usec_time.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Platform/platform_defaults.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Platform/platform_defaults_cf2.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h:

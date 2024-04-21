@@ -53,7 +53,10 @@ Core/Src/Drivers/ledseq.o: ../Core/Src/Drivers/ledseq.c \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/static_mem.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/cfassert.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Config/autoconf.h \
- /home/swift/workspace/project/swiftF4/Core/Inc/Config/config.h
+ /home/swift/workspace/project/swiftF4/Core/Inc/Config/config.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nrf24l01.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nRF24L01reg.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Utils/usec_time.h
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/ledseq.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/led.h:
 ../Core/Inc/main.h:
@@ -110,3 +113,6 @@ Core/Src/Drivers/ledseq.o: ../Core/Src/Drivers/ledseq.c \
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/cfassert.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Config/autoconf.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Config/config.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nrf24l01.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nRF24L01reg.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Utils/usec_time.h:

@@ -46,7 +46,10 @@ Core/Src/Drivers/pm_stm32f4.o: ../Core/Src/Drivers/pm_stm32f4.c \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Config/config.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nrf24l01.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nRF24L01reg.h \
  ../Core/Inc/main.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Utils/usec_time.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Platform/system.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/pm.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Config/autoconf.h \
@@ -108,7 +111,10 @@ Core/Src/Drivers/pm_stm32f4.o: ../Core/Src/Drivers/pm_stm32f4.c \
 ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Config/config.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nrf24l01.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nRF24L01reg.h:
 ../Core/Inc/main.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Utils/usec_time.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Platform/system.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/pm.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Config/autoconf.h:

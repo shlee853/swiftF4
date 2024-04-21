@@ -50,7 +50,10 @@ Core/Src/Drivers/uart_syslink.o: ../Core/Src/Drivers/uart_syslink.c \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Config/config.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nrf24l01.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nRF24L01reg.h \
  ../Core/Inc/main.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Utils/usec_time.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Config/autoconf.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Comms/uart_syslink.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Comms/crtp.h \
@@ -61,6 +64,7 @@ Core/Src/Drivers/uart_syslink.o: ../Core/Src/Drivers/uart_syslink.c \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/queuemonitor.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/static_mem.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/cfassert.h \
+ /home/swift/workspace/project/swiftF4/Core/Inc/Drivers/led.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/debug.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/eprintf.h \
  /home/swift/workspace/project/swiftF4/Core/Inc/Utils/SEGGER_RTT.h \
@@ -116,7 +120,10 @@ Core/Src/Drivers/uart_syslink.o: ../Core/Src/Drivers/uart_syslink.c \
 ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Config/config.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nrf24l01.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Drivers/nRF24L01reg.h:
 ../Core/Inc/main.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Utils/usec_time.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Config/autoconf.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Comms/uart_syslink.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Comms/crtp.h:
@@ -127,6 +134,7 @@ Core/Src/Drivers/uart_syslink.o: ../Core/Src/Drivers/uart_syslink.c \
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/queuemonitor.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/static_mem.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/cfassert.h:
+/home/swift/workspace/project/swiftF4/Core/Inc/Drivers/led.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/debug.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/eprintf.h:
 /home/swift/workspace/project/swiftF4/Core/Inc/Utils/SEGGER_RTT.h:
