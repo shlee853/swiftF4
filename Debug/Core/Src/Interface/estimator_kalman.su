@@ -1,9 +1,0 @@
-../Core/Src/Interface/estimator_kalman.c:190:6:estimatorKalmanTaskInit	24	static
-../Core/Src/Interface/estimator_kalman.c:205:6:estimatorKalmanTaskTest	4	static
-../Core/Src/Interface/estimator_kalman.c:209:13:kalmanTask	40	static
-../Core/Src/Interface/estimator_kalman.c:278:6:estimatorKalman	16	static
-../Core/Src/Interface/estimator_kalman.c:290:13:updateQueuedMeasurements	72	static
-../Core/Src/Interface/estimator_kalman.c:359:6:estimatorKalmanInit	16	static
-../Core/Src/Interface/estimator_kalman.c:371:6:estimatorKalmanTest	4	static
-../Core/Src/Interface/estimator_kalman.c:376:6:estimatorKalmanGetEstimatedPos	16	static
-../Core/Src/Interface/estimator_kalman.c:382:6:estimatorKalmanGetEstimatedRot	16	static

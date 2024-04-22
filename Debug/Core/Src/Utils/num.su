@@ -1,5 +1,0 @@
-../Core/Src/Utils/num.c:48:10:single2half	32	static
-../Core/Src/Utils/num.c:64:7:half2single	32	static
-../Core/Src/Utils/num.c:89:10:limitUint16	16	static
-../Core/Src/Utils/num.c:103:7:constrain	24	static
-../Core/Src/Utils/num.c:108:7:deadband	16	static

@@ -1,4 +1,0 @@
-/home/swift/workspace/project/swiftF4/Core/Inc/Utils/cf_math.h:58:20:assert_aligned_4_bytes	2
-/home/swift/workspace/project/swiftF4/Core/Inc/Utils/cf_math.h:79:20:mat_mult	2
-/home/swift/workspace/project/swiftF4/Core/Inc/Utils/cf_math.h:88:21:arm_sqrt	3
-../Core/Src/Interface/mm_sweep_angles.c:29:6:kalmanCoreUpdateWithSweepAngles	3

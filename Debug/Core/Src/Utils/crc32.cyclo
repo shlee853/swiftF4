@@ -1,7 +1,0 @@
-../Core/Src/Utils/crc32.c:95:6:crc32ContextInit	2
-../Core/Src/Utils/crc32.c:107:6:crc32Update	1
-../Core/Src/Utils/crc32.c:112:10:crc32Out	1
-../Core/Src/Utils/crc32.c:117:10:crc32CalculateBuffer	1
-../Core/Src/Utils/crc32.c:129:17:crcByBit	4
-../Core/Src/Utils/crc32.c:152:17:crcByByte	2
-../Core/Src/Utils/crc32.c:165:13:crcTableInit	2

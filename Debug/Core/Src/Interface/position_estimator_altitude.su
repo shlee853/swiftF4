@@ -1,4 +1,0 @@
-../Core/Src/Interface/position_estimator_altitude.c:64:6:positionEstimate	40	static
-../Core/Src/Interface/position_estimator_altitude.c:68:6:positionUpdateVelocity	16	static
-../Core/Src/Interface/position_estimator_altitude.c:72:13:positionEstimateInternal	48	static
-../Core/Src/Interface/position_estimator_altitude.c:119:13:positionUpdateVelocityInternal	24	static

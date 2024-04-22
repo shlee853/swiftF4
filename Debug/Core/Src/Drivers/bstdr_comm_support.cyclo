@@ -1,4 +1,0 @@
-../Core/Src/Drivers/bstdr_comm_support.c:102:13:bstdr_comm_init	1
-../Core/Src/Drivers/bstdr_comm_support.c:116:13:bstdr_burst_read	2
-../Core/Src/Drivers/bstdr_comm_support.c:137:13:bstdr_burst_write	2
-../Core/Src/Drivers/bstdr_comm_support.c:158:6:bstdr_ms_delay	1

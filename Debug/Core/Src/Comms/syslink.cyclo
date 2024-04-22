@@ -1,8 +1,0 @@
-../Core/Src/Comms/syslink.c:67:13:syslinkTask	1
-../Core/Src/Comms/syslink.c:77:13:syslinkRouteIncommingPacket	9
-../Core/Src/Comms/syslink.c:110:6:syslinkInit	3
-../Core/Src/Comms/syslink.c:126:6:syslinkTest	1
-../Core/Src/Comms/syslink.c:131:6:isSyslinkUp	1
-../Core/Src/Comms/syslink.c:137:5:syslinkSendPacket	3
-../Core/Src/Comms/syslink.c:170:13:debugHandler	2
-../Core/Src/Comms/syslink.c:185:13:debugSyslinkReceive	2

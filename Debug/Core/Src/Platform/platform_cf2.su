@@ -1,2 +1,0 @@
-../Core/Src/Platform/platform_cf2.c:77:25:platformGetListOfConfigurations	16	static
-../Core/Src/Platform/platform_cf2.c:85:13:platformConfigGetPlatformName	4	static

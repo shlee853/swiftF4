@@ -1,9 +1,0 @@
-../Core/Src/Comms/crtp_mem.c:87:6:crtpMemInit	2
-../Core/Src/Comms/crtp_mem.c:99:6:crtpMemTest	2
-../Core/Src/Comms/crtp_mem.c:107:13:memTask	5
-../Core/Src/Comms/crtp_mem.c:140:13:memSettingsProcess	3
-../Core/Src/Comms/crtp_mem.c:161:13:createNbrResponse	1
-../Core/Src/Comms/crtp_mem.c:171:13:createInfoResponse	3
-../Core/Src/Comms/crtp_mem.c:192:13:createInfoResponseBody	1
-../Core/Src/Comms/crtp_mem.c:204:13:memReadProcess	4
-../Core/Src/Comms/crtp_mem.c:234:13:memWriteProcess	3

@@ -1,7 +1,0 @@
-../Core/Src/Drivers/ow_none.c:36:6:owInit	8	static
-../Core/Src/Drivers/ow_none.c:41:6:owTest	8	static
-../Core/Src/Drivers/ow_none.c:46:6:owSyslinkReceive	16	static
-../Core/Src/Drivers/ow_none.c:50:6:owScan	16	static
-../Core/Src/Drivers/ow_none.c:55:6:owGetinfo	16	static
-../Core/Src/Drivers/ow_none.c:60:6:owRead	16	static
-../Core/Src/Drivers/ow_none.c:65:6:owWrite	16	static

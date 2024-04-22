@@ -1,5 +1,0 @@
-../Core/Src/Interface/deck_drivers.c:50:13:deckdriversInit	24	static
-../Core/Src/Interface/deck_drivers.c:71:5:deckDriverCount	8	static
-../Core/Src/Interface/deck_drivers.c:77:27:deckGetDriver	16	static
-../Core/Src/Interface/deck_drivers.c:86:19:deckFindDriverByVidPid	24	static
-../Core/Src/Interface/deck_drivers.c:99:19:deckFindDriverByName	24	static

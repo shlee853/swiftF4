@@ -1,7 +1,0 @@
-../Core/Src/Comms/platformservice.c:69:6:platformserviceInit	24	static
-../Core/Src/Comms/platformservice.c:82:6:platformserviceTest	4	static
-../Core/Src/Comms/platformservice.c:87:13:platformSrvTask	16	static
-../Core/Src/Comms/platformservice.c:114:13:platformCommandProcess	32	static
-../Core/Src/Comms/platformservice.c:143:5:platformserviceSendAppchannelPacket	16	static
-../Core/Src/Comms/platformservice.c:150:5:platformserviceSendAppchannelPacketBlock	16	static
-../Core/Src/Comms/platformservice.c:157:13:versionCommandProcess	24	static

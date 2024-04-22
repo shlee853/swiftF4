@@ -1,4 +1,0 @@
-../Core/Src/Utils/worker.c:48:6:workerInit	16	static
-../Core/Src/Utils/worker.c:57:6:workerTest	4	static
-../Core/Src/Utils/worker.c:62:6:workerLoop	16	static
-../Core/Src/Utils/worker.c:78:5:workerSchedule	24	static

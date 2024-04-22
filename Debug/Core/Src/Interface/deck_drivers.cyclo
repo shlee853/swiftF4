@@ -1,5 +1,0 @@
-../Core/Src/Interface/deck_drivers.c:50:13:deckdriversInit	4
-../Core/Src/Interface/deck_drivers.c:71:5:deckDriverCount	1
-../Core/Src/Interface/deck_drivers.c:77:27:deckGetDriver	2
-../Core/Src/Interface/deck_drivers.c:86:19:deckFindDriverByVidPid	4
-../Core/Src/Interface/deck_drivers.c:99:19:deckFindDriverByName	3

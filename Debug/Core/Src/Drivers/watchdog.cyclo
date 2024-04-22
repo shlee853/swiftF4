@@ -1,3 +1,0 @@
-../Core/Src/Drivers/watchdog.c:43:6:watchdogNormalStartTest	1
-../Core/Src/Drivers/watchdog.c:57:6:watchdogInit	1
-../Core/Src/Drivers/watchdog.c:89:6:IWDG_ReloadCounter	1

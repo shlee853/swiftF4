@@ -1,7 +1,0 @@
-../Core/Src/Drivers/usblink.c:73:13:usblinkTask	1
-../Core/Src/Drivers/usblink.c:88:12:usblinkReceivePacket	2
-../Core/Src/Drivers/usblink.c:99:12:usblinkSendPacket	3
-../Core/Src/Drivers/usblink.c:121:12:usblinkSetEnable	1
-../Core/Src/Drivers/usblink.c:127:6:usblinkInit	2
-../Core/Src/Drivers/usblink.c:143:6:usblinkTest	1
-../Core/Src/Drivers/usblink.c:148:29:usblinkGetLink	1

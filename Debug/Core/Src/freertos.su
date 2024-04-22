@@ -1,8 +1,0 @@
-../Core/Src/freertos.c:76:13:configureTimerForRunTimeStats	4	static
-../Core/Src/freertos.c:81:22:getRunTimeCounterValue	4	static
-../Core/Src/freertos.c:88:13:vApplicationIdleHook	4	static
-../Core/Src/freertos.c:103:13:vApplicationStackOverflowHook	16	static
-../Core/Src/freertos.c:115:6:vApplicationGetIdleTaskMemory	24	static
-../Core/Src/freertos.c:128:6:vApplicationGetTimerTaskMemory	24	static
-../Core/Src/freertos.c:142:6:MX_FREERTOS_Init	48	static
-../Core/Src/freertos.c:181:6:StartDefaultTask	16	static

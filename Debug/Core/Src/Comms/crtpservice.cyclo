@@ -1,3 +1,0 @@
-../Core/Src/Comms/crtpservice.c:53:6:crtpserviceInit	2
-../Core/Src/Comms/crtpservice.c:64:6:crtpserviceTest	1
-../Core/Src/Comms/crtpservice.c:69:13:crtpSrvTask	6

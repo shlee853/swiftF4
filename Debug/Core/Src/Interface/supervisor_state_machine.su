@@ -1,8 +1,0 @@
-../Core/Src/Interface/supervisor_state_machine.c:267:6:supervisorStateMachineInit	4	static
-../Core/Src/Interface/supervisor_state_machine.c:275:13:areAllSet	16	static
-../Core/Src/Interface/supervisor_state_machine.c:279:13:isAnySet	16	static
-../Core/Src/Interface/supervisor_state_machine.c:283:13:areConditionsMet	32	static
-../Core/Src/Interface/supervisor_state_machine.c:306:35:findTransition	40	static
-../Core/Src/Interface/supervisor_state_machine.c:323:19:supervisorStateUpdate	24	static
-../Core/Src/Interface/supervisor_state_machine.c:343:13:supervisorGetStateName	16	static
-../Core/Src/Interface/supervisor_state_machine.c:347:13:supervisorGetConditionName	16	static

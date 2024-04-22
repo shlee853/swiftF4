@@ -67,5 +67,8 @@ void appMain()
   while(1) {
     vTaskDelay(M2T(2000));
     DEBUG_PRINT("Hello World!\n");
+
+    CDC_Transmit_FS("Test USB\n", 9);
+
   }
 }

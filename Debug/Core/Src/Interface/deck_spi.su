@@ -1,7 +1,0 @@
-../Core/Src/Interface/deck_spi.c:99:6:spiBegin	40	static
-../Core/Src/Interface/deck_spi.c:140:13:spiDMAInit	56	static
-../Core/Src/Interface/deck_spi.c:190:13:spiConfigureWithSpeed	64	static
-../Core/Src/Interface/deck_spi.c:226:6:spiTest	4	static
-../Core/Src/Interface/deck_spi.c:231:6:spiExchange	32	static
-../Core/Src/Interface/deck_spi.c:271:6:spiBeginTransaction	16	static
-../Core/Src/Interface/deck_spi.c:277:6:spiEndTransaction	8	static

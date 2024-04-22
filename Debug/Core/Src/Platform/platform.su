@@ -1,8 +1,0 @@
-../Core/Src/Platform/platform.c:33:5:platformInit	24	static
-../Core/Src/Platform/platform.c:48:5:platformParseDeviceTypeString	32	static
-../Core/Src/Platform/platform.c:72:5:platformInitConfiguration	72	static
-../Core/Src/Platform/platform.c:97:13:platformConfigGetDeviceType	4	static
-../Core/Src/Platform/platform.c:101:13:platformConfigGetDeviceTypeName	4	static
-../Core/Src/Platform/platform.c:105:24:platformConfigGetSensorImplementation	4	static
-../Core/Src/Platform/platform.c:109:6:platformConfigPhysicalLayoutAntennasAreClose	4	static
-../Core/Src/Platform/platform.c:113:23:platformConfigGetMotorMapping	4	static

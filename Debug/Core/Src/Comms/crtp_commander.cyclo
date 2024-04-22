@@ -1,3 +1,0 @@
-../Core/Src/Comms/crtp_commander.c:40:6:crtpCommanderInit	2
-../Core/Src/Comms/crtp_commander.c:97:6:notifySetpointsStopDecoder	2
-../Core/Src/Comms/crtp_commander.c:111:13:commanderCrtpCB	8

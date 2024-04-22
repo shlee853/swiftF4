@@ -1,3 +1,0 @@
-../Core/Src/Comms/crtp_commander_rpyt.c:88:13:rotateYaw	32	static
-../Core/Src/Comms/crtp_commander_rpyt.c:102:13:yawModeUpdate	16	static
-../Core/Src/Comms/crtp_commander_rpyt.c:120:6:crtpCommanderRpytDecodeSetpoint	24	static

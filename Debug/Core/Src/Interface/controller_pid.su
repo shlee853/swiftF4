@@ -1,9 +1,0 @@
-/home/swift/workspace/project/swiftF4/Core/Inc/Algo/math3d.h:45:21:fsqr	16	static
-/home/swift/workspace/project/swiftF4/Core/Inc/Algo/math3d.h:46:21:radians	16	static
-/home/swift/workspace/project/swiftF4/Core/Inc/Algo/math3d.h:47:21:degrees	16	static
-/home/swift/workspace/project/swiftF4/Core/Inc/Algo/math3d.h:573:27:mkquat	72	static
-/home/swift/workspace/project/swiftF4/Core/Inc/Algo/math3d.h:681:26:quat2rpy	72	static
-../Core/Src/Interface/controller_pid.c:27:6:controllerPidInit	8	static
-../Core/Src/Interface/controller_pid.c:33:6:controllerPidTest	16	static
-../Core/Src/Interface/controller_pid.c:42:14:capAngle	24	static
-../Core/Src/Interface/controller_pid.c:56:6:controllerPid	64	static

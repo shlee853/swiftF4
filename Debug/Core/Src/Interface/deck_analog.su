@@ -1,6 +1,0 @@
-../Core/Src/Interface/deck_analog.c:38:6:adcInit	32	static
-../Core/Src/Interface/deck_analog.c:78:17:analogReadChannel	32	static
-../Core/Src/Interface/deck_analog.c:101:10:analogRead	40	static
-../Core/Src/Interface/deck_analog.c:128:6:analogReference	16	static
-../Core/Src/Interface/deck_analog.c:137:6:analogReadResolution	16	static
-../Core/Src/Interface/deck_analog.c:161:7:analogReadVoltage	32	static

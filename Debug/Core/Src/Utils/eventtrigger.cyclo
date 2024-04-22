@@ -1,5 +1,0 @@
-../Core/Src/Utils/eventtrigger.c:38:10:eventtriggerGetId	1
-../Core/Src/Utils/eventtrigger.c:45:21:eventtriggerGetById	2
-../Core/Src/Utils/eventtrigger.c:55:21:eventtriggerGetByName	3
-../Core/Src/Utils/eventtrigger.c:67:6:eventTrigger	3
-../Core/Src/Utils/eventtrigger.c:76:6:eventtriggerRegisterCallback	1

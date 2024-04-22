@@ -1,5 +1,0 @@
-../Core/Src/Interface/outlierFilterTdoa.c:53:6:outlierFilterTdoaReset	16	static
-../Core/Src/Interface/outlierFilterTdoa.c:59:6:outlierFilterTdoaValidateIntegrator	40	static
-../Core/Src/Interface/outlierFilterTdoa.c:107:14:sq	16	static
-../Core/Src/Interface/outlierFilterTdoa.c:109:14:distanceSq	24	static
-../Core/Src/Interface/outlierFilterTdoa.c:113:13:isDistanceDiffSmallerThanDistanceBetweenAnchors	24	static

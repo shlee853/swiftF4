@@ -37,21 +37,18 @@
 
 #include "config.h"
 #include "usblink.h"
-//#include "radiolink.h"
+#include "radiolink.h"
 #include "usb.h"
 
 #include "usbd_usr.h"
-//#include "usb_conf.h"
 #include "usbd_conf.h"
 #include "usbd_desc.h"
-//#include "usb_dcd.h"
-//#include "usbd_req.h"
 #include "usbd_ctlreq.h"
 #include "usbd_cdc_if.h"
 
 #include "crtp.h"
 #include "static_mem.h"
-//#include "vcp_esc_passthrough.h"
+#include "vcp_esc_passthrough.h"
 #include "bootloader.h"
 
 //NO_DMA_CCM_SAFE_ZERO_INIT __ALIGN_BEGIN USB_OTG_CORE_HANDLE    USB_OTG_dev __ALIGN_END ;
@@ -70,6 +67,14 @@ static xQueueHandle usbDataTx;
 STATIC_MEM_QUEUE_ALLOC(usbDataTx, 1, sizeof(USBPacket)); /* Buffer USB packets (max 64 bytes) */
 
 //#define USB_CDC_CONFIG_DESC_SIZ     98
+#define USBD_CFG_MAX_NUM                1
+#define USBD_ITF_MAX_NUM                1
+
+#define USB_OTG_EP_CONTROL                       0
+#define USB_OTG_EP_ISOC                          1
+#define USB_OTG_EP_BULK                          2
+#define USB_OTG_EP_INT                           3
+#define USB_OTG_EP_MASK                          3
 
 #define CF_INTERFACE                0x0
 #define VCP_COM_INTERFACE           0x1
@@ -276,23 +281,26 @@ __ALIGN_BEGIN uint8_t  usbd_cf_CfgDesc[USB_CDC_CONFIG_DESC_SIZ] __ALIGN_END = {
     0x00                               /* bInterval: ignore for Bulk transfer */
 };
 
-/*
+
+
+
 static uint8_t  usbd_cf_Init        (void  *pdev, uint8_t cfgidx);
 static uint8_t  usbd_cf_DeInit      (void  *pdev, uint8_t cfgidx);
 static uint8_t  usbd_cf_DataIn      (void *pdev, uint8_t epnum);
-static uint8_t  usbd_cf_DataOut     (void *pdev, uint8_t epnum);
+static uint8_t  usbd_cf_DataOut     (USBD_HandleTypeDef *pdev, uint8_t epnum);
 static uint8_t  *usbd_cf_GetCfgDesc (uint8_t speed, uint16_t *length);
 static uint8_t  usbd_cf_SOF         (void *pdev);
-static uint8_t  usbd_cf_Setup       (void *pdev , USB_SETUP_REQ  *req);
+static uint8_t  usbd_cf_Setup       (void *pdev , USBD_SetupReqTypedef  *req);
 static uint8_t  usbd_cdc_EP0_RxReady(void *pdev);
-*/
+
 static USBPacket inPacket;
 static USBPacket outPacket;
 static USBPacket outVcpPacket;
 
 /* CDC interface class callbacks structure */
-/*
-USBD_Class_cb_TypeDef cf_usb_cb =
+
+
+USBD_ClassTypeDef cf_usb_cb =
 {
   usbd_cf_Init,
   usbd_cf_DeInit,
@@ -305,7 +313,25 @@ USBD_Class_cb_TypeDef cf_usb_cb =
   NULL,
   NULL,
   usbd_cf_GetCfgDesc,
+  NULL,
+  NULL,
+  NULL,
 };
+
+typedef struct _USBD_USR_PROP
+{
+  void (*Init)(void);
+  void (*DeviceReset)(uint8_t speed);
+  void (*DeviceConfigured)(void);
+  void (*DeviceSuspended)(void);
+  void (*DeviceResumed)(void);
+
+  void (*DeviceConnected)(void);
+  void (*DeviceDisconnected)(void);
+
+}
+USBD_Usr_cb_TypeDef;
+
 
 USBD_Usr_cb_TypeDef USR_cb =
 {
@@ -317,7 +343,446 @@ USBD_Usr_cb_TypeDef USR_cb =
   USBD_USR_DeviceConnected,
   USBD_USR_DeviceDisconnected,
 };
+
+
+
+
+static void resetUSB(void) {
+  portBASE_TYPE xTaskWokenByReceive = pdFALSE;
+
+  crtpSetLink(radiolinkGetLink());
+
+  if (isInit == true) {
+    // Empty queue
+    while (xQueueReceiveFromISR(usbDataTx, &outPacket, &xTaskWokenByReceive) == pdTRUE);
+  }
+
+  //  USB_OTG_FlushTxFifo(&USB_OTG_dev, CF_IN_EP);
+  USBD_LL_FlushEP(&hUsbDeviceFS, CF_IN_EP);
+
+  rxStopped = true;
+  doingTransfer = false;
+}
+
+static uint8_t usbd_cf_Setup(void *pdev , USBD_SetupReqTypedef  *req)
+{
+  if ((req->bmRequest & USB_REQ_TYPE_MASK) == USB_REQ_TYPE_VENDOR) // Crazyflie interface
+  {
+    command = req->wIndex;
+    if (command == 0x01)
+    {
+      crtpSetLink(usblinkGetLink());
+
+      if (rxStopped && !xQueueIsQueueFullFromISR(usbDataRx))
+      {
+
+
+//        DCD_EP_PrepareRx(&hUsbDeviceFS, CF_OUT_EP, (uint8_t*)(inPacket.data), USB_RX_TX_PACKET_SIZE);
+        USBD_LL_PrepareReceive(&hUsbDeviceFS, CF_OUT_EP, (uint8_t*)(inPacket.data), USB_RX_TX_PACKET_SIZE);
+        rxStopped = false;
+      }
+    }
+    else if(command == 0x02)
+    {
+      //restart system and transition to DFU bootloader mode
+      //enter bootloader specific to STM32f4xx
+      enter_bootloader(0, 0x00000000);
+    }
+    else
+    {
+      crtpSetLink(radiolinkGetLink());
+    }
+  }
+  else // VCP_COM_INTERFACE
+  {
+    switch (req->bmRequest & USB_REQ_TYPE_MASK)
+    {
+      /* CDC Class Requests -------------------------------*/
+    case USB_REQ_TYPE_CLASS :
+        /* Check if the request is a data setup packet */
+        if (req->wLength)
+        {
+          /* Check if the request is Device-to-Host */
+          if (req->bmRequest & 0x80)
+          {
+            /* Get the data to be sent to Host from interface layer */
+            //APP_FOPS.pIf_Ctrl(req->bRequest, CmdBuff, req->wLength);
+
+            /* Send the data to the host */
+            USBD_CtlSendData (pdev,
+                              CmdBuff,
+                              req->wLength);
+          }
+          else /* Host-to-Device request */
+          {
+            /* Set the value of the current command to be processed */
+            cdcCmd = req->bRequest;
+            cdcLen = req->wLength;
+
+            /* Prepare the reception of the buffer over EP0
+            Next step: the received data will be managed in usbd_cdc_EP0_TxSent()
+            function. */
+            USBD_CtlPrepareRx (pdev,
+                               CmdBuff,
+                               req->wLength);
+          }
+        }
+        else /* No Data request */
+        {
+          /* See the command as activating passthrough interface*/
+          passthroughEnableFromISR();
+        }
+
+        return USBD_OK;
+
+      default:
+        USBD_CtlError (pdev, req);
+        return USBD_FAIL;
+
+      /* Standard Requests -------------------------------*/
+    case USB_REQ_TYPE_STANDARD:
+      switch (req->bRequest)
+      {
+      case USB_REQ_GET_DESCRIPTOR:
+        USBD_CtlError (pdev, req);
+        return USBD_FAIL;
+
+      case USB_REQ_GET_INTERFACE :
+        USBD_CtlSendData (pdev,
+                          (uint8_t *)&usbd_cdc_AltSet,
+                          1);
+        break;
+
+      case USB_REQ_SET_INTERFACE :
+        if ((uint8_t)(req->wValue) < USBD_ITF_MAX_NUM)
+        {
+          usbd_cdc_AltSet = (uint8_t)(req->wValue);
+        }
+        else
+        {
+          /* Call the error management function (command will be nacked */
+          USBD_CtlError (pdev, req);
+        }
+        break;
+      }
+    }
+  }
+
+  return USBD_OK;
+}
+
+static uint8_t  usbd_cf_Init (void  *pdev,  uint8_t cfgidx)
+{
+  uint8_t *pbuf;
+
+  /* Open CF EP IN */
+  USBD_LL_OpenEP(pdev, CF_IN_EP, USB_OTG_EP_BULK, USB_RX_TX_PACKET_SIZE);
+  /* Open CF EP OUT */
+  USBD_LL_OpenEP(pdev, CF_OUT_EP, USB_OTG_EP_BULK, USB_RX_TX_PACKET_SIZE);
+
+  /* Prepare Out endpoint to receive next packet */
+  USBD_LL_OpenEP(pdev, CF_OUT_EP, USB_RX_TX_PACKET_SIZE, (uint8_t*)(inPacket.data));
+
+  rxStopped = false;
+
+  /* Open EP IN for VCP*/
+  USBD_LL_OpenEP(pdev, VCP_IN_EP, USB_OTG_EP_BULK, CDC_DATA_IN_PACKET_SIZE);
+
+  /* Open EP OUT for VCP*/
+  USBD_LL_OpenEP(pdev, VCP_OUT_EP, USB_OTG_EP_BULK, CDC_DATA_OUT_PACKET_SIZE);
+
+  /* Open Command IN EP for VCP*/
+  USBD_LL_OpenEP(pdev, VCP_CMD_EP, USB_OTG_EP_INT, CDC_CMD_PACKET_SIZE);
+
+
+  pbuf = (uint8_t *)USBD_DeviceDesc;
+  pbuf[4] = DEVICE_CLASS_CDC;
+  pbuf[5] = DEVICE_SUBCLASS_CDC;
+
+  /* Prepare Out endpoint to receive next packet */
+  USBD_LL_PrepareReceive(pdev, VCP_OUT_EP, (uint8_t*)USB_Rx_Buffer, CDC_DATA_OUT_PACKET_SIZE);
+
+
+  return USBD_OK;
+}
+
+/**
+  * @brief  usbd_cdc_Init
+  *         DeInitialize the CDC layer
+  * @param  pdev: device instance
+  * @param  cfgidx: Configuration index
+  * @retval status
+  */
+static uint8_t  usbd_cf_DeInit (void  *pdev,
+                                 uint8_t cfgidx)
+{
+  /* Close CF EP IN */
+	USBD_LL_CloseEP(pdev, CF_IN_EP);
+
+  /* Close CF EP OUT */
+	USBD_LL_CloseEP(pdev, CF_OUT_EP);
+
+  /* Close VCP EP IN */
+	USBD_LL_CloseEP(pdev, VCP_IN_EP);
+
+  /* Close VCP EP OUT */
+  USBD_LL_CloseEP(pdev, VCP_OUT_EP);
+
+  /* Close Command IN EP */
+  USBD_LL_CloseEP(pdev, VCP_CMD_EP);
+
+  return USBD_OK;
+}
+
+/**
+  * @brief  usbd_cdc_EP0_RxReady
+  *         Data received on control endpoint
+  * @param  pdev: device instance
+  * @retval status
+  */
+uint8_t  usbd_cdc_EP0_RxReady (void  *pdev)
+{
+  if (cdcCmd != NO_CMD)
+  {
+    /* Process the data */
+
+    /* Reset the command variable to default value */
+    cdcCmd = NO_CMD;
+  }
+
+  return USBD_OK;
+}
+
+/**
+  * @brief  usbd_audio_DataIn
+  *         Data sent on non-control IN endpoint
+  * @param  pdev: device instance
+  * @param  epnum: endpoint number
+  * @retval status
+  */
+static uint8_t  usbd_cf_DataIn (void *pdev, uint8_t epnum)
+{
+  if (epnum == (CF_IN_EP &~ 0x80))
+  {
+    portBASE_TYPE xTaskWokenByReceive = pdFALSE;
+
+    doingTransfer = false;
+
+    if (xQueueReceiveFromISR(usbDataTx, &outPacket, &xTaskWokenByReceive) == pdTRUE)
+    {
+      doingTransfer = true;
+      USBD_LL_Transmit(pdev, CF_IN_EP, (uint8_t*)outPacket.data,  outPacket.size );
+    }
+
+
+
+    portYIELD_FROM_ISR(xTaskWokenByReceive);
+  }
+  else // VCP In endpoint
+  {
+    int i;
+    doingVcpTransfer = false;
+
+    for (i = 0; i < USB_RX_TX_PACKET_SIZE &&
+         (passthroughVcpTxReceiveFromISR(&outVcpPacket.data[i]) == pdTRUE); i++);
+
+    if (i != 0)
+    {
+      doingVcpTransfer = true;
+      DCD_EP_Tx (pdev,
+                VCP_IN_EP,
+                (uint8_t*)outVcpPacket.data,
+                i);
+
+      USBD_LL_Transmit(pdev, VCP_IN_EP,(uint8_t*)outVcpPacket.data,  i );
+
+    }
+  }
+
+  return USBD_OK;
+}
+
+static uint8_t  usbd_cf_SOF (void *pdev)
+{
+  portBASE_TYPE xTaskWokenByReceive = pdFALSE;
+  if (!doingTransfer) {
+    if (xQueueReceiveFromISR(usbDataTx, &outPacket, &xTaskWokenByReceive) == pdTRUE)
+    {
+      doingTransfer = true;
+      USBD_LL_Transmit(pdev, CF_IN_EP,(uint8_t*)outPacket.data,  outPacket.size);
+
+    }
+  }
+  portYIELD_FROM_ISR(xTaskWokenByReceive);
+
+  /* VCP */
+  if (!doingVcpTransfer) {
+   int i;
+   for (i = 0; (i < USB_RX_TX_PACKET_SIZE) &&
+         (passthroughVcpTxReceiveFromISR(&outVcpPacket.data[i]) == pdTRUE); i++)
+   { };
+
+    if (i != 0)
+    {
+      doingVcpTransfer = true;
+	  USBD_LL_PrepareReceive(pdev, VCP_IN_EP, (uint8_t*)outVcpPacket.data, i);
+    }
+  }
+
+  return USBD_OK;
+}
+
+/**
+  * @brief  usbd_cf_DataOut
+  *         Data received on non-control Out endpoint
+  * @param  pdev: device instance
+  * @param  epnum: endpoint number
+  * @retval status
+  */
+static uint8_t  usbd_cf_DataOut (USBD_HandleTypeDef *pdev, uint8_t epnum)
+{
+  uint8_t result;
+  if (epnum == CF_OUT_EP)
+  {
+    portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;
+
+    inPacket.size = ((USBD_HandleTypeDef*)pdev)->ep_out[epnum].total_length;
+
+    if (xQueueSendFromISR(usbDataRx, &inPacket, &xHigherPriorityTaskWoken) == pdTRUE) {
+      result = USBD_OK;
+    } else {
+      result = USBD_BUSY;
+    }
+
+    if (!xQueueIsQueueFullFromISR(usbDataRx)) {
+      /* Prepare Out endpoint to receive next packet */
+  	  USBD_LL_PrepareReceive(pdev, CF_OUT_EP, (uint8_t*)inPacket.data, USB_RX_TX_PACKET_SIZE);
+
+      rxStopped = false;
+    } else {
+      rxStopped = true;
+    }
+  }
+  else // VCP
+  {
+    uint16_t USB_Rx_Cnt;
+
+    /* Get the received data buffer and update the counter */
+    USB_Rx_Cnt = ((USBD_HandleTypeDef*)pdev)->ep_out[epnum].total_length;
+    /* USB data will be immediately processed, this allow next USB traffic being
+    NAKed till the end of the application Xfer */
+    for (int i = 0; i < USB_Rx_Cnt; i++)
+    {
+      passthroughVcpRxSendFromISR(USB_Rx_Buffer[i]);
+    }
+
+    /* Prepare Out endpoint to receive next packet */
+	USBD_LL_PrepareReceive(pdev, VCP_OUT_EP, (uint8_t*)USB_Rx_Buffer, CDC_DATA_OUT_PACKET_SIZE);
+
+    result = USBD_OK;
+  }
+
+  return result;
+}
+
+/**
+  * @brief  USBD_cdc_GetCfgDesc
+  *         Return configuration descriptor
+  * @param  speed : current device speed
+  * @param  length : pointer data length
+  * @retval pointer to descriptor buffer
+  */
+static uint8_t  *usbd_cf_GetCfgDesc (uint8_t speed, uint16_t *length)
+{
+  *length = sizeof (usbd_cf_CfgDesc);
+  return usbd_cf_CfgDesc;
+}
+
+/**
+* @brief  USBD_USR_Init
+*         Displays the message on LCD for host lib initialization
+* @param  None
+* @retval None
 */
+void USBD_USR_Init(void)
+{
+
+}
+
+/**
+* @brief  USBD_USR_DeviceReset
+* @param  speed : device speed
+* @retval None
+*/
+void USBD_USR_DeviceReset(uint8_t speed)
+{
+  resetUSB();
+}
+
+
+/**
+* @brief  USBD_USR_DeviceConfigured
+* @param  None
+* @retval Staus
+*/
+void USBD_USR_DeviceConfigured(void)
+{
+}
+
+/**
+* @brief  USBD_USR_DeviceSuspended
+* @param  None
+* @retval None
+*/
+void USBD_USR_DeviceSuspended(void)
+{
+  /* USB communication suspended (probably USB unplugged). Switch back to radiolink */
+  resetUSB();
+}
+
+
+/**
+* @brief  USBD_USR_DeviceResumed
+* @param  None
+* @retval None
+*/
+void USBD_USR_DeviceResumed(void)
+{
+}
+
+
+/**
+* @brief  USBD_USR_DeviceConnected
+* @param  None
+* @retval Staus
+*/
+void USBD_USR_DeviceConnected(void)
+{
+}
+
+
+/**
+* @brief  USBD_USR_DeviceDisonnected
+* @param  None
+* @retval Staus
+*/
+void USBD_USR_DeviceDisconnected(void)
+{
+  resetUSB();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 bool usbGetDataBlocking(USBPacket *in)
@@ -329,7 +794,7 @@ bool usbGetDataBlocking(USBPacket *in)
   NVIC_DisableIRQ(OTG_FS_IRQn);
   if (rxStopped) {
 	  USBD_LL_PrepareReceive(&hUsbDeviceFS, CF_OUT_EP, (uint8_t*)(inPacket.data), USB_RX_TX_PACKET_SIZE);
-    rxStopped = false;
+      rxStopped = false;
   }
   NVIC_EnableIRQ(OTG_FS_IRQn);
 
@@ -338,6 +803,9 @@ bool usbGetDataBlocking(USBPacket *in)
 
 
 static USBPacket outStage;
+
+
+
 
 bool usbSendData(uint32_t size, uint8_t* data)
 {
