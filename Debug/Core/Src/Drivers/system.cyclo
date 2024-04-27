@@ -1,0 +1,11 @@
+../Core/Src/Drivers/system.c:115:6:systemLaunch	1
+../Core/Src/Drivers/system.c:127:6:systemInit	4
+../Core/Src/Drivers/system.c:210:6:systemTask	16
+../Core/Src/Drivers/system.c:413:6:systemTest	1
+../Core/Src/Drivers/system.c:425:6:systemStart	1
+../Core/Src/Drivers/system.c:435:6:systemWaitStart	2
+../Core/Src/Drivers/system.c:452:6:systemRequestShutdown	1
+../Core/Src/Drivers/system.c:464:6:systemSyslinkReceive	3
+../Core/Src/Drivers/system.c:478:6:systemRequestNRFVersion	1
+../Core/Src/Drivers/system.c:489:6:vApplicationIdleHook	3
+../Core/Src/Drivers/system.c:513:13:doAssertCallback	2

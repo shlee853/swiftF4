@@ -1,0 +1,7 @@
+../Core/Src/Interface/commander.c:57:6:commanderInit	16	static
+../Core/Src/Interface/commander.c:74:6:commanderSetSetpoint	24	static
+../Core/Src/Interface/commander.c:93:6:commanderRelaxPriority	16	static
+../Core/Src/Interface/commander.c:100:6:commanderGetSetpoint	16	static
+../Core/Src/Interface/commander.c:111:6:commanderTest	4	static
+../Core/Src/Interface/commander.c:116:10:commanderGetInactivityTime	8	static
+../Core/Src/Interface/commander.c:121:5:commanderGetActivePriority	16	static

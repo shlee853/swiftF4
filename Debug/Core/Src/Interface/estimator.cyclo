@@ -1,0 +1,10 @@
+../Core/Src/Interface/estimator.c:105:6:stateEstimatorInit	1
+../Core/Src/Interface/estimator.c:110:6:stateEstimatorSwitchTo	4
+../Core/Src/Interface/estimator.c:146:20:stateEstimatorGetType	1
+../Core/Src/Interface/estimator.c:150:13:initEstimator	2
+../Core/Src/Interface/estimator.c:156:13:deinitEstimator	2
+../Core/Src/Interface/estimator.c:162:6:stateEstimatorTest	1
+../Core/Src/Interface/estimator.c:166:6:stateEstimator	1
+../Core/Src/Interface/estimator.c:170:13:stateEstimatorGetName	1
+../Core/Src/Interface/estimator.c:175:6:estimatorEnqueue	17
+../Core/Src/Interface/estimator.c:261:6:estimatorDequeue	1

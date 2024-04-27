@@ -1,0 +1,4 @@
+../Core/Src/Utils/health.c:94:14:variance	32	static
+../Core/Src/Utils/health.c:116:13:evaluatePropTest	72	static
+../Core/Src/Utils/health.c:130:6:healthShallWeRunTest	4	static
+../Core/Src/Utils/health.c:145:6:healthRunTests	80	static

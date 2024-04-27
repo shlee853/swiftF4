@@ -1,0 +1,7 @@
+../Core/Src/Interface/commander.c:57:6:commanderInit	3
+../Core/Src/Interface/commander.c:74:6:commanderSetSetpoint	4
+../Core/Src/Interface/commander.c:93:6:commanderRelaxPriority	1
+../Core/Src/Interface/commander.c:100:6:commanderGetSetpoint	1
+../Core/Src/Interface/commander.c:111:6:commanderTest	1
+../Core/Src/Interface/commander.c:116:10:commanderGetInactivityTime	1
+../Core/Src/Interface/commander.c:121:5:commanderGetActivePriority	2

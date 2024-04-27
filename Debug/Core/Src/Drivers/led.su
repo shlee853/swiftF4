@@ -1,0 +1,10 @@
+../Core/Src/Drivers/led.c:69:13:ledRestoreSavedState	16	static
+../Core/Src/Drivers/led.c:77:13:ledSetForce	88	static
+../Core/Src/Drivers/led.c:113:13:ledSetSwitch	16	static
+../Core/Src/Drivers/led.c:131:13:ledBitmaskParamCallback	16	static
+../Core/Src/Drivers/led.c:148:6:ledInit	40	static
+../Core/Src/Drivers/led.c:177:6:ledTest	16	static
+../Core/Src/Drivers/led.c:202:6:ledClearAll	16	static
+../Core/Src/Drivers/led.c:213:6:ledSetAll	16	static
+../Core/Src/Drivers/led.c:223:6:ledSet	16	static
+../Core/Src/Drivers/led.c:234:6:ledShowFaultPattern	8	static

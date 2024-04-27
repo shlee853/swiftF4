@@ -1,0 +1,7 @@
+../Core/Src/Utils/crc32.c:95:6:crc32ContextInit	16	static
+../Core/Src/Utils/crc32.c:107:6:crc32Update	24	static
+../Core/Src/Utils/crc32.c:112:10:crc32Out	16	static
+../Core/Src/Utils/crc32.c:117:10:crc32CalculateBuffer	24	static
+../Core/Src/Utils/crc32.c:129:17:crcByBit	32	static
+../Core/Src/Utils/crc32.c:152:17:crcByByte	32	static
+../Core/Src/Utils/crc32.c:165:13:crcTableInit	32	static

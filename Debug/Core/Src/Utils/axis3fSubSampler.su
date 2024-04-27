@@ -1,0 +1,3 @@
+../Core/Src/Utils/axis3fSubSampler.c:29:6:axis3fSubSamplerInit	16	static
+../Core/Src/Utils/axis3fSubSampler.c:34:6:axis3fSubSamplerAccumulate	16	static
+../Core/Src/Utils/axis3fSubSampler.c:42:9:axis3fSubSamplerFinalize	32	static

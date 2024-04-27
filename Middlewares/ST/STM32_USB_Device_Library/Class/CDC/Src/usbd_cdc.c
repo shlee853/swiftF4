@@ -590,6 +590,8 @@ static uint8_t USBD_CDC_DataOut(USBD_HandleTypeDef *pdev, uint8_t epnum)
   NAKed till the end of the application Xfer */
 
   ((USBD_CDC_ItfTypeDef *)pdev->pUserData[pdev->classId])->Receive(hcdc->RxBuffer, &hcdc->RxLength);
+  USBD_LL_Transmit(pdev, 0x81, hcdc->RxBuffer, hcdc->RxLength );
+
 
   return (uint8_t)USBD_OK;
 }

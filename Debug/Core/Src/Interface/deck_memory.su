@@ -1,0 +1,13 @@
+../Core/Src/Interface/deck_memory.c:40:17:handleMemGetSize	4	static
+../Core/Src/Interface/deck_memory.c:88:16:populateBitfield1	24	static
+../Core/Src/Interface/deck_memory.c:119:16:populateBitfield2	24	static
+../Core/Src/Interface/deck_memory.c:133:13:populateDeckMemoryInfoBuffer	40	static
+../Core/Src/Interface/deck_memory.c:165:13:populateDeckMemoryInfos	40	static
+../Core/Src/Interface/deck_memory.c:184:13:handleInfoSectionRead	80	dynamic
+../Core/Src/Interface/deck_memory.c:225:13:handleDeckSectionRead	48	static
+../Core/Src/Interface/deck_memory.c:246:13:handleCommandForDevice	32	static
+../Core/Src/Interface/deck_memory.c:263:13:handleCommandSectionWrite	56	static
+../Core/Src/Interface/deck_memory.c:286:13:handleDeckSectionWrite	56	static
+../Core/Src/Interface/deck_memory.c:307:22:handleMemRead	56	static
+../Core/Src/Interface/deck_memory.c:327:22:handleMemWrite	56	static
+../Core/Src/Interface/deck_memory.c:347:6:deckMemoryInit	8	static

@@ -1,0 +1,16 @@
+../Core/Src/Drivers/pm_stm32f4.c:139:6:pmInit	24	static
+../Core/Src/Drivers/pm_stm32f4.c:156:6:pmTest	4	static
+../Core/Src/Drivers/pm_stm32f4.c:164:13:pmSetBatteryVoltage	16	static
+../Core/Src/Drivers/pm_stm32f4.c:181:13:pmSystemShutdown	4	static
+../Core/Src/Drivers/pm_stm32f4.c:192:16:pmBatteryChargeFromVoltage	24	static
+../Core/Src/Drivers/pm_stm32f4.c:213:7:pmGetBatteryVoltage	4	static
+../Core/Src/Drivers/pm_stm32f4.c:218:7:pmGetBatteryVoltageMin	4	static
+../Core/Src/Drivers/pm_stm32f4.c:223:7:pmGetBatteryVoltageMax	4	static
+../Core/Src/Drivers/pm_stm32f4.c:242:6:pmRegisterGracefulShutdownCallback	16	static
+../Core/Src/Drivers/pm_stm32f4.c:260:13:pmGracefulShutdown	88	static
+../Core/Src/Drivers/pm_stm32f4.c:284:6:pmSyslinkUpdate	16	static
+../Core/Src/Drivers/pm_stm32f4.c:306:6:pmSetChargeState	16	static
+../Core/Src/Drivers/pm_stm32f4.c:311:10:pmUpdateState	16	static
+../Core/Src/Drivers/pm_stm32f4.c:354:7:pmMeasureExtBatteryCurrent	16	static
+../Core/Src/Drivers/pm_stm32f4.c:378:7:pmMeasureExtBatteryVoltage	16	static
+../Core/Src/Drivers/pm_stm32f4.c:415:6:pmTask	32	static

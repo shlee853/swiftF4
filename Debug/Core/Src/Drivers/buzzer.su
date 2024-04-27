@@ -1,0 +1,4 @@
+../Core/Src/Drivers/buzzer.c:39:6:buzzerInit	8	static
+../Core/Src/Drivers/buzzer.c:45:6:buzzerTest	4	static
+../Core/Src/Drivers/buzzer.c:50:6:buzzerOff	8	static
+../Core/Src/Drivers/buzzer.c:56:6:buzzerOn	16	static

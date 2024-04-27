@@ -53,6 +53,9 @@ class MyClass {
     std::string myString;
 };
 */
+
+//extern USBD_HandleTypeDef hUsbDeviceFS;
+
 void appMain()
 {
   DEBUG_PRINT("Waiting for activation ...\n");
@@ -68,7 +71,12 @@ void appMain()
     vTaskDelay(M2T(2000));
     DEBUG_PRINT("Hello World!\n");
 
-    CDC_Transmit_FS("Test USB\n", 9);
+//    CDC_Transmit_FS("Test USB\n", 9);
+
+//    USBD_CDC_SetTxBuffer(&hUsbDeviceFS, Buf, Len);
+//    result = USBD_CDC_TransmitPacket(&hUsbDeviceFS);
+
+
 
   }
 }

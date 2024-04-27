@@ -1,0 +1,12 @@
+../Core/Src/Drivers/ledseq.c:196:6:ledseqInit	4
+../Core/Src/Drivers/ledseq.c:233:13:lesdeqCmdTask	3
+../Core/Src/Drivers/ledseq.c:249:6:ledseqTest	1
+../Core/Src/Drivers/ledseq.c:263:6:ledseqEnable	1
+../Core/Src/Drivers/ledseq.c:267:6:ledseqRun	2
+../Core/Src/Drivers/ledseq.c:277:6:ledseqRunBlocking	2
+../Core/Src/Drivers/ledseq.c:291:6:ledseqSetChargeLevel	1
+../Core/Src/Drivers/ledseq.c:299:6:ledseqStop	2
+../Core/Src/Drivers/ledseq.c:309:6:ledseqStopBlocking	1
+../Core/Src/Drivers/ledseq.c:324:13:runLedseq	8
+../Core/Src/Drivers/ledseq.c:369:6:ledseqRegisterSequence	5
+../Core/Src/Drivers/ledseq.c:396:13:updateActive	4

@@ -29,7 +29,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-#include "usbd_conf.h"
+//#include "usbd_conf.h"
 #include "usbd_cdc.h"
 
 

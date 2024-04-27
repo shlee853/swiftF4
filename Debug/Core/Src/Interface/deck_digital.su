@@ -1,0 +1,3 @@
+../Core/Src/Interface/deck_digital.c:31:6:pinMode	40	static
+../Core/Src/Interface/deck_digital.c:45:6:digitalWrite	24	static
+../Core/Src/Interface/deck_digital.c:55:5:digitalRead	24	static

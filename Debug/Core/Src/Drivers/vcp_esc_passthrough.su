@@ -1,0 +1,12 @@
+../Core/Src/Drivers/vcp_esc_passthrough.c:67:6:passthroughInit	24	static
+../Core/Src/Drivers/vcp_esc_passthrough.c:80:6:passthroughEnableFromISR	16	static
+../Core/Src/Drivers/vcp_esc_passthrough.c:86:6:passthroughVcpRxSendFromISR	24	static
+../Core/Src/Drivers/vcp_esc_passthrough.c:93:6:passthroughVcpRxSendBlock	16	static
+../Core/Src/Drivers/vcp_esc_passthrough.c:98:5:passthroughVcpRxReceive	16	static
+../Core/Src/Drivers/vcp_esc_passthrough.c:104:5:passthroughVcpRxReceiveBlock	16	static
+../Core/Src/Drivers/vcp_esc_passthrough.c:110:6:passthroughVcpTxSend	16	static
+../Core/Src/Drivers/vcp_esc_passthrough.c:115:6:passthroughVcpTxSendBlock	16	static
+../Core/Src/Drivers/vcp_esc_passthrough.c:120:5:passthroughVcpTxReceiveFromISR	24	static
+../Core/Src/Drivers/vcp_esc_passthrough.c:126:6:passthroughTask	16	static
+../Core/Src/Drivers/vcp_esc_passthrough.c:166:16:readByteBlocking	16	static
+../Core/Src/Drivers/vcp_esc_passthrough.c:173:13:mspCallback	24	static

@@ -1,0 +1,3 @@
+../Core/Src/Interface/rateSupervisor.c:30:6:rateSupervisorInit	24	static
+../Core/Src/Interface/rateSupervisor.c:40:6:rateSupervisorValidate	24	static
+../Core/Src/Interface/rateSupervisor.c:63:10:rateSupervisorLatestCount	16	static

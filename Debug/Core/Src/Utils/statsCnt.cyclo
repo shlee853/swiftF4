@@ -1,0 +1,4 @@
+../Core/Src/Utils/statsCnt.c:32:6:statsCntRateCounterInit	1
+../Core/Src/Utils/statsCnt.c:40:7:statsCntRateCounterUpdate	2
+../Core/Src/Utils/statsCnt.c:55:6:statsCntRateLoggerInit	1
+../Core/Src/Utils/statsCnt.c:62:7:statsCntRateLogHandler	1

@@ -101,6 +101,7 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Alternate = GPIO_AF9_I2C3;
   HAL_GPIO_Init(E_SDA_GPIO_Port, &GPIO_InitStruct);
 
+  /* EXTI interrupt init*/
 
 }
 

@@ -1,0 +1,7 @@
+../Core/Src/Drivers/lps25h.c:43:6:lps25hInit	16	static
+../Core/Src/Drivers/lps25h.c:58:6:lps25hTestConnection	24	static
+../Core/Src/Drivers/lps25h.c:75:6:lps25hSelfTest	24	static
+../Core/Src/Drivers/lps25h.c:97:6:lps25hEvaluateSelfTest	64	static
+../Core/Src/Drivers/lps25h.c:108:6:lps25hSetEnabled	32	static
+../Core/Src/Drivers/lps25h.c:138:6:lps25hGetData	48	static
+../Core/Src/Drivers/lps25h.c:172:7:lps25hPressureToAltitude	16	static

@@ -1,0 +1,9 @@
+../Core/Src/Utils/eprintf.c:36:12:getIntLen	2
+../Core/Src/Utils/eprintf.c:47:5:power	2
+../Core/Src/Utils/eprintf.c:60:12:itoa10Unsigned	4
+../Core/Src/Utils/eprintf.c:87:12:itoa10	5
+../Core/Src/Utils/eprintf.c:120:12:itoa16	6
+../Core/Src/Utils/eprintf.c:154:12:handleLongLong	4
+../Core/Src/Utils/eprintf.c:179:12:handleLong	4
+../Core/Src/Utils/eprintf.c:204:5:evprintf	19
+../Core/Src/Utils/eprintf.c:314:5:eprintf	1

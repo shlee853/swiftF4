@@ -1,0 +1,11 @@
+../Core/Src/Drivers/power_distribution_quadrotor.c:51:5:powerDistributionMotorType	1
+../Core/Src/Drivers/power_distribution_quadrotor.c:56:10:powerDistributionStopRatio	1
+../Core/Src/Drivers/power_distribution_quadrotor.c:61:6:powerDistributionInit	1
+../Core/Src/Drivers/power_distribution_quadrotor.c:65:6:powerDistributionTest	1
+../Core/Src/Drivers/power_distribution_quadrotor.c:71:17:capMinThrust	2
+../Core/Src/Drivers/power_distribution_quadrotor.c:79:13:powerDistributionLegacy	1
+../Core/Src/Drivers/power_distribution_quadrotor.c:90:13:powerDistributionForceTorque	3
+../Core/Src/Drivers/power_distribution_quadrotor.c:115:13:powerDistributionForce	1
+../Core/Src/Drivers/power_distribution_quadrotor.c:119:6:powerDistribution	5
+../Core/Src/Drivers/power_distribution_quadrotor.c:137:6:powerDistributionCap	5
+../Core/Src/Drivers/power_distribution_quadrotor.c:169:10:powerDistributionGetIdleThrust	1

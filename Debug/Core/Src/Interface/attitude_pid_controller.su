@@ -1,0 +1,10 @@
+../Core/Src/Interface/attitude_pid_controller.c:46:23:saturateSignedInt16	16	static
+../Core/Src/Interface/attitude_pid_controller.c:105:6:attitudeControllerInit	16	static
+../Core/Src/Interface/attitude_pid_controller.c:136:6:attitudeControllerTest	4	static
+../Core/Src/Interface/attitude_pid_controller.c:141:6:attitudeControllerCorrectRatePID	32	static
+../Core/Src/Interface/attitude_pid_controller.c:156:6:attitudeControllerCorrectAttitudePID	56	static
+../Core/Src/Interface/attitude_pid_controller.c:179:6:attitudeControllerResetRollAttitudePID	8	static
+../Core/Src/Interface/attitude_pid_controller.c:184:6:attitudeControllerResetPitchAttitudePID	8	static
+../Core/Src/Interface/attitude_pid_controller.c:189:6:attitudeControllerResetAllPID	8	static
+../Core/Src/Interface/attitude_pid_controller.c:199:6:attitudeControllerGetActuatorOutput	24	static
+../Core/Src/Interface/attitude_pid_controller.c:206:7:attitudeControllerGetYawMaxDelta	4	static

@@ -1,0 +1,11 @@
+../Core/Src/Drivers/sound_cf2.c:209:13:off	24	static
+../Core/Src/Drivers/sound_cf2.c:213:13:turnCurrentEffectOff	4	static
+../Core/Src/Drivers/sound_cf2.c:222:13:melodyplayer	32	static
+../Core/Src/Drivers/sound_cf2.c:249:13:bypass	24	static
+../Core/Src/Drivers/sound_cf2.c:258:13:siren	24	static
+../Core/Src/Drivers/sound_cf2.c:278:13:tilt	24	static
+../Core/Src/Drivers/sound_cf2.c:323:13:soundTimer	32	static
+../Core/Src/Drivers/sound_cf2.c:344:6:soundInit	24	static
+../Core/Src/Drivers/sound_cf2.c:358:6:soundTest	4	static
+../Core/Src/Drivers/sound_cf2.c:363:6:soundSetEffect	16	static
+../Core/Src/Drivers/sound_cf2.c:368:6:soundSetFreq	16	static
