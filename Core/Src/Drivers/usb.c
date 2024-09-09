@@ -418,17 +418,34 @@ static uint8_t usbd_cf_Setup(USBD_HandleTypeDef *pdev , USBD_SetupReqTypedef  *r
 
   if ((req->bmRequest & USB_REQ_TYPE_MASK) == USB_REQ_TYPE_VENDOR) // Crazyflie interface
   {
+
+
+	  // 중요항목: 없으면 USB timeout error 발생
+     ((USBD_CDC_ItfTypeDef *)pdev->pUserData[pdev->classId])->Control(req->bRequest, (uint8_t *)hcdc->data, req->wLength);
+
+       len = MIN(CDC_REQ_MAX_DATA_SIZE, req->wLength);
+       (void)USBD_CtlSendData(pdev, (uint8_t *)hcdc->data, len);
+
     command = req->wIndex;
+
+
+
     if (command == 0x01)
     {
       crtpSetLink(usblinkGetLink());
 
-      if (rxStopped && !xQueueIsQueueFullFromISR(usbDataRx))
+      //      if (rxStopped && !xQueueIsQueueFullFromISR(usbDataRx))
+      if ( !xQueueIsQueueFullFromISR(usbDataRx))
       {
 
 
 //        DCD_EP_PrepareRx(&hUsbDeviceFS, CF_OUT_EP, (uint8_t*)(inPacket.data), USB_RX_TX_PACKET_SIZE);
+
+   	    inPacket.size =  USBD_LL_GetRxDataSize(pdev, CF_OUT_EP);
         USBD_LL_PrepareReceive(&hUsbDeviceFS, CF_OUT_EP, (uint8_t*)(inPacket.data), USB_RX_TX_PACKET_SIZE);
+   	    USBD_LL_Transmit(pdev, CF_IN_EP, (uint8_t*)inPacket.data, inPacket.size );
+
+
         rxStopped = false;
       }
     }
@@ -441,6 +458,9 @@ static uint8_t usbd_cf_Setup(USBD_HandleTypeDef *pdev , USBD_SetupReqTypedef  *r
     else
     {
       crtpSetLink(radiolinkGetLink());
+//      usbd_cf_DataOut (pdev, CF_OUT_EP);
+
+
     }
   }
   else // VCP_COM_INTERFACE
@@ -543,7 +563,6 @@ static uint8_t  usbd_cf_Init (USBD_HandleTypeDef *pdev,  uint8_t cfgidx)
     return (uint8_t)USBD_EMEM;
   }
 
-
   (void)USBD_memset(hcdc, 0, sizeof(USBD_CDC_HandleTypeDef));
 
   pdev->pClassDataCmsit[pdev->classId] = (void *)hcdc;
@@ -571,16 +590,21 @@ static uint8_t  usbd_cf_Init (USBD_HandleTypeDef *pdev,  uint8_t cfgidx)
   USBD_LL_OpenEP(pdev, VCP_CMD_EP, USB_OTG_EP_INT, CDC_CMD_PACKET_SIZE);
   pdev->ep_in[VCP_CMD_EP & 0xFU].is_used = 1U;
 
-  ((USBD_CDC_ItfTypeDef *)pdev->pUserData[pdev->classId])->Init();
-
   hcdc->RxBuffer = NULL;
+
+  ((USBD_CDC_ItfTypeDef *)pdev->pUserData[pdev->classId])->Init();
 
   hcdc->TxState = 0U;
   hcdc->RxState = 0U;
 
+  if (hcdc->RxBuffer == NULL)
+  {
+    return (uint8_t)USBD_EMEM;
+  }
 
   /* Prepare Out endpoint to receive next packet */
-  USBD_LL_PrepareReceive(pdev, CF_OUT_EP, USB_RX_TX_PACKET_SIZE, (uint8_t*)(inPacket.data));
+  USBD_LL_PrepareReceive(pdev, CF_OUT_EP, (uint8_t*)(inPacket.data), USB_RX_TX_PACKET_SIZE);
+  //  USBD_LL_PrepareReceive(pdev, CF_OUT_EP, hcdc->RxBuffer, USB_RX_TX_PACKET_SIZE);
 
   /* Prepare Out endpoint to receive next packet */
   USBD_LL_PrepareReceive(pdev, VCP_OUT_EP, (uint8_t*)USB_Rx_Buffer, CDC_DATA_OUT_PACKET_SIZE);
@@ -642,15 +666,22 @@ static uint8_t  usbd_cf_DeInit (USBD_HandleTypeDef  *pdev, uint8_t cfgidx)
   */
 uint8_t  usbd_cdc_EP0_RxReady (USBD_HandleTypeDef  *pdev)
 {
-  if (cdcCmd != NO_CMD)
-  {
-    /* Process the data */
+	  USBD_CDC_HandleTypeDef *hcdc = (USBD_CDC_HandleTypeDef *)pdev->pClassDataCmsit[pdev->classId];
 
-    /* Reset the command variable to default value */
-    cdcCmd = NO_CMD;
-  }
+	  if (hcdc == NULL)
+	  {
+	    return (uint8_t)USBD_FAIL;
+	  }
 
-  return USBD_OK;
+	  if ((pdev->pUserData[pdev->classId] != NULL) && (hcdc->CmdOpCode != 0xFFU))
+	  {
+	    ((USBD_CDC_ItfTypeDef *)pdev->pUserData[pdev->classId])->Control(hcdc->CmdOpCode,
+	                                                                     (uint8_t *)hcdc->data,
+	                                                                     (uint16_t)hcdc->CmdLength);
+	    hcdc->CmdOpCode = 0xFFU;
+	  }
+
+	  return (uint8_t)USBD_OK;
 }
 
 /**
@@ -676,7 +707,7 @@ static uint8_t  usbd_cf_DataIn (USBD_HandleTypeDef *pdev, uint8_t epnum)
 
 
 
-    portYIELD_FROM_ISR(xTaskWokenByReceive);
+  portYIELD_FROM_ISR(xTaskWokenByReceive);
   }
   else // VCP In endpoint
   {
@@ -752,7 +783,10 @@ static uint8_t  usbd_cf_DataOut (USBD_HandleTypeDef *pdev, uint8_t epnum)
 
     if (!xQueueIsQueueFullFromISR(usbDataRx)) {
       /* Prepare Out endpoint to receive next packet */
-  	  USBD_LL_PrepareReceive(pdev, CF_OUT_EP, (uint8_t*)inPacket.data, USB_RX_TX_PACKET_SIZE);
+  	  USBD_LL_PrepareReceive(pdev, CF_OUT_EP, (uint8_t*)inPacket.data, USB_RX_TX_PACKET_SIZE);	// EP0 0x01로 들어온 데이터를 packet.data에 넣음
+
+  	  // Test
+  	  USBD_LL_Transmit(pdev, CF_IN_EP, (uint8_t*)inPacket.data, inPacket.size );
 
       rxStopped = false;
     } else {
@@ -974,8 +1008,8 @@ void usbInit(void)
     Error_Handler();
   }
 
-//  if (USBD_RegisterClass(&hUsbDeviceFS, &cf_usb_cb) != USBD_OK)
   if (USBD_RegisterClass(&hUsbDeviceFS, &cf_usb_cb) != USBD_OK)
+//  if (USBD_RegisterClass(&hUsbDeviceFS, &USBD_CDC) != USBD_OK)
   {
     Error_Handler();
   }

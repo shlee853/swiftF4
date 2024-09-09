@@ -443,6 +443,23 @@ static uint8_t USBD_CDC_Setup(USBD_HandleTypeDef *pdev,
     return (uint8_t)USBD_FAIL;
   }
 
+  //test
+
+  if ((req->bmRequest & USB_REQ_TYPE_MASK) == USB_REQ_TYPE_VENDOR) // Crazyflie interface
+  {
+
+	  // 중요항목: 없으면 USB timeout error 발생
+      ((USBD_CDC_ItfTypeDef *)pdev->pUserData[pdev->classId])->Control(req->bRequest,
+                                                                        (uint8_t *)hcdc->data,
+                                                                        req->wLength);
+
+       len = MIN(CDC_REQ_MAX_DATA_SIZE, req->wLength);
+       (void)USBD_CtlSendData(pdev, (uint8_t *)hcdc->data, len);
+  }
+
+
+
+
   switch (req->bmRequest & USB_REQ_TYPE_MASK)
   {
     case USB_REQ_TYPE_CLASS:
