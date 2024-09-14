@@ -421,7 +421,7 @@ static uint8_t usbd_cf_Setup(USBD_HandleTypeDef *pdev , USBD_SetupReqTypedef  *r
 
 
 	  // 중요항목: 없으면 USB timeout error 발생
-     ((USBD_CDC_ItfTypeDef *)pdev->pUserData[pdev->classId])->Control(req->bRequest, (uint8_t *)hcdc->data, req->wLength);
+ //    ((USBD_CDC_ItfTypeDef *)pdev->pUserData[pdev->classId])->Control(req->bRequest, (uint8_t *)hcdc->data, req->wLength);
 
        len = MIN(CDC_REQ_MAX_DATA_SIZE, req->wLength);
        (void)USBD_CtlSendData(pdev, (uint8_t *)hcdc->data, len);
@@ -435,15 +435,15 @@ static uint8_t usbd_cf_Setup(USBD_HandleTypeDef *pdev , USBD_SetupReqTypedef  *r
       crtpSetLink(usblinkGetLink());
 
       //      if (rxStopped && !xQueueIsQueueFullFromISR(usbDataRx))
-      if ( !xQueueIsQueueFullFromISR(usbDataRx))
+      if ( rxStopped && !xQueueIsQueueFullFromISR(usbDataRx))
       {
-
 
 //        DCD_EP_PrepareRx(&hUsbDeviceFS, CF_OUT_EP, (uint8_t*)(inPacket.data), USB_RX_TX_PACKET_SIZE);
 
    	    inPacket.size =  USBD_LL_GetRxDataSize(pdev, CF_OUT_EP);
         USBD_LL_PrepareReceive(&hUsbDeviceFS, CF_OUT_EP, (uint8_t*)(inPacket.data), USB_RX_TX_PACKET_SIZE);
-   	    USBD_LL_Transmit(pdev, CF_IN_EP, (uint8_t*)inPacket.data, inPacket.size );
+
+//   	    USBD_LL_Transmit(pdev, CF_IN_EP, (uint8_t*)inPacket.data, inPacket.size );
 
 
         rxStopped = false;
@@ -699,13 +699,17 @@ static uint8_t  usbd_cf_DataIn (USBD_HandleTypeDef *pdev, uint8_t epnum)
 
     doingTransfer = false;
 
+//    outPacket.size = inPacket.size;
+  	//  USBD_LL_Transmit(pdev, CF_IN_EP, (uint8_t*)inPacket.data, inPacket.size );
+
     if (xQueueReceiveFromISR(usbDataTx, &outPacket, &xTaskWokenByReceive) == pdTRUE)
     {
       doingTransfer = true;
       USBD_LL_Transmit(pdev, CF_IN_EP, (uint8_t*)outPacket.data,  outPacket.size );
+
     }
-
-
+    // Test
+//    USBD_LL_Transmit(pdev, CF_IN_EP, (uint8_t*)inPacket.data,  inPacket.size );
 
   portYIELD_FROM_ISR(xTaskWokenByReceive);
   }
@@ -785,7 +789,7 @@ static uint8_t  usbd_cf_DataOut (USBD_HandleTypeDef *pdev, uint8_t epnum)
       /* Prepare Out endpoint to receive next packet */
   	  USBD_LL_PrepareReceive(pdev, CF_OUT_EP, (uint8_t*)inPacket.data, USB_RX_TX_PACKET_SIZE);	// EP0 0x01로 들어온 데이터를 packet.data에 넣음
 
-  	  // Test
+  	  // ??? 아래 BYPASS 코드가 없으면 READ시 인터럽트가 걸리지 않음
   	  USBD_LL_Transmit(pdev, CF_IN_EP, (uint8_t*)inPacket.data, inPacket.size );
 
       rxStopped = false;
