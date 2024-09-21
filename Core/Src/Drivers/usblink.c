@@ -57,6 +57,8 @@ static int usblinkReceivePacket(CRTPPacket *p);
 
 STATIC_MEM_TASK_ALLOC(usblinkTask, USBLINK_TASK_STACKSIZE);
 
+
+
 static struct crtpLinkOperations usblinkOp =
 {
   .setEnable         = usblinkSetEnable,
@@ -135,7 +137,7 @@ void usblinkInit()
   crtpPacketDelivery = STATIC_MEM_QUEUE_CREATE(crtpPacketDelivery);
   DEBUG_QUEUE_MONITOR_REGISTER(crtpPacketDelivery);
 
-  STATIC_MEM_TASK_CREATE(usblinkTask, usblinkTask, USBLINK_TASK_NAME, NULL, USBLINK_TASK_PRI);
+ STATIC_MEM_TASK_CREATE(usblinkTask, usblinkTask, USBLINK_TASK_NAME, NULL, USBLINK_TASK_PRI);
 
   isInit = true;
 }

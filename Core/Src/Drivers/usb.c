@@ -52,7 +52,6 @@
 #include "vcp_esc_passthrough.h"
 #include "bootloader.h"
 
-//NO_DMA_CCM_SAFE_ZERO_INIT __ALIGN_BEGIN USB_OTG_CORE_HANDLE    USB_OTG_dev __ALIGN_END ;
 
 static bool isInit = false;
 static bool doingTransfer = false;
@@ -103,6 +102,9 @@ STATIC_MEM_QUEUE_ALLOC(usbDataTx, 1, sizeof(USBPacket)); /* Buffer USB packets (
 
 extern USBD_HandleTypeDef hUsbDeviceFS;
 extern PCD_HandleTypeDef hpcd_USB_OTG_FS;
+
+//NO_DMA_CCM_SAFE_ZERO_INIT __ALIGN_BEGIN USBD_HandleTypeDef    hUsbDeviceFS __ALIGN_END ;
+
 
 uint8_t  USB_Tx_State = USB_CDC_IDLE;
 
@@ -739,6 +741,7 @@ static uint8_t  usbd_cf_SOF (USBD_HandleTypeDef *pdev)
     if (xQueueReceiveFromISR(usbDataTx, &outPacket, &xTaskWokenByReceive) == pdTRUE)
     {
       doingTransfer = true;
+  	  USBD_LL_FlushEP(pdev, CF_IN_EP);
       USBD_LL_Transmit(pdev, CF_IN_EP,(uint8_t*)outPacket.data,  outPacket.size);
 
     }
@@ -790,7 +793,8 @@ static uint8_t  usbd_cf_DataOut (USBD_HandleTypeDef *pdev, uint8_t epnum)
   	  USBD_LL_PrepareReceive(pdev, CF_OUT_EP, (uint8_t*)inPacket.data, USB_RX_TX_PACKET_SIZE);	// EP0 0x01로 들어온 데이터를 packet.data에 넣음
 
   	  // ??? 아래 BYPASS 코드가 없으면 READ시 인터럽트가 걸리지 않음
-  	  USBD_LL_Transmit(pdev, CF_IN_EP, (uint8_t*)inPacket.data, inPacket.size );
+//  	  USBD_LL_FlushEP(pdev, CF_IN_EP);
+//   	  USBD_LL_Transmit(pdev, CF_IN_EP, (uint8_t*)inPacket.data, 1);
 
       rxStopped = false;
     } else {
@@ -996,7 +1000,16 @@ bool usbSendData(uint32_t size, uint8_t* data)
   outStage.size = size;
   memcpy(outStage.data, data, size);
   // Dont' block when sending
-  return (xQueueSend(usbDataTx, &outStage, M2T(100)) == pdTRUE);
+  //  return (xQueueSend(usbDataTx, &outStage, M2T(100)) == pdTRUE);
+    if(xQueueSend(usbDataTx, &outStage, M2T(100))) {
+        usbd_cf_DataIn(&hUsbDeviceFS, CF_OUT_EP);
+    	return pdTRUE;
+    }
+    else {
+    	return pdFALSE;
+    }
+
+
 }
 
 

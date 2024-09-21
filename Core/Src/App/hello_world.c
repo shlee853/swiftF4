@@ -58,6 +58,8 @@ class MyClass {
 
 void appMain()
 {
+
+	int cnt=0;
   DEBUG_PRINT("Waiting for activation ...\n");
 
 //  MyClass *cl = new MyClass();
@@ -69,7 +71,7 @@ void appMain()
 
   while(1) {
     vTaskDelay(M2T(2000));
-    DEBUG_PRINT("Hello World!\n");
+    DEBUG_PRINT("Hello World %d\r",cnt++);
 
 //    CDC_Transmit_FS("Test USB\n", 9);
 
